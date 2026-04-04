@@ -4,43 +4,58 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>All Sorted — Join the Waitlist</title>
-  <meta name="description" content="The app that keeps your life together. Everything you forget, in one place. Launching soon." />
+  <meta name="description" content="All Sorted is coming soon. The app that keeps your life together — bills, tax, wallet, drives, notes and AI. Join the waitlist for early access." />
+
+  <!-- Open Graph for sharing -->
   <meta property="og:title" content="All Sorted — Join the Waitlist" />
-  <meta property="og:description" content="The app that keeps your life together. Everything you forget, in one place. Launching soon." />
-  <meta property="og:image" content="hero.jpg" />
+  <meta property="og:description" content="The app that keeps your life together. Everything you forget, in one place. Launching soon — join the waitlist for early access." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://roxannealterio.github.io/allsorted-website/" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --cream:  #F5F0EA;
-      --cream2: #EDE5DC;
-      --cream3: #E4D8CC;
-      --taupe:  #9B8478;
-      --taupeD: #7A6454;
-      --taupeL: #C4B5A0;
-      --t0:     #3C2E22;
-      --t2:     #8C7A68;
-      --t3:     #B8A898;
-      --white:  #FDFAF7;
-      --b1:     #E8E0D8;
-      --b0:     #D8CEC4;
-      --green:  #4A7A5E;
-      --greenP: #E2F0E8;
-    }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--t0); font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
-    /* ── ANNOUNCE ── */
+    :root {
+      --cream:   #F5F0EA;
+      --cream2:  #EDE5DC;
+      --cream3:  #E4D8CC;
+      --taupe:   #9B8478;
+      --taupeD:  #7A6454;
+      --taupeL:  #C4B5A0;
+      --t0:      #3C2E22;
+      --t1:      #5C4A38;
+      --t2:      #8C7A68;
+      --t3:      #B8A898;
+      --white:   #FDFAF7;
+      --b1:      #E8E0D8;
+      --b0:      #D8CEC4;
+      --green:   #4A7A5E;
+      --greenP:  #E2F0E8;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--cream);
+      color: var(--t0);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── ANNOUNCE BAR ── */
     .announce {
       background: var(--taupeD);
-      color: rgba(255,255,255,0.82);
+      color: rgba(255,255,255,0.8);
       text-align: center;
-      padding: 11px 20px;
+      padding: 10px 20px;
       font-size: 11px;
       font-weight: 500;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
     }
 
@@ -48,16 +63,15 @@
     nav {
       position: sticky;
       top: 0;
-      left: 0; right: 0;
       z-index: 100;
-      padding: 0 48px;
+      background: rgba(245,240,234,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--b1);
+      padding: 0 40px;
       height: 62px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(245,240,234,0.95);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--b1);
     }
 
     .nav-logo {
@@ -108,21 +122,9 @@
       justify-content: center;
       text-align: center;
       padding: 80px 24px 60px;
-      background: var(--cream);
     }
 
-    .hero-bg { display: none; }
-    .hero-overlay { display: none; }
-
-    .hero-content {
-      text-align: center;
-      padding: 0 24px;
-      width: 100%;
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    .coming-pill {
+    .coming-soon-pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -135,12 +137,15 @@
       padding: 8px 20px;
       border-radius: 100px;
       margin-bottom: 40px;
+      opacity: 0;
+      animation: up 0.6s ease forwards 0.1s;
     }
 
     .pill-dot {
-      width: 6px; height: 6px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: #4A7A5E;
+      background: var(--green);
       animation: blink 2s ease-in-out infinite;
     }
 
@@ -153,6 +158,8 @@
       padding-left: 0.45em;
       line-height: 1;
       margin-bottom: 24px;
+      opacity: 0;
+      animation: up 0.7s ease forwards 0.25s;
     }
 
     .hero-line {
@@ -160,62 +167,72 @@
       height: 1px;
       background: var(--taupeL);
       margin: 0 auto 24px;
+      opacity: 0;
+      animation: up 0.6s ease forwards 0.4s;
     }
 
     .hero-tagline {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(20px, 3.5vw, 30px);
+      font-size: clamp(20px, 4vw, 32px);
       font-weight: 300;
       font-style: italic;
       color: var(--t2);
-      margin-bottom: 12px;
-      line-height: 1.4;
+      max-width: 560px;
+      line-height: 1.5;
+      margin: 0 auto 16px;
+      opacity: 0;
+      animation: up 0.6s ease forwards 0.52s;
     }
 
     .hero-sub {
       font-size: 15px;
       color: var(--t3);
-      margin-bottom: 44px;
-      line-height: 1.8;
       max-width: 420px;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto 52px;
+      line-height: 1.85;
+      opacity: 0;
+      animation: up 0.6s ease forwards 0.64s;
     }
 
     /* ── WAITLIST FORM ── */
-    .form-wrap {
+    .waitlist-wrap {
+      opacity: 0;
+      animation: up 0.7s ease forwards 0.78s;
       width: 100%;
-      max-width: 460px;
+      max-width: 480px;
       margin: 0 auto;
     }
 
-    .form-inner {
+    .form-card {
       background: var(--white);
       border: 1px solid var(--b1);
-      border-radius: 18px;
-      padding: 28px;
-      box-shadow: 0 8px 32px rgba(60,46,34,0.07);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 8px 32px rgba(60,46,34,0.08);
     }
 
-    .form-lbl {
+    .form-label {
       font-size: 10px;
       font-weight: 600;
       letter-spacing: 0.35em;
       text-transform: uppercase;
       color: var(--taupe);
       text-align: center;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       display: block;
     }
 
-    .form-row { display: flex; gap: 8px; }
+    .form-row {
+      display: flex;
+      gap: 10px;
+    }
 
     .form-input {
       flex: 1;
-      height: 48px;
+      height: 50px;
       border: 1.5px solid var(--b1);
       border-radius: 100px;
-      padding: 0 18px;
+      padding: 0 20px;
       font-family: 'Jost', sans-serif;
       font-size: 14px;
       font-weight: 300;
@@ -228,62 +245,71 @@
     .form-input::placeholder { color: var(--t3); }
     .form-input:focus { border-color: var(--taupeL); }
 
-    .form-btn {
-      height: 48px;
-      padding: 0 22px;
+    .form-submit {
+      height: 50px;
+      padding: 0 24px;
       background: var(--taupeD);
       color: var(--white);
       border: none;
       border-radius: 100px;
       font-family: 'Jost', sans-serif;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.22s;
       white-space: nowrap;
       flex-shrink: 0;
     }
 
-    .form-btn:hover { background: var(--taupe); }
-    .form-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .form-submit:hover { background: var(--taupe); transform: translateY(-1px); }
+    .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
     .form-note {
       font-size: 11px;
       color: var(--t3);
       text-align: center;
-      margin-top: 12px;
+      margin-top: 14px;
+      line-height: 1.6;
     }
 
     .success-msg {
       display: none;
       text-align: center;
-      padding: 8px 0;
+      padding: 20px;
     }
 
-    .tick {
-      width: 44px; height: 44px;
+    .success-msg .tick {
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       background: var(--greenP);
       border: 1.5px solid var(--green);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 12px;
-      font-size: 20px;
-      color: var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 22px;
     }
 
-    .success-msg h3 { font-size: 15px; font-weight: 500; color: var(--t0); margin-bottom: 6px; }
-    .success-msg p { font-size: 13px; color: var(--t2); line-height: 1.6; }
+    .success-msg h3 {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--t0);
+      margin-bottom: 8px;
+    }
+
+    .success-msg p { font-size: 13px; color: var(--t2); line-height: 1.7; }
 
     /* ── COUNTER ── */
     .counter-row {
-      position: relative;
-      z-index: 10;
       display: flex;
       gap: 10px;
       justify-content: center;
-      margin-top: 24px;
+      margin-top: 40px;
+      opacity: 0;
+      animation: up 0.6s ease forwards 0.95s;
       flex-wrap: wrap;
     }
 
@@ -291,117 +317,176 @@
       background: var(--white);
       border: 1px solid var(--b1);
       border-radius: 100px;
-      padding: 9px 18px;
+      padding: 10px 20px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .c-num { font-size: 14px; font-weight: 600; color: var(--taupeD); }
-    .c-lbl { font-size: 11px; color: var(--t3); }
-
-    /* ── SECTIONS ── */
-    .sec { padding: 96px 24px; }
-    .sec-inner { max-width: 1080px; margin: 0 auto; }
-
-    .eyebrow {
-      font-size: 10px; font-weight: 600; letter-spacing: 0.4em;
-      text-transform: uppercase; color: var(--taupe);
-      text-align: center; margin-bottom: 14px;
+    .counter-num {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--taupeD);
     }
 
-    .h2 {
-      font-size: clamp(26px, 5vw, 48px); font-weight: 300;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--t0); text-align: center;
-      line-height: 1.15; margin-bottom: 14px;
-    }
-
-    .lead {
-      font-size: 15px; color: var(--t2);
-      text-align: center; max-width: 480px;
-      margin: 0 auto 56px; line-height: 1.85;
+    .counter-lbl {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--t3);
+      letter-spacing: 0.05em;
     }
 
     /* ── MONEY SECTION ── */
     .money-sec {
+      padding: 96px 24px;
+      text-align: center;
       background: var(--cream2);
       border-top: 1px solid var(--b1);
       border-bottom: 1px solid var(--b1);
-      padding: 96px 24px;
-      text-align: center;
     }
 
+    .money-sec .eyebrow { margin-bottom: 20px; }
+
     .money-h2 {
-      font-size: clamp(28px, 6vw, 58px); font-weight: 300;
-      letter-spacing: 0.04em; text-transform: uppercase;
-      color: var(--t0); line-height: 1.2;
+      font-size: clamp(28px, 6vw, 58px);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--t0);
+      line-height: 1.2;
       margin-bottom: 24px;
-      max-width: 800px; margin-left: auto; margin-right: auto;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .money-italic {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(18px, 3vw, 26px); font-weight: 300;
-      font-style: italic; color: var(--t2);
-      max-width: 580px; margin: 0 auto 14px; line-height: 1.65;
+      font-size: clamp(18px, 3vw, 26px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--t2);
+      max-width: 600px;
+      margin: 0 auto 16px;
+      line-height: 1.6;
     }
 
     .money-sub {
-      font-size: 15px; color: var(--t3);
-      max-width: 460px; margin: 0 auto 48px; line-height: 1.85;
+      font-size: 15px;
+      color: var(--t3);
+      max-width: 480px;
+      margin: 0 auto 48px;
+      line-height: 1.85;
     }
 
     .money-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
-      max-width: 640px;
+      max-width: 660px;
       margin: 0 auto 48px;
     }
 
-    .mc { border-radius: 16px; padding: 28px 16px; text-align: center; }
-    .mc.light { background: var(--white); border: 1px solid var(--b1); }
-    .mc.dark { background: var(--taupeD); }
-    .mc-num { font-size: clamp(28px, 4vw, 42px); font-weight: 300; line-height: 1; margin-bottom: 8px; }
-    .mc.light .mc-num { color: var(--taupeD); }
-    .mc.dark .mc-num { color: var(--white); }
-    .mc-num.green { color: var(--green); }
-    .mc-lbl { font-size: 9px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; }
-    .mc.light .mc-lbl { color: var(--t3); }
-    .mc.dark .mc-lbl { color: rgba(255,255,255,0.38); }
+    .money-card {
+      border-radius: 16px;
+      padding: 28px 16px;
+      text-align: center;
+    }
+
+    .money-card.light { background: var(--white); border: 1px solid var(--b1); }
+    .money-card.dark { background: var(--taupeD); }
+
+    .money-num {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .money-card.light .money-num { color: var(--taupeD); }
+    .money-card.dark .money-num { color: var(--white); }
+
+    .money-lbl {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .money-card.light .money-lbl { color: var(--t3); }
+    .money-card.dark .money-lbl { color: rgba(255,255,255,0.4); }
+
+    .money-num.green { color: var(--green); }
 
     /* ── FEATURES ── */
+    .sec { padding: 96px 24px; }
+    .sec-inner { max-width: 1080px; margin: 0 auto; }
+
+    .eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .h2 {
+      font-size: clamp(26px, 5vw, 48px);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--t0);
+      text-align: center;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .lead {
+      font-size: 15px;
+      color: var(--t2);
+      text-align: center;
+      max-width: 480px;
+      margin: 0 auto 56px;
+      line-height: 1.85;
+    }
+
     .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; }
 
-    .feat {
-      background: var(--white); border: 1px solid var(--b1);
-      border-radius: 16px; padding: 28px;
+    .feat-card {
+      background: var(--white);
+      border: 1px solid var(--b1);
+      border-radius: 16px;
+      padding: 28px;
       transition: transform 0.22s, box-shadow 0.22s;
     }
 
-    .feat:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(60,46,34,0.07); }
+    .feat-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(60,46,34,0.07); }
 
     .feat-icon {
-      width: 38px; height: 38px; border-radius: 9px;
-      border: 1px solid var(--b1); background: var(--cream);
+      width: 38px; height: 38px;
+      border-radius: 9px;
+      border: 1px solid var(--b1);
+      background: var(--cream);
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 16px;
     }
 
     .feat-icon svg { width: 18px; height: 18px; stroke: var(--taupe); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-    .feat-title { font-size: 13px; font-weight: 600; color: var(--t0); margin-bottom: 8px; letter-spacing: 0.04em; }
+    .feat-title { font-size: 13px; font-weight: 600; color: var(--t0); margin-bottom: 8px; letter-spacing: 0.05em; }
     .feat-desc { font-size: 13px; font-weight: 300; color: var(--t2); line-height: 1.75; }
 
     /* ── STATEMENT ── */
     .statement { background: var(--taupeD); padding: 96px 24px; text-align: center; }
-    .statement h2 { font-size: clamp(28px, 6vw, 60px); font-weight: 300; letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); max-width: 700px; margin: 0 auto 32px; line-height: 1.2; }
+    .statement h2 { font-size: clamp(28px, 6vw, 60px); font-weight: 300; letter-spacing: 0.05em; text-transform: uppercase; color: var(--white); max-width: 700px; margin: 0 auto 32px; line-height: 1.2; }
 
     /* ── AI ── */
     .ai-sec { background: var(--taupeD); padding: 96px 24px; text-align: center; }
     .ai-sec .eyebrow { color: rgba(255,255,255,0.35); }
     .ai-sec .h2 { color: var(--white); }
     .ai-sec .lead { color: rgba(255,255,255,0.5); margin-bottom: 48px; }
+
     .chat { max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; text-align: left; }
     .chat-lbl { font-size: 9px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.3); padding: 0 4px; margin-bottom: 3px; }
     .bubble { padding: 13px 17px; border-radius: 14px; font-size: 13px; font-weight: 300; line-height: 1.7; }
@@ -424,51 +509,58 @@
 
     /* ── BOTTOM CTA ── */
     .bottom-cta { background: var(--cream2); border-top: 1px solid var(--b1); padding: 96px 24px; text-align: center; }
-    .waitlist-bottom { max-width: 460px; margin: 0 auto; }
-    .waitlist-bottom .form-row { flex-direction: column; gap: 10px; }
-    .waitlist-bottom .form-input { border-radius: 12px; height: 52px; }
-    .waitlist-bottom .form-btn { height: 52px; border-radius: 12px; width: 100%; font-size: 12px; }
+
+    .waitlist-inline { max-width: 460px; margin: 0 auto; }
+    .waitlist-inline .form-row { flex-direction: column; gap: 10px; }
+    .waitlist-inline .form-input { border-radius: 12px; height: 52px; }
+    .waitlist-inline .form-submit { height: 52px; border-radius: 12px; width: 100%; }
 
     /* ── FOOTER ── */
     footer { background: var(--taupeD); padding: 56px 40px 36px; }
+
     .footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
     .footer-logo-txt { font-size: 13px; font-weight: 400; letter-spacing: 0.55em; text-transform: uppercase; color: var(--white); padding-left: 0.55em; margin-bottom: 12px; }
     .footer-tag { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.75; margin-bottom: 20px; }
+
     .footer-col h4 { font-size: 9px; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 18px; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .footer-col a { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
     .footer-col a:hover { color: var(--white); }
+
     .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
     .footer-copy { font-size: 11px; color: rgba(255,255,255,0.28); }
     .social-row { display: flex; gap: 20px; }
     .social-row a { font-size: 11px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.38); text-decoration: none; transition: color 0.2s; }
     .social-row a:hover { color: var(--white); }
 
+    /* ── REVEAL ── */
+    .r { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .r.on { opacity: 1; transform: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    @keyframes blink { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
     /* ── BUTTONS ── */
     .btn { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; padding: 14px 28px; border-radius: 100px; transition: all 0.22s; }
     .btn-solid { background: var(--taupeD); color: var(--white); }
     .btn-solid:hover { background: var(--taupe); transform: translateY(-2px); }
-    .btn-white { background: var(--white); color: var(--taupeD); }
-    .btn-white:hover { background: var(--cream); transform: translateY(-2px); }
-    .btn-outline-white { border: 1.5px solid rgba(255,255,255,0.3); color: var(--white); }
-    .btn-outline-white:hover { border-color: rgba(255,255,255,0.6); }
-
-    /* ── REVEAL ── */
-    .r { opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
-    .r.on { opacity: 1; transform: none; }
-
-    @keyframes blink { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    .btn-outline { border: 1.5px solid var(--b0); color: var(--taupeD); }
+    .btn-outline:hover { border-color: var(--taupe); transform: translateY(-2px); }
+    .btn-outline-white { border: 1.5px solid rgba(255,255,255,0.25); color: var(--white); }
+    .btn-outline-white:hover { border-color: rgba(255,255,255,0.5); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
-      nav { padding: 0 20px; top: 20px; }
+      nav { padding: 0 20px; }
       .nav-link { display: none; }
       .form-row { flex-direction: column; }
-      .form-input, .form-btn { width: 100%; border-radius: 12px; }
+      .form-input, .form-submit { border-radius: 12px; width: 100%; }
       .money-cards { grid-template-columns: 1fr; max-width: 280px; }
       .footer-top { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; text-align: center; }
-      .phone-grid { grid-template-columns: 1fr !important; }
+      .social-row { justify-content: center; }
     }
   </style>
 </head>
@@ -479,7 +571,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#top" class="nav-logo">All Sorted</a>
+  <a href="#" class="nav-logo">All Sorted</a>
   <div class="nav-right">
     <a href="#features" class="nav-link">Features</a>
     <a href="#faq" class="nav-link">FAQ</a>
@@ -490,64 +582,70 @@
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
+  <div class="coming-soon-pill">
+    <div class="pill-dot"></div>
+    Launching Soon
+  </div>
+  <h1 class="hero-logo">All Sorted</h1>
+  <div class="hero-line"></div>
+  <p class="hero-tagline">The app that keeps your life together.</p>
+  <p class="hero-sub">Everything you forget, in one place. Bills, tax, drives, wallet, notes and AI — launching soon. Be first to know.</p>
 
-  <div class="hero-content" id="waitlist">
-    <div class="coming-pill">
-      <div class="pill-dot"></div>
-      Launching Soon
-    </div>
-    <h1 class="hero-logo">All Sorted</h1>
-    <div class="hero-line"></div>
-    <p class="hero-tagline">The app that keeps your life together.</p>
-    <p class="hero-sub">Everything you forget, in one place. Launching soon — be first to know.</p>
-
-    <div class="form-wrap">
-      <div class="form-inner">
-        <span class="form-lbl">Join the Waitlist — It's Free</span>
-        <div class="form-row" id="formRow">
-          <input type="email" class="form-input" id="emailInput" placeholder="your@email.com" />
-          <button class="form-btn" id="submitBtn" onclick="joinWaitlist()">Join Now</button>
-        </div>
-        <div class="success-msg" id="successMsg">
-          <div class="tick">✓</div>
-          <h3>You're on the list!</h3>
-          <p>We'll email you the moment All Sorted launches.<br>Follow us for sneak peeks.</p>
-          <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener"
-            class="btn btn-solid" style="margin-top: 16px; font-size: 11px; display: inline-flex;">
-            Follow @allsortedapp
-          </a>
-        </div>
-        <p class="form-note" id="formNote">No spam, ever. Just a launch email when we're ready.</p>
+  <!-- WAITLIST FORM -->
+  <div class="waitlist-wrap" id="waitlist">
+    <div class="form-card">
+      <span class="form-label">Join the Waitlist — It's Free</span>
+      <div class="form-row" id="formRow">
+        <input type="email" class="form-input" id="emailInput" placeholder="your@email.com" />
+        <button class="form-submit" id="submitBtn" onclick="joinWaitlist()">Join Now</button>
       </div>
+      <div class="success-msg" id="successMsg">
+        <div class="tick">✓</div>
+        <h3>You're on the list!</h3>
+        <p>We'll email you the moment All Sorted launches.<br>Follow us on Instagram for sneak peeks.</p>
+        <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener"
+          class="btn btn-solid" style="margin-top: 16px; font-size: 11px;">
+          Follow @allsortedapp
+        </a>
+      </div>
+      <p class="form-note" id="formNote">No spam, ever. We'll only email you when we launch.</p>
     </div>
   </div>
 
+  <!-- SOCIAL PROOF PILLS -->
   <div class="counter-row">
     <div class="counter-pill">
       <div class="pill-dot"></div>
-      <span class="c-num" id="waitlistCount">247</span>
-      <span class="c-lbl">people on the waitlist</span>
+      <span class="counter-num" id="waitlistCount">247</span>
+      <span class="counter-lbl">people on the waitlist</span>
     </div>
     <div class="counter-pill">
-      <span class="c-lbl">Launching</span>
-      <span class="c-num">2025</span>
+      <span class="counter-lbl">🗓 Launching</span>
+      <span class="counter-num">Mid 2025</span>
     </div>
   </div>
 </section>
 
-<!-- MONEY -->
+<!-- MONEY SECTION -->
 <section class="money-sec">
   <div style="max-width: 800px; margin: 0 auto;">
     <p class="eyebrow r">Did you know?</p>
     <h2 class="money-h2 r">You are probably leaving<br>money on the table.</h2>
-    <p class="money-italic r">Most people miss hundreds — even thousands — in unclaimed deductions every year. Not because they don't qualify. Because they never logged them.</p>
-    <p class="money-sub r">Work trips, receipts, phone bills, home office — All Sorted makes it effortless to log everything as it happens, so nothing slips through.</p>
+    <p class="money-italic r">Most people miss hundreds — even thousands — in unclaimed tax deductions every year. Not because they don't qualify. Because they never logged them.</p>
+    <p class="money-sub r">Work trips, receipts, phone bills, home office costs — All Sorted makes it effortless to log everything as it happens, so nothing slips through at tax time.</p>
     <div class="money-cards r">
-      <div class="mc light"><div class="mc-num">$0</div><div class="mc-lbl">Without the app</div></div>
-      <div class="mc dark"><div class="mc-num">$1,244</div><div class="mc-lbl">With All Sorted</div></div>
-      <div class="mc light"><div class="mc-num green">+$404</div><div class="mc-lbl">Back in your pocket</div></div>
+      <div class="money-card light">
+        <div class="money-num">$0</div>
+        <div class="money-lbl">Without the app</div>
+      </div>
+      <div class="money-card dark">
+        <div class="money-num">$1,244</div>
+        <div class="money-lbl">With All Sorted</div>
+      </div>
+      <div class="money-card light">
+        <div class="money-num green">+$404</div>
+        <div class="money-lbl">Back in your pocket</div>
+      </div>
     </div>
     <a href="#waitlist" class="btn btn-solid r">Join the Waitlist</a>
   </div>
@@ -556,45 +654,7 @@
 <!-- STATEMENT -->
 <section class="statement">
   <h2 class="r">Stop juggling five apps.<br>Get All Sorted.</h2>
-  <a href="#waitlist" class="btn btn-outline-white r">Join the Waitlist</a>
-</section>
-
-<!-- PHONE PHOTO SECTION -->
-<section style="background: var(--cream); border-bottom: 1px solid var(--b1); padding: 96px 24px;">
-  <div style="max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
-    <div class="r">
-      <img src="phone.jpg" alt="All Sorted app"
-        style="width: 100%; border-radius: 24px; box-shadow: 0 24px 60px rgba(60,46,34,0.15); display: block;" />
-    </div>
-    <div class="r">
-      <p class="eyebrow" style="text-align:left; margin-bottom: 12px;">Because when it looks good</p>
-      <h2 style="font-size: clamp(24px,4vw,42px); font-weight: 300; letter-spacing: 0.06em; text-transform: uppercase; color: var(--t0); line-height: 1.2; margin-bottom: 20px;">You're more likely<br>to use it.</h2>
-      <p style="font-size: 15px; font-weight: 300; color: var(--t2); line-height: 1.85; margin-bottom: 28px;">All Sorted is designed to be as beautiful as it is functional. Every screen, every detail — crafted so you actually want to open it every day.</p>
-      <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px;">
-        <li style="display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 300; color: var(--t1);">
-          <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--taupeL); flex-shrink: 0;"></div>
-          Bills Due always visible at a glance
-        </li>
-        <li style="display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 300; color: var(--t1);">
-          <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--taupeL); flex-shrink: 0;"></div>
-          One-tap Pay Now for major billers
-        </li>
-        <li style="display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 300; color: var(--t1);">
-          <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--taupeL); flex-shrink: 0;"></div>
-          GPS trip tracking with customisable rate
-        </li>
-        <li style="display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 300; color: var(--t1);">
-          <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--taupeL); flex-shrink: 0;"></div>
-          Set your income tax bracket — we do the math
-        </li>
-        <li style="display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 300; color: var(--t1);">
-          <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--taupeL); flex-shrink: 0;"></div>
-          AI assistant that knows your actual finances
-        </li>
-      </ul>
-      <a href="#waitlist" class="btn btn-solid">Join the Waitlist</a>
-    </div>
-  </div>
+  <a href="#waitlist" class="btn btn-outline-white r" style="margin-top: 8px;">Join the Waitlist</a>
 </section>
 
 <!-- FEATURES -->
@@ -604,35 +664,35 @@
     <h2 class="h2 r">One app. Whole life.</h2>
     <p class="lead r">Everything you forget, in one beautiful place.</p>
     <div class="grid-3">
-      <div class="feat r">
+      <div class="feat-card r">
         <div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
         <div class="feat-title">Wallet</div>
-        <p class="feat-desc">Gift cards, memberships, discount codes and documents — all stored securely in one place.</p>
+        <p class="feat-desc">Gift cards, memberships, discount codes and documents — Medicare, licences, insurance — all in one secure place.</p>
       </div>
-      <div class="feat r">
+      <div class="feat-card r">
         <div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
         <div class="feat-title">Life</div>
-        <p class="feat-desc">Track bills and subscriptions. Auto-reminders 5, 3 and 1 day before due. Pay with one tap.</p>
+        <p class="feat-desc">Track bills, subscriptions and rego. Auto-reminders 5, 3 and 1 day before due. Pay with one tap.</p>
       </div>
-      <div class="feat r">
+      <div class="feat-card r">
         <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
         <div class="feat-title">Tax</div>
-        <p class="feat-desc">Log deductions, scan receipts and watch your refund grow. Set your income tax bracket for an exact estimate.</p>
+        <p class="feat-desc">Scan receipts, log deductions and watch your refund grow. Set your income tax bracket — we calculate your exact saving.</p>
       </div>
-      <div class="feat r">
+      <div class="feat-card r">
         <div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
         <div class="feat-title">Drive</div>
         <p class="feat-desc">GPS auto-tracking for work trips. Set your rate per km and export a full mileage logbook for tax time.</p>
       </div>
-      <div class="feat r">
+      <div class="feat-card r">
         <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg></div>
         <div class="feat-title">Notes</div>
-        <p class="feat-desc">Smart notes that detect bills and reminders. Type it and we'll offer to add it to Life automatically.</p>
+        <p class="feat-desc">Smart notes that detect bills and reminders automatically. Type it and we'll ask if you want to add it to Life.</p>
       </div>
-      <div class="feat r">
+      <div class="feat-card r">
         <div class="feat-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
         <div class="feat-title">Records & Graphs</div>
-        <p class="feat-desc">Track income and expenses, import from your bank CSV and visualise cash flow in beautiful inline graphs.</p>
+        <p class="feat-desc">Track income and expenses, import from your bank CSV and see your cash flow in beautiful inline graphs.</p>
       </div>
     </div>
   </div>
@@ -642,12 +702,12 @@
 <section class="ai-sec">
   <p class="eyebrow r">Powered by Claude AI</p>
   <h2 class="h2 r">Your personal finance assistant.</h2>
-  <p class="lead r">Ask anything. The AI knows your actual bills, expenses, deductions and trips.</p>
+  <p class="lead r">Ask anything. The AI knows your actual bills, expenses, deductions and trips — and gives you real, personalised answers.</p>
   <div class="chat r">
     <div><p class="chat-lbl">You</p><div class="bubble u">How can I reduce my tax?</div></div>
-    <div><p class="chat-lbl">All Sorted AI</p><div class="bubble a">You've logged $1,244 in deductions — that's an estimated $404 refund at your bracket. Adding your work from home expenses could push this even higher.</div></div>
+    <div><p class="chat-lbl">All Sorted AI</p><div class="bubble a">You've logged $1,244 in deductions — that's an estimated $404 refund at your bracket. Adding your work from home expenses and phone bill could push this even higher.</div></div>
     <div><p class="chat-lbl">You</p><div class="bubble u">What bills are due this week?</div></div>
-    <div><p class="chat-lbl">All Sorted AI</p><div class="bubble a">2 bills due — Telstra ($89) in 3 days and Origin Energy ($142) in 5 days. Pay Now links are ready in your Life tab.</div></div>
+    <div><p class="chat-lbl">All Sorted AI</p><div class="bubble a">2 bills due — Telstra ($89) in 3 days and Origin Energy ($142) in 5 days. Both have Pay Now links ready in your Life tab.</div></div>
   </div>
 </section>
 
@@ -659,11 +719,11 @@
     <div class="faq-list r">
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">When does All Sorted launch?<div class="faq-icon"><span>+</span></div></button>
-        <div class="faq-a"><p>We're launching in the next 1-2 months on iOS. Join the waitlist and you'll be first to know — plus get early access before everyone else.</p></div>
+        <div class="faq-a"><p>We're launching in the next 1-2 months on iOS. Join the waitlist and you'll be the first to know — plus get early access before the public launch.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Is it free?<div class="faq-icon"><span>+</span></div></button>
-        <div class="faq-a"><p>Yes — All Sorted is free to download and use. All core features included at no cost.</p></div>
+        <div class="faq-a"><p>Yes — All Sorted is free to download and use. All core features are included at no cost.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Does it work for my country?<div class="faq-icon"><span>+</span></div></button>
@@ -671,7 +731,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Can I customise my tax rate?<div class="faq-icon"><span>+</span></div></button>
-        <div class="faq-a"><p>Yes. In Settings you choose your income tax bracket — 0%, 19%, 32.5%, 37% or 45% — and every estimated refund updates instantly to reflect your exact rate.</p></div>
+        <div class="faq-a"><p>Yes. In Settings you choose your income tax bracket — 0%, 19%, 32.5%, 37% or 45% — and every estimated refund across the app updates instantly to reflect your exact rate.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Is my data secure?<div class="faq-icon"><span>+</span></div></button>
@@ -679,7 +739,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Will there be an Android version?<div class="faq-icon"><span>+</span></div></button>
-        <div class="faq-a"><p>iOS first. Android is on the roadmap — join the waitlist and we'll keep you updated.</p></div>
+        <div class="faq-a"><p>We're launching iOS first. Android is on the roadmap — join the waitlist and we'll let you know when it's ready.</p></div>
       </div>
     </div>
   </div>
@@ -696,16 +756,16 @@
   </a>
 </section>
 
-<!-- BOTTOM CTA -->
+<!-- BOTTOM WAITLIST CTA -->
 <section class="bottom-cta">
   <p class="eyebrow r">Don't miss the launch</p>
   <h2 class="h2 r">Be first. Join the waitlist.</h2>
-  <p class="lead r">Drop your email and we'll let you know the moment All Sorted is live.</p>
-  <div class="waitlist-bottom r">
-    <div class="form-inner">
+  <p class="lead r">We're launching soon. Drop your email and we'll let you know the moment All Sorted is live.</p>
+  <div class="waitlist-inline r">
+    <div class="form-card">
       <div class="form-row" id="formRow2">
         <input type="email" class="form-input" id="emailInput2" placeholder="your@email.com" />
-        <button class="form-btn" id="submitBtn2" onclick="joinWaitlist2()">Join Now</button>
+        <button class="form-submit" id="submitBtn2" onclick="joinWaitlist2()">Join Now</button>
       </div>
       <div class="success-msg" id="successMsg2">
         <div class="tick">✓</div>
@@ -724,7 +784,8 @@
       <div class="footer-logo-txt">All Sorted</div>
       <p class="footer-tag">The app that keeps your life together.<br>Everything you forget, in one place.</p>
       <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener"
-        style="font-size:12px; font-weight:400; letter-spacing:0.12em; color:rgba(255,255,255,0.5); text-decoration:none;">
+        style="display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:400; letter-spacing:0.12em; color:rgba(255,255,255,0.55); text-decoration:none; transition:color 0.2s;"
+        onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">
         @allsortedapp
       </a>
     </div>
@@ -742,7 +803,7 @@
       <ul>
         <li><a href="privacy.html">Privacy Policy</a></li>
         <li><a href="terms.html">Terms of Use</a></li>
-        <li><a href="/cdn-cgi/l/email-protection#1c6e73647d7272797d7068796e75735c7b717d7570327f7371">Contact</a></li>
+        <li><a href="mailto:roxannealterio@gmail.com">Contact</a></li>
       </ul>
     </div>
   </div>
@@ -754,18 +815,20 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+  // ── Scroll reveal ──
   const els = document.querySelectorAll('.r');
   const obs = new IntersectionObserver(entries => {
     entries.forEach((e, i) => {
       if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('on'), i * 40);
+        setTimeout(() => e.target.classList.add('on'), i * 55);
         obs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.01, rootMargin: '0px 0px -20px 0px' });
+  }, { threshold: 0.07 });
   els.forEach(el => obs.observe(el));
 
+  // ── Waitlist counter animation ──
   let count = 247;
   setInterval(() => {
     if (Math.random() > 0.7) {
@@ -775,6 +838,7 @@
     }
   }, 8000);
 
+  // ── FAQ ──
   function toggleFaq(btn) {
     const item = btn.parentElement;
     const isOpen = item.classList.contains('open');
@@ -782,6 +846,7 @@
     if (!isOpen) item.classList.add('open');
   }
 
+  // ── Waitlist form (hero) ──
   function joinWaitlist() {
     const email = document.getElementById('emailInput').value.trim();
     if (!email || !email.includes('@')) {
@@ -789,9 +854,17 @@
       setTimeout(() => document.getElementById('emailInput').style.borderColor = '', 1500);
       return;
     }
-    document.getElementById('submitBtn').disabled = true;
-    document.getElementById('submitBtn').textContent = 'Joining...';
-    fetch('https://formspree.io/f/xwvwrywg', {
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Joining...';
+
+    // Save to localStorage so we can see signups
+    const signups = JSON.parse(localStorage.getItem('waitlist') || '[]');
+    signups.push({ email, date: new Date().toISOString() });
+    localStorage.setItem('waitlist', JSON.stringify(signups));
+
+    // Send to Formspree (replace with your ID below)
+    fetch('https://formspree.io/f/YOUR_FORM_ID', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({ email, source: 'hero' })
@@ -805,6 +878,7 @@
     });
   }
 
+  // ── Waitlist form (bottom) ──
   function joinWaitlist2() {
     const email = document.getElementById('emailInput2').value.trim();
     if (!email || !email.includes('@')) {
@@ -812,9 +886,11 @@
       setTimeout(() => document.getElementById('emailInput2').style.borderColor = '', 1500);
       return;
     }
-    document.getElementById('submitBtn2').disabled = true;
-    document.getElementById('submitBtn2').textContent = 'Joining...';
-    fetch('https://formspree.io/f/xwvwrywg', {
+    const btn = document.getElementById('submitBtn2');
+    btn.disabled = true;
+    btn.textContent = 'Joining...';
+
+    fetch('https://formspree.io/f/YOUR_FORM_ID', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({ email, source: 'bottom' })
@@ -825,4 +901,9 @@
     });
   }
 
-  document.getElementById('emailInput').addEventListener('keydown', e => { if (e.key === 'Enter') joinWaitlis
+  // ── Enter key submits form ──
+  document.getElementById('emailInput').addEventListener('keydown', e => { if (e.key === 'Enter') joinWaitlist(); });
+  document.getElementById('emailInput2').addEventListener('keydown', e => { if (e.key === 'Enter') joinWaitlist2(); });
+</script>
+</body>
+</html>
