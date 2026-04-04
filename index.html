@@ -114,7 +114,7 @@
       inset: 0;
       background-image: url('hero.jpg');
       background-size: cover;
-      background-position: center top;
+      background-position: center 20%;
       background-repeat: no-repeat;
     }
 
@@ -486,6 +486,7 @@
       .money-cards { grid-template-columns: 1fr; max-width: 280px; }
       .footer-top { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; text-align: center; }
+      .phone-grid { grid-template-columns: 1fr !important; }
     }
   </style>
 </head>
@@ -549,7 +550,7 @@
     </div>
     <div class="counter-pill">
       <span class="c-lbl">Launching</span>
-      <span class="c-num">Mid 2025</span>
+      <span class="c-num">2025</span>
     </div>
   </div>
 </section>
@@ -574,6 +575,44 @@
 <section class="statement">
   <h2 class="r">Stop juggling five apps.<br>Get All Sorted.</h2>
   <a href="#waitlist" class="btn btn-outline-white r">Join the Waitlist</a>
+</section>
+
+<!-- PHONE PHOTO SECTION -->
+<section style="background: var(--cream); border-bottom: 1px solid var(--b1); padding: 96px 24px;">
+  <div style="max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
+    <div class="r">
+      <img src="phone.jpg" alt="All Sorted app"
+        style="width: 100%; border-radius: 24px; box-shadow: 0 24px 60px rgba(60,46,34,0.15); display: block;" />
+    </div>
+    <div class="r">
+      <p class="eyebrow" style="text-align:left; margin-bottom: 12px;">Because when it looks good</p>
+      <h2 style="font-size: clamp(24px,4vw,42px); font-weight: 300; letter-spacing: 0.06em; text-transform: uppercase; color: var(--t0); line-height: 1.2; margin-bottom: 20px;">You're more likely<br>to use it.</h2>
+      <p style="font-size: 15px; font-weight: 300; color: var(--t2); line-height: 1.85; margin-bottom: 28px;">All Sorted is designed to be as beautiful as it is functional. Every screen, every detail — crafted so you actually want to open it every day.</p>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px;">
+        <li style="display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 300; color: var(--t1);">
+          <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--taupeL); flex-shrink: 0;"></div>
+          Bills Due always visible at a glance
+        </li>
+        <li style="display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 300; color: var(--t1);">
+          <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--taupeL); flex-shrink: 0;"></div>
+          One-tap Pay Now for major billers
+        </li>
+        <li style="display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 300; color: var(--t1);">
+          <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--taupeL); flex-shrink: 0;"></div>
+          GPS trip tracking with customisable rate
+        </li>
+        <li style="display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 300; color: var(--t1);">
+          <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--taupeL); flex-shrink: 0;"></div>
+          Set your income tax bracket — we do the math
+        </li>
+        <li style="display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 300; color: var(--t1);">
+          <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--taupeL); flex-shrink: 0;"></div>
+          AI assistant that knows your actual finances
+        </li>
+      </ul>
+      <a href="#waitlist" class="btn btn-solid">Join the Waitlist</a>
+    </div>
+  </div>
 </section>
 
 <!-- FEATURES -->
@@ -721,7 +760,7 @@
       <ul>
         <li><a href="privacy.html">Privacy Policy</a></li>
         <li><a href="terms.html">Terms of Use</a></li>
-        <li><a href="mailto:roxannealterio@gmail.com">Contact</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#1c6e73647d7272797d7068796e75735c7b717d7570327f7371">Contact</a></li>
       </ul>
     </div>
   </div>
@@ -733,7 +772,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const els = document.querySelectorAll('.r');
   const obs = new IntersectionObserver(entries => {
     entries.forEach((e, i) => {
@@ -804,8 +843,4 @@
     });
   }
 
-  document.getElementById('emailInput').addEventListener('keydown', e => { if (e.key === 'Enter') joinWaitlist(); });
-  document.getElementById('emailInput2').addEventListener('keydown', e => { if (e.key === 'Enter') joinWaitlist2(); });
-</script>
-</body>
-</html>
+  document.getElementById('emailInput').addEventListener('keydown', e => { if (e.key === 'Enter') joinWaitlis
