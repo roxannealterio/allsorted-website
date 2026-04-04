@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Sorted — Join the Waitlist</title>
+  <meta name="description" content="The app that keeps your life together. Everything you forget, in one place. Launching soon — join the waitlist for early access + an exclusive discount." />
+  <meta property="og:title" content="All Sorted — Join the Waitlist" />
+  <meta property="og:description" content="Your assistant in your pocket. Bills, tax, wallet, drives, notes and AI — all in one beautiful app. Join the waitlist for early access + discount." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream:#F5F0EA; --cream2:#EDE5DC; --cream3:#E4D8CC;
+      --taupe:#9B8478; --taupeD:#7A6454; --taupeL:#C4B5A0;
+      --t0:#3C2E22; --t1:#5C4A38; --t2:#8C7A68; --t3:#B8A898;
+      --white:#FDFAF7; --b1:#E8E0D8; --b0:#D8CEC4;
+      --green:#4A7A5E; --greenP:#E2F0E8;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family:'Jost',sans-serif; background:var(--cream); color:var(--t0); font-weight:300; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+
+    .announce { background:var(--taupeD); color:rgba(255,255,255,0.85); text-align:center; padding:11px 20px; font-size:11px; font-weight:600; letter-spacing:0.22em; text-transform:uppercase; }
+    .announce span { color:rgba(255,255,255,0.45); font-weight:400; margin:0 10px; }
+
+    nav { position:sticky; top:0; z-index:100; background:rgba(245,240,234,0.95); backdrop-filter:blur(14px); border-bottom:1px solid var(--b1); padding:0 48px; height:62px; display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo { font-size:12px; font-weight:400; letter-spacing:0.55em; text-transform:uppercase; color:var(--taupeD); padding-left:0.55em; text-decoration:none; }
+    .nav-right { display:flex; align-items:center; gap:28px; }
+    .nav-link { font-size:11px; font-weight:400; letter-spacing:0.18em; text-transform:uppercase; color:var(--t3); text-decoration:none; transition:color 0.2s; }
+    .nav-link:hover { color:var(--taupeD); }
+    .nav-btn { font-size:11px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--white); background:var(--taupeD); padding:10px 22px; border-radius:100px; text-decoration:none; transition:all 0.2s; }
+    .nav-btn:hover { background:var(--taupe); }
+
+    /* HERO */
+    .hero {
+      min-height:100vh;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      text-align:center; padding:80px 24px 60px;
+      position:relative; overflow:hidden;
+    }
+
+    .hero-bg {
+      position:absolute; inset:0;
+      background-image:url('hero.jpg');
+      background-size:cover;
+      background-position:center 40%;
+      background-repeat:no-repeat;
+      filter:brightness(0.96) saturate(0.85);
+    }
+
+    .hero-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(
+        to bottom,
+        rgba(245,240,234,0.08) 0%,
+        rgba(245,240,234,0.2) 35%,
+        rgba(245,240,234,0.65) 65%,
+        rgba(245,240,234,0.92) 100%
+      );
+    }
+
+    /* All hero content sits above the overlay */
+    .coming-pill, .hero-logo, .hero-line, .hero-tagline, .hero-sub,
+    .discount-badge, .form-wrap, .counter-row {
+      position:relative; z-index:10;
+    }
+
+    .coming-pill { display:inline-flex; align-items:center; gap:8px; font-size:10px; font-weight:600; letter-spacing:0.3em; text-transform:uppercase; color:var(--taupeD); border:1.5px solid rgba(216,206,196,0.7); background:rgba(253,250,247,0.85); backdrop-filter:blur(8px); padding:8px 20px; border-radius:100px; margin-bottom:40px; opacity:0; animation:up 0.6s ease forwards 0.1s; }
+    .pill-dot { width:7px; height:7px; border-radius:50%; background:var(--green); animation:blink 2s ease-in-out infinite; }
+
+    .hero-logo { font-size:clamp(52px,12vw,108px); font-weight:300; letter-spacing:0.45em; text-transform:uppercase; color:var(--taupeD); padding-left:0.45em; line-height:1; margin-bottom:24px; opacity:0; animation:up 0.7s ease forwards 0.25s; }
+    .hero-line { width:40px; height:1px; background:var(--taupeL); margin:0 auto 24px; opacity:0; animation:up 0.6s ease forwards 0.4s; }
+    .hero-tagline { font-family:'Cormorant Garamond',serif; font-size:clamp(20px,4vw,32px); font-weight:300; font-style:italic; color:var(--t2); margin-bottom:8px; line-height:1.45; opacity:0; animation:up 0.6s ease forwards 0.52s; }
+    .hero-sub { font-size:15px; color:var(--t3); max-width:400px; margin:0 auto 16px; line-height:1.8; opacity:0; animation:up 0.6s ease forwards 0.62s; }
+
+    .discount-badge { display:inline-flex; align-items:center; gap:8px; background:var(--greenP); border:1.5px solid var(--green); color:var(--green); border-radius:100px; padding:8px 18px; font-size:12px; font-weight:600; margin-bottom:36px; opacity:0; animation:up 0.6s ease forwards 0.72s; }
+    .discount-badge svg { width:14px; height:14px; stroke:var(--green); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+    /* FORM */
+    .form-wrap { width:100%; max-width:460px; margin:0 auto; opacity:0; animation:up 0.7s ease forwards 0.85s; }
+    .form-inner { background:var(--white); border:1px solid var(--b1); border-radius:20px; padding:28px; box-shadow:0 8px 32px rgba(60,46,34,0.07); }
+    .form-lbl { font-size:10px; font-weight:600; letter-spacing:0.35em; text-transform:uppercase; color:var(--taupe); text-align:center; margin-bottom:16px; display:block; }
+    .form-row { display:flex; gap:8px; }
+    .form-input { flex:1; height:48px; border:1.5px solid var(--b1); border-radius:100px; padding:0 18px; font-family:'Jost',sans-serif; font-size:14px; font-weight:300; color:var(--t0); background:var(--cream); outline:none; transition:border-color 0.2s; }
+    .form-input::placeholder { color:var(--t3); }
+    .form-input:focus { border-color:var(--taupeL); }
+    .form-btn { height:48px; padding:0 22px; background:var(--taupeD); color:var(--white); border:none; border-radius:100px; font-family:'Jost',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; cursor:pointer; transition:all 0.2s; white-space:nowrap; flex-shrink:0; }
+    .form-btn:hover { background:var(--taupe); }
+    .form-btn:disabled { opacity:0.6; cursor:not-allowed; }
+    .form-note { font-size:11px; color:var(--t3); text-align:center; margin-top:12px; line-height:1.6; }
+    .success-msg { display:none; text-align:center; padding:8px 0; }
+    .tick { width:44px; height:44px; border-radius:50%; background:var(--greenP); border:1.5px solid var(--green); display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-size:20px; color:var(--green); }
+    .success-msg h3 { font-size:15px; font-weight:500; color:var(--t0); margin-bottom:6px; }
+    .success-msg p { font-size:13px; color:var(--t2); line-height:1.6; }
+
+    /* COUNTER */
+    .counter-row { display:flex; gap:10px; justify-content:center; margin-top:28px; flex-wrap:wrap; opacity:0; animation:up 0.6s ease forwards 1s; }
+    .counter-pill { background:rgba(253,250,247,0.92); backdrop-filter:blur(8px); border:1px solid rgba(216,206,196,0.6); border-radius:100px; padding:9px 18px; display:flex; align-items:center; gap:8px; cursor:default; transition:transform 0.2s, box-shadow 0.2s; }
+    .counter-pill:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(60,46,34,0.1); }
+    .counter-pill.pop { animation:pillpop 0.4s ease; }
+    .c-num { font-size:14px; font-weight:600; color:var(--taupeD); transition:transform 0.2s; }
+    .c-lbl { font-size:11px; color:var(--t3); }
+    .stat-num { color:var(--green) !important; }
+
+    @keyframes pillpop { 0%{transform:scale(1)} 40%{transform:scale(1.06)} 100%{transform:scale(1)} }
+    @keyframes numflip { 0%{opacity:0;transform:translateY(6px)} 100%{opacity:1;transform:none} }
+
+    /* SECTIONS */
+    .sec { padding:96px 24px; }
+    .sec-inner { max-width:1080px; margin:0 auto; }
+    .eyebrow { font-size:10px; font-weight:600; letter-spacing:0.4em; text-transform:uppercase; color:var(--taupe); text-align:center; margin-bottom:14px; }
+    .h2 { font-size:clamp(26px,5vw,48px); font-weight:300; letter-spacing:0.06em; text-transform:uppercase; color:var(--t0); text-align:center; line-height:1.15; margin-bottom:14px; }
+    .lead { font-size:15px; color:var(--t2); text-align:center; max-width:480px; margin:0 auto 56px; line-height:1.85; }
+
+    /* MONEY */
+    .money-sec { background:var(--cream2); border-top:1px solid var(--b1); border-bottom:1px solid var(--b1); padding:96px 24px; text-align:center; }
+    .money-h2 { font-size:clamp(28px,6vw,58px); font-weight:300; letter-spacing:0.04em; text-transform:uppercase; color:var(--t0); line-height:1.2; margin-bottom:24px; max-width:800px; margin-left:auto; margin-right:auto; }
+    .money-italic { font-family:'Cormorant Garamond',serif; font-size:clamp(18px,3vw,26px); font-weight:300; font-style:italic; color:var(--t2); max-width:580px; margin:0 auto 14px; line-height:1.65; }
+    .money-sub { font-size:15px; color:var(--t3); max-width:460px; margin:0 auto 48px; line-height:1.85; }
+    .money-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:640px; margin:0 auto 48px; }
+    .mc { border-radius:16px; padding:28px 16px; text-align:center; }
+    .mc.light { background:var(--white); border:1px solid var(--b1); }
+    .mc.dark { background:var(--taupeD); }
+    .mc-num { font-size:clamp(28px,4vw,42px); font-weight:300; line-height:1; margin-bottom:8px; }
+    .mc.light .mc-num { color:var(--taupeD); }
+    .mc.dark .mc-num { color:var(--white); }
+    .mc-num.green { color:var(--green); }
+    .mc-lbl { font-size:9px; font-weight:600; letter-spacing:0.25em; text-transform:uppercase; }
+    .mc.light .mc-lbl { color:var(--t3); }
+    .mc.dark .mc-lbl { color:rgba(255,255,255,0.38); }
+
+    /* STATEMENT */
+    .statement { background:var(--taupeD); padding:96px 24px; text-align:center; }
+    .statement h2 { font-size:clamp(28px,6vw,60px); font-weight:300; letter-spacing:0.04em; text-transform:uppercase; color:var(--white); max-width:700px; margin:0 auto 32px; line-height:1.2; }
+
+    /* FEATURES */
+    .grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:10px; }
+    .feat { background:var(--white); border:1px solid var(--b1); border-radius:16px; padding:28px; transition:transform 0.22s,box-shadow 0.22s; }
+    .feat:hover { transform:translateY(-3px); box-shadow:0 12px 32px rgba(60,46,34,0.07); }
+    .feat-icon { width:38px; height:38px; border-radius:9px; border:1px solid var(--b1); background:var(--cream); display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+    .feat-icon svg { width:18px; height:18px; stroke:var(--taupe); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+    .feat-title { font-size:13px; font-weight:600; color:var(--t0); margin-bottom:8px; letter-spacing:0.04em; }
+    .feat-desc { font-size:13px; font-weight:300; color:var(--t2); line-height:1.75; }
+
+    /* FOUNDER */
+    .founder-sec { background:var(--cream2); border-top:1px solid var(--b1); border-bottom:1px solid var(--b1); padding:96px 24px; }
+    .founder-inner { max-width:780px; margin:0 auto; display:grid; grid-template-columns:200px 1fr; gap:60px; align-items:start; }
+    .founder-photo { width:180px; height:180px; border-radius:50%; background:var(--cream3); border:3px solid var(--b0); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .founder-initials { font-size:52px; font-weight:300; color:var(--taupeL); }
+    .founder-label { font-size:10px; font-weight:600; letter-spacing:0.4em; text-transform:uppercase; color:var(--taupe); margin-bottom:12px; }
+    .founder-name { font-size:clamp(24px,4vw,38px); font-weight:300; letter-spacing:0.04em; color:var(--t0); margin-bottom:4px; }
+    .founder-role { font-size:12px; color:var(--t3); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:24px; }
+    .founder-bio { font-size:15px; font-weight:300; color:var(--t2); line-height:1.85; margin-bottom:20px; }
+    .founder-quote { font-family:'Cormorant Garamond',serif; font-size:clamp(18px,2.5vw,24px); font-weight:300; font-style:italic; color:var(--taupeD); border-left:2px solid var(--taupeL); padding-left:20px; line-height:1.5; margin-bottom:28px; }
+    .founder-sig { font-family:'Cormorant Garamond',serif; font-size:30px; font-weight:300; font-style:italic; color:var(--taupeD); }
+
+    /* AI */
+    .ai-sec { background:var(--taupeD); padding:96px 24px; text-align:center; }
+    .ai-sec .eyebrow { color:rgba(255,255,255,0.35); }
+    .ai-sec .h2 { color:var(--white); }
+    .ai-sec .lead { color:rgba(255,255,255,0.5); margin-bottom:48px; }
+    .chat { max-width:500px; margin:0 auto; display:flex; flex-direction:column; gap:10px; text-align:left; }
+    .chat-lbl { font-size:9px; font-weight:600; letter-spacing:0.25em; text-transform:uppercase; color:rgba(255,255,255,0.3); padding:0 4px; margin-bottom:3px; }
+    .bubble { padding:13px 17px; border-radius:14px; font-size:13px; font-weight:300; line-height:1.7; }
+    .bubble.u { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.85); align-self:flex-end; max-width:86%; border-bottom-right-radius:4px; }
+    .bubble.a { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.7); align-self:flex-start; max-width:90%; border-bottom-left-radius:4px; }
+
+    /* FAQ */
+    .faq-list { max-width:660px; margin:0 auto; }
+    .faq-item { border-bottom:1px solid var(--b1); }
+    .faq-q { width:100%; display:flex; align-items:center; justify-content:space-between; padding:20px 4px; background:none; border:none; cursor:pointer; font-family:'Jost',sans-serif; font-size:12px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--t0); text-align:left; gap:16px; }
+    .faq-icon { width:26px; height:26px; border-radius:50%; border:1px solid var(--b1); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .faq-icon span { font-size:16px; color:var(--taupe); line-height:1; transition:transform 0.2s; }
+    .faq-item.open .faq-icon span { transform:rotate(45deg); }
+    .faq-a { max-height:0; overflow:hidden; transition:max-height 0.3s ease; }
+    .faq-a p { padding:0 4px 18px; font-size:14px; font-weight:300; color:var(--t2); line-height:1.8; }
+    .faq-item.open .faq-a { max-height:200px; }
+
+    .connect-sec { padding:96px 24px; text-align:center; border-top:1px solid var(--b1); }
+    .bottom-cta { background:var(--cream2); border-top:1px solid var(--b1); padding:96px 24px; text-align:center; }
+    .waitlist-bottom { max-width:460px; margin:0 auto; }
+    .waitlist-bottom .form-row { flex-direction:column; gap:10px; }
+    .waitlist-bottom .form-input { border-radius:12px; height:52px; }
+    .waitlist-bottom .form-btn { height:52px; border-radius:12px; width:100%; font-size:12px; }
+
+    footer { background:var(--taupeD); padding:56px 40px 36px; }
+    .footer-top { display:grid; grid-template-columns:1fr 1fr 1fr; gap:48px; margin-bottom:40px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.1); }
+    .footer-logo-txt { font-size:13px; font-weight:400; letter-spacing:0.55em; text-transform:uppercase; color:var(--white); padding-left:0.55em; margin-bottom:12px; }
+    .footer-tag { font-size:13px; font-weight:300; color:rgba(255,255,255,0.45); line-height:1.75; margin-bottom:20px; }
+    .footer-col h4 { font-size:9px; font-weight:600; letter-spacing:0.35em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:18px; }
+    .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .footer-col a { font-size:13px; font-weight:300; color:rgba(255,255,255,0.55); text-decoration:none; transition:color 0.2s; }
+    .footer-col a:hover { color:var(--white); }
+    .footer-bottom { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+    .footer-copy { font-size:11px; color:rgba(255,255,255,0.28); }
+    .social-row { display:flex; gap:20px; }
+    .social-row a { font-size:11px; font-weight:400; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.38); text-decoration:none; transition:color 0.2s; }
+    .social-row a:hover { color:var(--white); }
+
+    .btn { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; text-decoration:none; padding:14px 28px; border-radius:100px; transition:all 0.22s; }
+    .btn-solid { background:var(--taupeD); color:var(--white); }
+    .btn-solid:hover { background:var(--taupe); transform:translateY(-2px); }
+    .btn-outline-white { border:1.5px solid rgba(255,255,255,0.3); color:var(--white); }
+    .btn-outline-white:hover { border-color:rgba(255,255,255,0.6); }
+
+    .r { opacity:0; transform:translateY(12px); transition:opacity 0.55s ease,transform 0.55s ease; }
+    .r.on { opacity:1; transform:none; }
+
+    @keyframes up { from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none} }
+    @keyframes blink { 0%,100%{opacity:0.4}50%{opacity:1} }
+
+    @media(max-width:700px){
+      nav{padding:0 20px}
+      .nav-link{display:none}
+      .form-row{flex-direction:column}
+      .form-input,.form-btn{width:100%;border-radius:12px}
+      .money-cards{grid-template-columns:1fr;max-width:280px}
+      .founder-inner{grid-template-columns:1fr;gap:32px}
+      .founder-photo{margin:0 auto}
+      .footer-top{grid-template-columns:1fr}
+      .footer-bottom{flex-direction:column;text-align:center}
+    }
+  </style>
+</head>
+<body>
+
+<div class="announce">Join before launch <span>·</span> Get an exclusive early bird discount <span>·</span> Limited spots</div>
+
+<nav>
+  <a href="#top" class="nav-logo">All Sorted</a>
+  <div class="nav-right">
+    <a href="#features" class="nav-link">Features</a>
+    <a href="#founder" class="nav-link">About</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+    <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener" class="nav-link">@allsortedapp</a>
+    <a href="#waitlist" class="nav-btn">Join Waitlist</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="coming-pill"><div class="pill-dot"></div>Launching Soon · iOS</div>
+  <h1 class="hero-logo">All Sorted</h1>
+  <div class="hero-line"></div>
+  <p class="hero-tagline">Your assistant in your pocket.</p>
+  <p class="hero-sub">Everything you forget, in one beautiful place. Bills, tax, wallet, drives, notes and AI.</p>
+  <div class="discount-badge">
+    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    Sign up before launch — get an exclusive discount
+  </div>
+  <div class="form-wrap" id="waitlist">
+    <div class="form-inner">
+      <span class="form-lbl">Join the Waitlist — It's Free</span>
+      <div class="form-row" id="formRow">
+        <input type="email" class="form-input" id="emailInput" placeholder="your@email.com" />
+        <button class="form-btn" id="submitBtn" onclick="joinWaitlist()">Join Now</button>
+      </div>
+      <div class="success-msg" id="successMsg">
+        <div class="tick">✓</div>
+        <h3>You're in! Check your inbox.</h3>
+        <p>A welcome email is on its way from Roxanne.<br>Follow us for sneak peeks while you wait.</p>
+        <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener"
+          class="btn btn-solid" style="margin-top:16px;font-size:11px;display:inline-flex;">Follow @allsortedapp</a>
+      </div>
+      <p class="form-note" id="formNote">No spam. Welcome email + launch notification + your exclusive discount.</p>
+    </div>
+  </div>
+  <div class="counter-row">
+    <div class="counter-pill" id="waitlistPill">
+      <div class="pill-dot"></div>
+      <span class="c-lbl">Join</span>
+      <span class="c-num" id="waitlistCount">50</span>
+      <span class="c-lbl">others on the waitlist</span>
+    </div>
+    <div class="counter-pill">
+      <span class="c-lbl">Launching</span>
+      <span class="c-num">2025</span>
+    </div>
+  </div>
+</section>
+
+<section class="money-sec">
+  <div style="max-width:800px;margin:0 auto;">
+    <p class="eyebrow r">Did you know?</p>
+    <h2 class="money-h2 r">You are probably leaving<br>money on the table.</h2>
+    <p class="money-italic r">Most people miss hundreds — even thousands — in unclaimed deductions every year. Not because they don't qualify. Because they never logged them.</p>
+    <p class="money-sub r">Work trips, receipts, phone bills, home office — All Sorted makes it effortless to log everything as it happens, so nothing slips through at tax time.</p>
+    <div class="money-cards r">
+      <div class="mc light"><div class="mc-num">$0</div><div class="mc-lbl">Without the app</div></div>
+      <div class="mc dark"><div class="mc-num">$1,244</div><div class="mc-lbl">With All Sorted</div></div>
+      <div class="mc light"><div class="mc-num green">+$404</div><div class="mc-lbl">Back in your pocket</div></div>
+    </div>
+    <a href="#waitlist" class="btn btn-solid r">Join the Waitlist</a>
+  </div>
+</section>
+
+<section class="statement">
+  <h2 class="r">Stop juggling five apps.<br>Get All Sorted.</h2>
+  <a href="#waitlist" class="btn btn-outline-white r">Join the Waitlist</a>
+</section>
+
+<section class="sec" id="features">
+  <div class="sec-inner">
+    <p class="eyebrow r">What's inside</p>
+    <h2 class="h2 r">One app. Whole life.</h2>
+    <p class="lead r">Everything you forget, in one beautiful place.</p>
+    <div class="grid-3">
+      <div class="feat r">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><circle cx="7" cy="15" r="1" fill="var(--taupe)" stroke="none"/></svg></div>
+        <div class="feat-title">Wallet</div>
+        <p class="feat-desc">Gift cards, memberships, discount codes and documents — Medicare, licences, insurance — all stored securely.</p>
+      </div>
+      <div class="feat r">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><line x1="8" y1="15" x2="8" y2="15" stroke-width="2"/><line x1="12" y1="15" x2="12" y2="15" stroke-width="2"/></svg></div>
+        <div class="feat-title">Life</div>
+        <p class="feat-desc">Track bills and subscriptions. Auto-reminders 5, 3 and 1 day before due. Pay with one tap.</p>
+      </div>
+      <div class="feat r">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div class="feat-title">Tax</div>
+        <p class="feat-desc">Log deductions, scan receipts and watch your refund grow. Set your income tax bracket for an exact estimate.</p>
+      </div>
+      <div class="feat r">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+        <div class="feat-title">Drive</div>
+        <p class="feat-desc">GPS auto-tracking for work trips. Set your rate per km and export a full mileage logbook for tax time.</p>
+      </div>
+      <div class="feat r">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+        <div class="feat-title">Notes</div>
+        <p class="feat-desc">Smart notes that detect bills and reminders automatically. Type it and we'll offer to add it to Life.</p>
+      </div>
+      <div class="feat r">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <div class="feat-title">Records & Graphs</div>
+        <p class="feat-desc">Track income and expenses, import from your bank CSV and visualise cash flow in beautiful inline graphs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ai-sec">
+  <p class="eyebrow r">Powered by Claude AI</p>
+  <h2 class="h2 r">Your personal finance assistant.</h2>
+  <p class="lead r">Ask anything. The AI knows your actual bills, expenses, deductions and trips — and gives you real answers.</p>
+  <div class="chat r">
+    <div><p class="chat-lbl">You</p><div class="bubble u">How can I reduce my tax?</div></div>
+    <div><p class="chat-lbl">All Sorted AI</p><div class="bubble a">You've logged $1,244 in deductions — that's an estimated $404 refund at your bracket. Adding your work from home expenses and phone bill could push this even higher.</div></div>
+    <div><p class="chat-lbl">You</p><div class="bubble u">What bills are due this week?</div></div>
+    <div><p class="chat-lbl">All Sorted AI</p><div class="bubble a">2 bills due — Telstra ($89) in 3 days and Origin Energy ($142) in 5 days. Pay Now links are ready in your Life tab.</div></div>
+  </div>
+</section>
+
+<section class="founder-sec" id="founder">
+  <div class="founder-inner">
+    <div>
+      <div class="founder-photo r" style="background:none; border:none;">
+        <img src="founder.jpg" alt="Roxanne Alterio" style="width:180px; height:180px; border-radius:50%; object-fit:cover; object-position:center top; border:3px solid var(--b0); display:block;" />
+      </div>
+    </div>
+    <div>
+      <p class="founder-label r">Meet the founder</p>
+      <h2 class="founder-name r">Roxanne Alterio</h2>
+      <p class="founder-role r">Founder · All Sorted</p>
+      <p class="founder-bio r">I built All Sorted because I was tired of missing bills, losing receipts and never knowing where my money was going. I wanted one app that felt as good as it worked — something I'd actually want to open every single day.</p>
+      <p class="founder-bio r">Think of it as your assistant in your pocket. The one that never forgets, always knows what's due, and quietly keeps everything in order so you don't have to.</p>
+      <blockquote class="founder-quote r">"Everything you keep forgetting deserves a place. That's why I built this."</blockquote>
+      <p class="founder-sig r">Roxanne x</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="faq" style="background:var(--cream2);border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);">
+  <div class="sec-inner">
+    <p class="eyebrow r">Got questions</p>
+    <h2 class="h2 r" style="margin-bottom:48px;">FAQ</h2>
+    <div class="faq-list r">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">When does All Sorted launch?<div class="faq-icon"><span>+</span></div></button>
+        <div class="faq-a"><p>We're launching in the next 1-2 months on iOS. Join the waitlist and you'll be first to know — plus get your exclusive early bird discount before the public launch.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What's the early bird discount?<div class="faq-icon"><span>+</span></div></button>
+        <div class="faq-a"><p>Everyone on the waitlist gets an exclusive discount when we launch — before it's available to anyone else. Join now to lock in your spot.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is it free to download?<div class="faq-icon"><span>+</span></div></button>
+        <div class="faq-a"><p>Yes — All Sorted is free to download and use. Premium features will be available for those who want to unlock everything — and waitlist members get a discount on those too.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Does it work for my country?<div class="faq-icon"><span>+</span></div></button>
+        <div class="faq-a"><p>Yes — All Sorted is available worldwide. Set your currency, timezone and income tax bracket and everything adjusts to your situation.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can I customise my tax rate?<div class="faq-icon"><span>+</span></div></button>
+        <div class="faq-a"><p>Yes. In Settings you choose your income tax bracket — 0%, 19%, 32.5%, 37% or 45% — and every estimated refund updates instantly to reflect your exact rate.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is my data secure?<div class="faq-icon"><span>+</span></div></button>
+        <div class="faq-a"><p>Yes. Your data is stored securely with encrypted connections and row-level security — only you can access your data.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Will there be an Android version?<div class="faq-icon"><span>+</span></div></button>
+        <div class="faq-a"><p>iOS first. Android is on the roadmap — join the waitlist and we'll keep you posted.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="connect-sec">
+  <p class="eyebrow r">Follow the journey</p>
+  <h2 class="h2 r">Behind the scenes.</h2>
+  <p class="lead r">Follow us on Instagram for sneak peeks, feature reveals and launch updates.</p>
+  <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener" class="btn btn-solid r">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+    @allsortedapp
+  </a>
+</section>
+
+<section class="bottom-cta">
+  <p class="eyebrow r">Don't miss the launch</p>
+  <h2 class="h2 r">Be first. Get the discount.</h2>
+  <p class="lead r">Join before launch and get an exclusive early bird discount — only for waitlist members.</p>
+  <div class="waitlist-bottom r">
+    <div class="form-inner" style="background:var(--white);">
+      <div class="form-row" id="formRow2">
+        <input type="email" class="form-input" id="emailInput2" placeholder="your@email.com" />
+        <button class="form-btn" id="submitBtn2" onclick="joinWaitlist2()">Join Now</button>
+      </div>
+      <div class="success-msg" id="successMsg2">
+        <div class="tick">✓</div>
+        <h3>You're in! Check your inbox.</h3>
+        <p>Welcome email on its way from Roxanne.</p>
+      </div>
+      <p class="form-note" id="formNote2">No spam. Just your welcome email + launch notification + discount.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo-txt">All Sorted</div>
+      <p class="footer-tag">The app that keeps your life together.<br>Everything you forget, in one place.</p>
+      <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener" style="font-size:12px;font-weight:400;letter-spacing:0.12em;color:rgba(255,255,255,0.5);text-decoration:none;">@allsortedapp</a>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#top">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#founder">About</a></li>
+        <li><a href="#waitlist">Join Waitlist</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Use</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#10797e767f50717c7c637f626475747160603e7e7564">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Roxanne Alterio · All Sorted</p>
+    <div class="social-row">
+      <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Scroll reveal
+  const els = document.querySelectorAll('.r');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('on'), i * 50);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.01, rootMargin: '0px 0px -10px 0px' });
+  els.forEach(el => obs.observe(el));
+
+  // ── Smooth count animation ──
+  function animateCount(el, from, to, dur, prefix, suffix) {
+    prefix = prefix || ''; suffix = suffix || '';
+    const start = Date.now();
+    const t = setInterval(() => {
+      const p = Math.min((Date.now() - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      const val = Math.floor(from + (to - from) * ease);
+      el.textContent = prefix + val.toLocaleString() + suffix;
+      el.style.animation = 'numflip 0.15s ease';
+      setTimeout(() => el.style.animation = '', 150);
+      if (p === 1) clearInterval(t);
+    }, 16);
+  }
+
+  // ── On page load — animate all counters ──
+  let count = 50;
+  window.addEventListener('load', () => {
+    const waitEl = document.getElementById('waitlistCount');
+    if (waitEl) setTimeout(() => animateCount(waitEl, 0, count, 2000, '', ''), 600);
+  });
+
+  // ── Money section numbers count up when scrolled into view ──
+  const moneyNums = document.querySelectorAll('.mc-num');
+  const moneyObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const txt = el.textContent.trim();
+        if (txt === '$0') { animateCount(el, 0, 0, 800, '$', ''); }
+        else if (txt === '$1,244') { animateCount(el, 0, 1244, 1800, '$', ''); }
+        else if (txt === '+$404') { animateCount(el, 0, 404, 1400, '+$', ''); }
+        moneyObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  moneyNums.forEach(el => moneyObs.observe(el));
+
+  // ── Slowly tick up every ~25s ──
+  setInterval(() => {
+    if (Math.random() > 0.5) {
+      const add = Math.floor(Math.random() * 2) + 1;
+      const el = document.getElementById('waitlistCount');
+      if (el) {
+        const from = count; count += add;
+        animateCount(el, from, count, 600, '', '');
+        // Pop the pill
+        const pill = document.getElementById('waitlistPill');
+        if (pill) { pill.classList.remove('pop'); void pill.offsetWidth; pill.classList.add('pop'); }
+      }
+    }
+  }, 25000);
+
+  // FAQ
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Forms
+  function submitForm(email, source, rowId, noteId, successId, btnId) {
+    fetch('https://formspree.io/f/xwvwrywg', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email, source, discount: true })
+    }).catch(() => {}).finally(() => {
+      document.getElementById(rowId).style.display = 'none';
+      document.getElementById(noteId).style.display = 'none';
+      document.getElementById(successId).style.display = 'block';
+      const el = document.getElementById('waitlistCount');
+      if (el) { const from = count; count++; animateCount(el, from, count, 400, '', ''); }
+    });
+  }
+
+  function joinWaitlist() {
+    const email = document.getElementById('emailInput').value.trim();
+    if (!email || !email.includes('@')) { document.getElementById('emailInput').style.borderColor = '#A04040'; setTimeout(() => document.getElementById('emailInput').style.borderColor = '', 1500); return; }
+    const btn = document.getElementById('submitBtn'); btn.disabled = true; btn.textContent = 'Joining...';
+    submitForm(email, 'hero', 'formRow', 'formNote', 'successMsg', 'submitBtn');
+  }
+
+  function joinWaitlist2() {
+    const email = document.getElementById('emailInput2').value.trim();
+    if (!email || !email.includes('@')) { document.getElementById('emailInput2').style.borderColor = '#A04040'; setTimeout(() => document.getElementById('emailInput2').style.borderColor = '', 1500); return; }
+    const btn = document.getElementById('submitBtn2'); btn.disabled = true; btn.textContent = 'Joining...';
+    submitForm(email, 'bottom', 'formRow2', 'formNote2', 'successMsg2', 'submitBtn2');
+  }
+
+  document.getElementById('emailInput').addEventListener('keydown', e => { if (e.key === 'Enter') joinWaitlist()
