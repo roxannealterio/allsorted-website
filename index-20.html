@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Sorted — Join the Waitlist</title>
+  <meta name="description" content="The app that keeps your life together. Everything you forget, in one place. Launching soon." />
+  <meta property="og:title" content="All Sorted — Join the Waitlist" />
+  <meta property="og:description" content="The app that keeps your life together. Everything you forget, in one place. Launching soon." />
+  <meta property="og:image" content="hero.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream:  #F5F0EA;
+      --cream2: #EDE5DC;
+      --cream3: #E4D8CC;
+      --taupe:  #9B8478;
+      --taupeD: #7A6454;
+      --taupeL: #C4B5A0;
+      --t0:     #3C2E22;
+      --t2:     #8C7A68;
+      --t3:     #B8A898;
+      --white:  #FDFAF7;
+      --b1:     #E8E0D8;
+      --b0:     #D8CEC4;
+      --green:  #4A7A5E;
+      --greenP: #E2F0E8;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--t0); font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    /* ── ANNOUNCE ── */
+    .announce {
+      background: var(--taupeD);
+      color: rgba(255,255,255,0.82);
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: absolute;
+      top: 40px;
+      left: 0; right: 0;
+      z-index: 50;
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+      color: var(--white);
+      padding-left: 0.55em;
+      text-decoration: none;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+    }
+
+    .nav-right { display: flex; align-items: center; gap: 28px; }
+
+    .nav-link {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      transition: color 0.2s;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.2);
+    }
+
+    .nav-link:hover { color: var(--white); }
+
+    .nav-btn {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--t0);
+      background: var(--white);
+      padding: 10px 22px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover { background: var(--cream); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px 60px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('hero.jpg');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+    }
+
+    /* Dark overlay — heavier at bottom for text legibility */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(30,20,14,0.15) 0%,
+        rgba(30,20,14,0.25) 40%,
+        rgba(30,20,14,0.72) 75%,
+        rgba(30,20,14,0.88) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 0 24px;
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .coming-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 7px 18px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      backdrop-filter: blur(4px);
+    }
+
+    .pill-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #6DBF8A;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    .hero-logo {
+      font-size: clamp(48px, 10vw, 96px);
+      font-weight: 200;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--white);
+      padding-left: 0.45em;
+      line-height: 1;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+
+    .hero-line {
+      width: 40px;
+      height: 1px;
+      background: rgba(255,255,255,0.35);
+      margin: 0 auto 20px;
+    }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 3.5vw, 28px);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    /* ── WAITLIST FORM ── */
+    .form-wrap {
+      width: 100%;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    .form-inner {
+      background: rgba(253,250,247,0.96);
+      backdrop-filter: blur(12px);
+      border-radius: 18px;
+      padding: 28px;
+    }
+
+    .form-lbl {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      text-align: center;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .form-row { display: flex; gap: 8px; }
+
+    .form-input {
+      flex: 1;
+      height: 48px;
+      border: 1.5px solid var(--b1);
+      border-radius: 100px;
+      padding: 0 18px;
+      font-family: 'Jost', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--t0);
+      background: var(--cream);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-input::placeholder { color: var(--t3); }
+    .form-input:focus { border-color: var(--taupeL); }
+
+    .form-btn {
+      height: 48px;
+      padding: 0 22px;
+      background: var(--taupeD);
+      color: var(--white);
+      border: none;
+      border-radius: 100px;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .form-btn:hover { background: var(--taupe); }
+    .form-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .form-note {
+      font-size: 11px;
+      color: var(--t3);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 8px 0;
+    }
+
+    .tick {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--greenP);
+      border: 1.5px solid var(--green);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 12px;
+      font-size: 20px;
+      color: var(--green);
+    }
+
+    .success-msg h3 { font-size: 15px; font-weight: 500; color: var(--t0); margin-bottom: 6px; }
+    .success-msg p { font-size: 13px; color: var(--t2); line-height: 1.6; }
+
+    /* ── COUNTER ── */
+    .counter-row {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .counter-pill {
+      background: rgba(253,250,247,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(6px);
+      border-radius: 100px;
+      padding: 9px 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .c-num { font-size: 14px; font-weight: 600; color: var(--white); }
+    .c-lbl { font-size: 11px; color: rgba(255,255,255,0.6); }
+
+    /* ── SECTIONS ── */
+    .sec { padding: 96px 24px; }
+    .sec-inner { max-width: 1080px; margin: 0 auto; }
+
+    .eyebrow {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.4em;
+      text-transform: uppercase; color: var(--taupe);
+      text-align: center; margin-bottom: 14px;
+    }
+
+    .h2 {
+      font-size: clamp(26px, 5vw, 48px); font-weight: 300;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--t0); text-align: center;
+      line-height: 1.15; margin-bottom: 14px;
+    }
+
+    .lead {
+      font-size: 15px; color: var(--t2);
+      text-align: center; max-width: 480px;
+      margin: 0 auto 56px; line-height: 1.85;
+    }
+
+    /* ── MONEY SECTION ── */
+    .money-sec {
+      background: var(--cream2);
+      border-top: 1px solid var(--b1);
+      border-bottom: 1px solid var(--b1);
+      padding: 96px 24px;
+      text-align: center;
+    }
+
+    .money-h2 {
+      font-size: clamp(28px, 6vw, 58px); font-weight: 300;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--t0); line-height: 1.2;
+      margin-bottom: 24px;
+      max-width: 800px; margin-left: auto; margin-right: auto;
+    }
+
+    .money-italic {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 3vw, 26px); font-weight: 300;
+      font-style: italic; color: var(--t2);
+      max-width: 580px; margin: 0 auto 14px; line-height: 1.65;
+    }
+
+    .money-sub {
+      font-size: 15px; color: var(--t3);
+      max-width: 460px; margin: 0 auto 48px; line-height: 1.85;
+    }
+
+    .money-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      max-width: 640px;
+      margin: 0 auto 48px;
+    }
+
+    .mc { border-radius: 16px; padding: 28px 16px; text-align: center; }
+    .mc.light { background: var(--white); border: 1px solid var(--b1); }
+    .mc.dark { background: var(--taupeD); }
+    .mc-num { font-size: clamp(28px, 4vw, 42px); font-weight: 300; line-height: 1; margin-bottom: 8px; }
+    .mc.light .mc-num { color: var(--taupeD); }
+    .mc.dark .mc-num { color: var(--white); }
+    .mc-num.green { color: var(--green); }
+    .mc-lbl { font-size: 9px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; }
+    .mc.light .mc-lbl { color: var(--t3); }
+    .mc.dark .mc-lbl { color: rgba(255,255,255,0.38); }
+
+    /* ── FEATURES ── */
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; }
+
+    .feat {
+      background: var(--white); border: 1px solid var(--b1);
+      border-radius: 16px; padding: 28px;
+      transition: transform 0.22s, box-shadow 0.22s;
+    }
+
+    .feat:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(60,46,34,0.07); }
+
+    .feat-icon {
+      width: 38px; height: 38px; border-radius: 9px;
+      border: 1px solid var(--b1); background: var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .feat-icon svg { width: 18px; height: 18px; stroke: var(--taupe); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .feat-title { font-size: 13px; font-weight: 600; color: var(--t0); margin-bottom: 8px; letter-spacing: 0.04em; }
+    .feat-desc { font-size: 13px; font-weight: 300; color: var(--t2); line-height: 1.75; }
+
+    /* ── STATEMENT ── */
+    .statement { background: var(--taupeD); padding: 96px 24px; text-align: center; }
+    .statement h2 { font-size: clamp(28px, 6vw, 60px); font-weight: 300; letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); max-width: 700px; margin: 0 auto 32px; line-height: 1.2; }
+
+    /* ── AI ── */
+    .ai-sec { background: var(--taupeD); padding: 96px 24px; text-align: center; }
+    .ai-sec .eyebrow { color: rgba(255,255,255,0.35); }
+    .ai-sec .h2 { color: var(--white); }
+    .ai-sec .lead { color: rgba(255,255,255,0.5); margin-bottom: 32px; }
+    .chip {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 100px;
+      padding: 9px 18px;
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.75);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .chip:hover { background: rgba(255,255,255,0.18); color: var(--white); }
+    .chat { max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; text-align: left; }
+    .chat-lbl { font-size: 9px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.3); padding: 0 4px; margin-bottom: 3px; }
+    .bubble { padding: 13px 17px; border-radius: 14px; font-size: 13px; font-weight: 300; line-height: 1.7; }
+    .bubble.u { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); align-self: flex-end; max-width: 86%; border-bottom-right-radius: 4px; }
+    .bubble.a { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); align-self: flex-start; max-width: 90%; border-bottom-left-radius: 4px; }
+
+    /* ── FAQ ── */
+    .faq-list { max-width: 660px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--b1); }
+    .faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 20px 4px; background: none; border: none; cursor: pointer; font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--t0); text-align: left; gap: 16px; }
+    .faq-icon { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--b1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .faq-icon span { font-size: 16px; color: var(--taupe); line-height: 1; transition: transform 0.2s; }
+    .faq-item.open .faq-icon span { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-a p { padding: 0 4px 18px; font-size: 14px; font-weight: 300; color: var(--t2); line-height: 1.8; }
+    .faq-item.open .faq-a { max-height: 200px; }
+
+    /* ── CONNECT ── */
+    .connect-sec { padding: 96px 24px; text-align: center; border-top: 1px solid var(--b1); }
+
+    /* ── BOTTOM CTA ── */
+    .bottom-cta { background: var(--cream2); border-top: 1px solid var(--b1); padding: 96px 24px; text-align: center; }
+    .waitlist-bottom { max-width: 460px; margin: 0 auto; }
+    .waitlist-bottom .form-row { flex-direction: column; gap: 10px; }
+    .waitlist-bottom .form-input { border-radius: 12px; height: 52px; }
+    .waitlist-bottom .form-btn { height: 52px; border-radius: 12px; width: 100%; font-size: 12px; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--taupeD); padding: 56px 40px 36px; }
+    .footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .footer-logo-txt { font-size: 13px; font-weight: 400; letter-spacing: 0.55em; text-transform: uppercase; color: var(--white); padding-left: 0.55em; margin-bottom: 12px; }
+    .footer-tag { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.75; margin-bottom: 20px; }
+    .footer-col h4 { font-size: 9px; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 18px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col a { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 11px; color: rgba(255,255,255,0.28); }
+    .social-row { display: flex; gap: 20px; }
+    .social-row a { font-size: 11px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.38); text-decoration: none; transition: color 0.2s; }
+    .social-row a:hover { color: var(--white); }
+
+    /* ── BUTTONS ── */
+    .btn { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; padding: 14px 28px; border-radius: 100px; transition: all 0.22s; }
+    .btn-solid { background: var(--taupeD); color: var(--white); }
+    .btn-solid:hover { background: var(--taupe); transform: translateY(-2px); }
+    .btn-white { background: var(--white); color: var(--taupeD); }
+    .btn-white:hover { background: var(--cream); transform: translateY(-2px); }
+    .btn-outline-white { border: 1.5px solid rgba(255,255,255,0.3); color: var(--white); }
+    .btn-outline-white:hover { border-color: rgba(255,255,255,0.6); }
+
+    /* ── REVEAL ── */
+    .r { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .r.on { opacity: 1; transform: none; }
+
+    @keyframes blink { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    @keyframes wordIn { to { opacity: 1; transform: translateY(0); } }
+    .word { animation: wordIn 0.5s ease forwards; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav { padding: 0 20px; top: 20px; }
+      .nav-link { display: none; }
+      .form-row { flex-direction: column; }
+      .form-input, .form-btn { width: 100%; border-radius: 12px; }
+      .money-cards { grid-template-columns: 1fr; max-width: 280px; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .founder-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+      .screens-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+      .screens-grid > div:nth-child(2) { transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ANNOUNCE -->
+<div class="announce">
+  <span id="announceText"></span><span id="announceCursor" style="opacity:1; animation: blink 0.7s step-end infinite;">|</span>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <!-- NAV inside hero so it sits over the photo -->
+  <nav>
+    <a href="#top" class="nav-logo">All Sorted</a>
+    <div class="nav-right">
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener" class="nav-link">@allsortedapp</a>
+      <a href="#waitlist" class="nav-btn">Join Waitlist</a>
+    </div>
+  </nav>
+
+  <div class="hero-content" id="waitlist">
+
+    <!-- Animated headline -->
+    <h1 id="heroH1" style="font-family: 'Jost', sans-serif; font-size: clamp(18px, 3vw, 28px); font-weight: 300; color: rgba(255,255,255,0.75); line-height: 1.4; letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0; text-align: center; opacity: 0; animation: fadeUp 0.7s ease forwards 0.4s;">
+      <span class="word" style="display: inline-block; opacity: 0; transform: translateY(12px);">Stop</span>
+      <span class="word" style="display: inline-block; opacity: 0; transform: translateY(12px);"> juggling</span>
+      <span class="word" style="display: inline-block; opacity: 0; transform: translateY(12px);"> five</span>
+      <span class="word" style="display: inline-block; opacity: 0; transform: translateY(12px);"> apps.</span>
+    </h1>
+    <h2 style="font-family: 'Jost', sans-serif; font-size: clamp(22px, 4vw, 36px); font-weight: 300; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.6); line-height: 1; margin: 8px auto 28px; text-align: center; white-space: nowrap; display: block; opacity: 0; animation: fadeUp 0.7s ease forwards 0.9s;">Get <strong style="font-weight: 700; color: var(--white);">All Sorted.</strong></h2>
+    <p class="hero-sub" style="margin-bottom: 40px; opacity: 0; animation: fadeUp 0.6s ease forwards 1.5s;">Everything you forget, in one place. Be first to know when we launch.</p>
+
+    <div class="form-wrap">
+      <div class="form-inner">
+        <span class="form-lbl">Join the Waitlist — It's Free</span>
+        <div class="form-row" id="formRow">
+          <input type="email" class="form-input" id="emailInput" placeholder="your@email.com" />
+          <button class="form-btn" id="submitBtn" onclick="joinWaitlist()">Join Now</button>
+        </div>
+        <div class="success-msg" id="successMsg">
+          <div class="tick">✓</div>
+          <h3>You're on the list!</h3>
+          <p>We'll email you the moment All Sorted launches.<br>Follow us for sneak peeks.</p>
+          <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener"
+            class="btn btn-solid" style="margin-top: 16px; font-size: 11px; display: inline-flex;">
+            Follow @allsortedapp
+          </a>
+        </div>
+        <p class="form-note" id="formNote">No spam, ever. Just a launch email when we're ready.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="counter-row">
+    <div class="counter-pill">
+      <div class="pill-dot"></div>
+      <span style="font-size: 11px; color: rgba(255,255,255,0.6);">Join</span>
+      <span class="c-num" id="waitlistCount" style="font-size: 20px; font-weight: 700;">0</span>
+      <span style="font-size: 11px; color: rgba(255,255,255,0.6);">others on the waitlist</span>
+    </div>
+  </div>
+</section>
+
+<!-- MONEY -->
+<section class="money-sec">
+  <div style="max-width: 800px; margin: 0 auto;">
+    <p class="eyebrow r">Did you know?</p>
+    <h2 class="money-h2 r">You are probably leaving<br>money on the table.</h2>
+    <p class="money-italic r">Most people miss hundreds, even thousands in unclaimed deductions every year. Not because they don't qualify. Because they never logged them.</p>
+    <p class="money-sub r">Work trips, receipts, phone bills, home office. All Sorted makes it effortless to log everything as it happens, so nothing slips through.</p>
+    <div class="money-cards r">
+      <div class="mc light"><div class="mc-num">$0</div><div class="mc-lbl">Without the app</div></div>
+      <div class="mc dark"><div class="mc-num">$1,244</div><div class="mc-lbl">With All Sorted</div></div>
+      <div class="mc light"><div class="mc-num green">+$404</div><div class="mc-lbl">Back in your pocket</div></div>
+    </div>
+    <a href="#waitlist" class="btn btn-solid r">Join the Waitlist</a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="sec" id="features">
+  <div class="sec-inner">
+    <p class="eyebrow r">What's inside</p>
+    <h2 class="h2 r">One app. Whole life.</h2>
+    <p class="lead r">Everything you forget, in one place.</p>
+    <div class="grid-3">
+      <div class="feat r">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
+        <div class="feat-title">Wallet</div>
+        <p class="feat-desc">Gift cards, memberships, discount codes and documents, all stored securely in one place.</p>
+      </div>
+      <div class="feat r">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+        <div class="feat-title">Life</div>
+        <p class="feat-desc">Track bills and subscriptions. Auto-reminders 5, 3 and 1 day before due. Pay with one tap.</p>
+      </div>
+      <div class="feat r">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <div class="feat-title">Tax</div>
+        <p class="feat-desc">Log deductions, scan receipts and watch your refund grow. Set your income tax bracket for an exact estimate.</p>
+      </div>
+      <div class="feat r">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+        <div class="feat-title">Drive</div>
+        <p class="feat-desc">GPS auto-tracking for work trips. Set your rate per km and export a full mileage logbook for tax time.</p>
+      </div>
+      <div class="feat r">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg></div>
+        <div class="feat-title">Notes</div>
+        <p class="feat-desc">Smart notes that detect bills and reminders. Type it and we'll offer to add it to Life automatically.</p>
+      </div>
+      <div class="feat r">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <div class="feat-title">Records & Graphs</div>
+        <p class="feat-desc">Track income and expenses, import from your bank CSV and visualise cash flow in beautiful inline graphs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI -->
+<section class="ai-sec">
+  <p class="eyebrow r">Powered by Claude AI</p>
+  <h2 class="h2 r">Your personal finance assistant.</h2>
+  <p class="lead r">Ask anything. Try it below.</p>
+
+  <div class="r" style="max-width: 520px; margin: 0 auto;">
+
+    <!-- Quick prompt chips -->
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px;">
+      <button onclick="runPrompt(0)" class="chip">How can I reduce my tax?</button>
+      <button onclick="runPrompt(1)" class="chip">What bills are due this week?</button>
+      <button onclick="runPrompt(2)" class="chip">Am I spending too much?</button>
+    </div>
+
+    <!-- Chat window -->
+    <div id="chatWindow" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 24px; min-height: 180px; text-align: left; display: flex; align-items: center; justify-content: center;">
+      <p style="font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.3); text-align: center;">Tap a question to see the AI in action</p>
+    </div>
+
+    <!-- Custom input -->
+    <div style="display: flex; gap: 8px; margin-top: 12px;">
+      <input type="text" id="aiInput" placeholder="Or type your own question..." onkeydown="if(event.key==='Enter')runCustom()" style="flex: 1; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 100px; padding: 12px 18px; font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.85); outline: none;" />
+      <button onclick="runCustom()" style="background: var(--white); color: var(--taupeD); border: none; border-radius: 100px; padding: 12px 20px; font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; letter-spacing: 0.05em;">Ask</button>
+    </div>
+    <p style="font-size: 11px; color: rgba(255,255,255,0.2); text-align: center; margin-top: 10px;">Demo only — the real AI reads your actual financial data.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq" style="background: var(--cream2); border-top: 1px solid var(--b1); border-bottom: 1px solid var(--b1);">
+  <div class="sec-inner">
+    <p class="eyebrow r">Got questions</p>
+    <h2 class="h2 r" style="margin-bottom: 48px;">FAQ</h2>
+    <div class="faq-list r">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">When does All Sorted launch?<div class="faq-icon"><span>+</span></div></button>
+        <div class="faq-a"><p>We're launching June 2026 on iOS. Join the waitlist and you'll be first to know, plus get early access before everyone else.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is it free?<div class="faq-icon"><span>+</span></div></button>
+        <div class="faq-a"><p>Yes — All Sorted is free to download with membership options starting from $7.99 a month.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Does it work for my country?<div class="faq-icon"><span>+</span></div></button>
+        <div class="faq-a"><p>Yes — All Sorted is available worldwide. Set your currency, timezone and income tax bracket and everything adjusts to your situation.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can I customise my tax rate?<div class="faq-icon"><span>+</span></div></button>
+        <div class="faq-a"><p>Yes. In Settings you choose your income tax bracket — 0%, 19%, 32.5%, 37% or 45% — and every estimated refund updates instantly to reflect your exact rate.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is my data secure?<div class="faq-icon"><span>+</span></div></button>
+        <div class="faq-a"><p>Yes. Your data is stored securely with encrypted connections and row-level security, only you can access your data.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Will there be an Android version?<div class="faq-icon"><span>+</span></div></button>
+        <div class="faq-a"><p>iOS first. Android is on the roadmap — join the waitlist and we'll keep you updated.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section class="connect-sec">
+  <p class="eyebrow r">Follow the journey</p>
+  <h2 class="h2 r">Behind the scenes.</h2>
+  <p class="lead r">Follow us on Instagram for sneak peeks, feature reveals and launch updates.</p>
+  <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener" class="btn btn-solid r">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+    @allsortedapp
+  </a>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <p class="eyebrow r">Launching June 2026</p>
+  <h2 class="h2 r">Claim your founding member spot.</h2>
+  <p class="lead r">Join <strong id="waitlistCount2" style="font-weight: 700; color: var(--taupeD);">50</strong> others already on the waitlist. Lock in early access now.</p>
+  <div class="waitlist-bottom r">
+    <div class="form-inner">
+      <div class="form-row" id="formRow2">
+        <input type="email" class="form-input" id="emailInput2" placeholder="your@email.com" />
+        <button class="form-btn" id="submitBtn2" onclick="joinWaitlist2()">Claim Spot</button>
+      </div>
+      <div class="success-msg" id="successMsg2">
+        <div class="tick">✓</div>
+        <h3>You're a founding member!</h3>
+        <p>We'll email you first when All Sorted launches in June 2026.</p>
+      </div>
+      <p class="form-note" id="formNote2">No spam. Just your early access invite when we launch.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SNEAK PEEK -->
+<section style="padding: 96px 0 80px; background: var(--cream); text-align: center; border-top: 1px solid var(--b1);">
+  <div style="max-width: 900px; margin: 0 auto; padding: 0 24px;">
+    <p class="eyebrow r" style="margin-bottom: 14px;">Sneak Peek</p>
+    <h2 class="h2 r" style="margin-bottom: 14px;">Because when it looks good,<br>you actually use it.</h2>
+    <p class="lead r" style="margin-bottom: 48px;">Every screen designed to feel calm, clean and in control.</p>
+  </div>
+
+  <!-- Carousel -->
+  <div style="position: relative; overflow: hidden;" class="r">
+    <div id="carouselTrack" style="display: flex; transition: transform 0.42s cubic-bezier(0.4,0,0.2,1); will-change: transform; touch-action: pan-y; cursor: grab;">
+
+      <!-- Slide 1 — Drive -->
+      <div class="cslide" style="min-width: 100%; display: flex; flex-direction: column; align-items: center; padding: 0 24px;">
+        <div style="background: #1C1C1E; border-radius: 44px; padding: 12px; box-shadow: 0 24px 56px rgba(60,46,34,0.18); width: 260px;">
+          <div style="border-radius: 34px; overflow: hidden; background: #F5F0EA;">
+            <img src="screen1.png" alt="Drive" style="width: 100%; display: block;" />
+          </div>
+        </div>
+        <p style="font-size: 11px; font-weight: 600; color: var(--taupeD); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 24px;">Drive</p>
+        <p style="font-size: 13px; font-weight: 300; color: var(--t3); margin-top: 4px;">GPS trip tracking for tax time</p>
+      </div>
+
+      <!-- Slide 2 — Life -->
+      <div class="cslide" style="min-width: 100%; display: flex; flex-direction: column; align-items: center; padding: 0 24px;">
+        <div style="background: #1C1C1E; border-radius: 44px; padding: 12px; box-shadow: 0 24px 56px rgba(60,46,34,0.18); width: 260px;">
+          <div style="border-radius: 34px; overflow: hidden; background: #F5F0EA;">
+            <img src="screen2.png" alt="Life" style="width: 100%; display: block;" />
+          </div>
+        </div>
+        <p style="font-size: 11px; font-weight: 600; color: var(--taupeD); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 24px;">Life</p>
+        <p style="font-size: 13px; font-weight: 300; color: var(--t3); margin-top: 4px;">Bills, subscriptions & reminders</p>
+      </div>
+
+      <!-- Slide 3 — Records -->
+      <div class="cslide" style="min-width: 100%; display: flex; flex-direction: column; align-items: center; padding: 0 24px;">
+        <div style="background: #1C1C1E; border-radius: 44px; padding: 12px; box-shadow: 0 24px 56px rgba(60,46,34,0.18); width: 260px;">
+          <div style="border-radius: 34px; overflow: hidden; background: #F5F0EA;">
+            <img src="screen3.png" alt="Records" style="width: 100%; display: block;" />
+          </div>
+        </div>
+        <p style="font-size: 11px; font-weight: 600; color: var(--taupeD); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 24px;">Records</p>
+        <p style="font-size: 13px; font-weight: 300; color: var(--t3); margin-top: 4px;">Income, expenses & graphs</p>
+      </div>
+
+    </div>
+
+    <!-- Arrow buttons -->
+    <button id="prevBtn" onclick="prevSlide()" style="position: absolute; left: 16px; top: 44%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--b1); background: var(--white); cursor: pointer; font-size: 20px; color: var(--taupeD); display: flex; align-items: center; justify-content: center; z-index: 10; line-height: 1;">‹</button>
+    <button id="nextBtn" onclick="nextSlide()" style="position: absolute; right: 16px; top: 44%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--b1); background: var(--white); cursor: pointer; font-size: 20px; color: var(--taupeD); display: flex; align-items: center; justify-content: center; z-index: 10; line-height: 1;">›</button>
+  </div>
+
+  <!-- Dots -->
+  <div style="display: flex; gap: 8px; justify-content: center; margin-top: 28px;">
+    <button onclick="goToSlide(0)" id="dot0" style="width: 28px; height: 4px; border-radius: 2px; background: var(--taupeD); border: none; cursor: pointer; padding: 0; transition: all 0.3s;"></button>
+    <button onclick="goToSlide(1)" id="dot1" style="width: 8px; height: 4px; border-radius: 2px; background: var(--b0); border: none; cursor: pointer; padding: 0; transition: all 0.3s;"></button>
+    <button onclick="goToSlide(2)" id="dot2" style="width: 8px; height: 4px; border-radius: 2px; background: var(--b0); border: none; cursor: pointer; padding: 0; transition: all 0.3s;"></button>
+  </div>
+</section>
+
+<!-- FOUNDING MEMBERS -->
+<section style="padding: 96px 24px; background: var(--taupeD); text-align: center;">
+  <div style="max-width: 820px; margin: 0 auto;">
+    <p class="eyebrow r" style="color: rgba(255,255,255,0.35); margin-bottom: 14px;">Limited Offer</p>
+    <h2 class="r" style="font-size: clamp(28px, 5vw, 52px); font-weight: 300; letter-spacing: 0.06em; text-transform: uppercase; color: var(--white); line-height: 1.2; margin-bottom: 20px;">Founding Member<br>Early Access.</h2>
+    <p class="r" style="font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 3vw, 26px); font-weight: 300; font-style: italic; color: rgba(255,255,255,0.65); margin-bottom: 16px; line-height: 1.5;">The first people in get something special.</p>
+    <p class="r" style="font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.5); max-width: 520px; margin: 0 auto 48px; line-height: 1.85;">Join before we launch in June 2026 and lock in founding member status — exclusive early access, first to every new feature, and a personal thank you from me.</p>
+
+    <!-- Perk cards with line SVG icons -->
+    <div class="r" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; max-width: 720px; margin: 0 auto 48px;">
+
+      <div style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 28px 20px; text-align: center;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 14px; display: block; margin-left: auto; margin-right: auto;"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        <div style="font-size: 11px; font-weight: 600; color: var(--white); margin-bottom: 8px; letter-spacing: 0.12em; text-transform: uppercase;">Early Access</div>
+        <p style="font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.6;">Get the app before anyone else on launch day.</p>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 16px; padding: 28px 20px; text-align: center; position: relative;">
+        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--white); color: var(--taupeD); font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; white-space: nowrap;">Most Valuable</div>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 14px; display: block; margin-left: auto; margin-right: auto;"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <div style="font-size: 11px; font-weight: 600; color: var(--white); margin-bottom: 8px; letter-spacing: 0.12em; text-transform: uppercase;">Lifetime Rate</div>
+        <p style="font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.7); line-height: 1.6;">Lock in a special founding member rate — forever. Never pay full price.</p>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 28px 20px; text-align: center;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 14px; display: block; margin-left: auto; margin-right: auto;"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        <div style="font-size: 11px; font-weight: 600; color: var(--white); margin-bottom: 8px; letter-spacing: 0.12em; text-transform: uppercase;">Founding Badge</div>
+        <p style="font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.6;">Permanently recognised as a founding member in the app.</p>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 28px 20px; text-align: center;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 14px; display: block; margin-left: auto; margin-right: auto;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <div style="font-size: 11px; font-weight: 600; color: var(--white); margin-bottom: 8px; letter-spacing: 0.12em; text-transform: uppercase;">Shape the App</div>
+        <p style="font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.6;">Your feedback directly shapes what we build next.</p>
+      </div>
+
+    </div>
+
+    <div class="r" style="display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 100px; padding: 10px 22px; margin-bottom: 28px;">
+      <div style="width: 7px; height: 7px; border-radius: 50%; background: #6DBF8A; animation: blink 2s ease-in-out infinite;"></div>
+      <span style="font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.6);">Only <strong style="color: var(--white); font-weight: 700;" id="spotsLeft">150</strong> founding member spots remaining</span>
+    </div>
+    <br>
+    <a href="#waitlist" class="btn r" style="background: var(--white); color: var(--taupeD); margin-top: 8px;">Claim Your Spot</a>
+  </div>
+</section>
+
+<!-- FOUNDER TEASER -->
+<section style="padding: 64px 24px; background: var(--cream2); border-top: 1px solid var(--b1); text-align: center;">
+  <a href="founder.html" style="text-decoration: none; display: inline-flex; align-items: center; gap: 20px; background: var(--white); border: 1px solid var(--b1); border-radius: 20px; padding: 24px 32px; transition: all 0.22s; max-width: 480px; width: 100%;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 32px rgba(60,46,34,0.09)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
+    <img src="founder.jpg" alt="Roxanne" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: center top; flex-shrink: 0; border: 2px solid var(--b1);" />
+    <div style="text-align: left; flex: 1;">
+      <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--taupe); margin-bottom: 4px;">Meet the founder</div>
+      <div style="font-size: 15px; font-weight: 400; color: var(--taupeD);">Why I built All Sorted</div>
+      <div style="font-size: 12px; font-weight: 300; color: var(--t3); margin-top: 2px;">Roxanne Alterio · Read my story →</div>
+    </div>
+  </a>
+</section>
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo-txt">All Sorted</div>
+      <p class="footer-tag">The app that keeps your life together.<br>Everything you forget, in one place.</p>
+      <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener"
+        style="font-size:12px; font-weight:400; letter-spacing:0.12em; color:rgba(255,255,255,0.5); text-decoration:none;">
+        @allsortedapp
+      </a>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#top">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#waitlist">Join Waitlist</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Use</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#4b3924332a25252e2a273f2e3922240b2c262a222765282426">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 · All Sorted App</p>
+    <div class="social-row">
+      <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const els = document.querySelectorAll('.r');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('on'), i * 40);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.01, rootMargin: '0px 0px -20px 0px' });
+  els.forEach(el => obs.observe(el));
+
+  // ── Count-up from 1 → 253 on load ──
+  let count = 50;
+  const TARGET = 50;
+
+  function updateAllCounters(n) {
+    ['waitlistCount','waitlistCount2','spotsLeft'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        if (id === 'spotsLeft') { el.textContent = Math.max(0, 200 - n); }
+        else { el.textContent = n; }
+      }
+    });
+  }
+
+  // Animate count from 0 to 253
+  let current = 0;
+  const duration = 2200;
+  const step = TARGET / (duration / 16);
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= TARGET) { current = TARGET; clearInterval(timer); }
+    updateAllCounters(Math.floor(current));
+  }, 16);
+
+  // Slowly tick up every ~15s
+  setInterval(() => {
+    if (Math.random() > 0.6) {
+      count++;
+      updateAllCounters(count);
+    }
+  }, 15000);
+
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  function joinWaitlist() {
+    const email = document.getElementById('emailInput').value.trim();
+    if (!email || !email.includes('@')) {
+      document.getElementById('emailInput').style.borderColor = '#A04040';
+      setTimeout(() => document.getElementById('emailInput').style.borderColor = '', 1500);
+      return;
+    }
+    document.getElementById('submitBtn').disabled = true;
+    document.getElementById('submitBtn').textContent = 'Joining...';
+    fetch('https://formspree.io/f/xwvwrywg', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email, source: 'hero' })
+    }).catch(() => {}).finally(() => {
+      document.getElementById('formRow').style.display = 'none';
+      document.getElementById('formNote').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+      count++;
+      updateAllCounters(count);
+    });
+  }
+
+  function joinWaitlist2() {
+    const email = document.getElementById('emailInput2').value.trim();
+    if (!email || !email.includes('@')) {
+      document.getElementById('emailInput2').style.borderColor = '#A04040';
+      setTimeout(() => document.getElementById('emailInput2').style.borderColor = '', 1500);
+      return;
+    }
+    document.getElementById('submitBtn2').disabled = true;
+    document.getElementById('submitBtn2').textContent = 'Joining...';
+    fetch('https://formspree.io/f/xwvwrywg', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email, source: 'bottom' })
+    }).catch(() => {}).finally(() => {
+      document.getElementById('formRow2').style.display = 'none';
+      document.getElementById('formNote2').style.display = 'none';
+      document.getElementById('successMsg2').style.display = 'block';
+      count++;
+      updateAllCounters(count);
+    });
+  }
+
+  // ── Carousel — proper swipe ──
+  let currentSlide = 0;
+  const totalSlides = 3;
+  const track = document.getElementById('carouselTrack');
+
+  function goToSlide(n) {
+    currentSlide = (n + totalSlides) % totalSlides;
+    if (track) track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    for (let i = 0; i < totalSlides; i++) {
+      const d = document.getElementById('dot' + i);
+      if (d) {
+        d.style.width = i === currentSlide ? '28px' : '8px';
+        d.style.background = i === currentSlide ? 'var(--taupeD)' : 'var(--b0)';
+      }
+    }
+  }
+
+  function nextSlide() { goToSlide(currentSlide + 1); }
+  function prevSlide() { goToSlide(currentSlide - 1); }
+
+  // Auto-advance
+  let autoTimer = setInterval(nextSlide, 3500);
+
+  // Touch swipe
+  if (track) {
+    let startX = 0, startY = 0, dragging = false;
+    track.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      dragging = true;
+      clearInterval(autoTimer);
+    }, { passive: true });
+    track.addEventListener('touchend', e => {
+      if (!dragging) return;
+      const dx = startX - e.changedTouches[0].clientX;
+      const dy = Math.abs(startY - e.changedTouches[0].clientY);
+      if (Math.abs(dx) > 40 && Math.abs(dx) > dy) {
+        dx > 0 ? nextSlide() : prevSlide();
+      }
+      dragging = false;
+      autoTimer = setInterval(nextSlide, 3500);
+    }, { passive: true });
+
+    // Mouse drag for desktop
+    let mouseStartX = 0, mouseDown = false;
+    track.addEventListener('mousedown', e => { mouseStartX = e.clientX; mouseDown = true; clearInterval(autoTimer); });
+    track.addEventListener('mouseup', e => {
+      if (!mouseDown) return;
+      const dx = mouseStartX - e.clientX;
+      if (Math.abs(dx) > 40) { dx > 0 ? nextSlide() : prevSlide(); }
+      mouseDown = false;
+      autoTimer = setInterval(nextSlide, 3500);
+    });
+    track.addEventListener('mouseleave', () => { mouseDown = false; });
+    track.style.cursor = 'grab';
+  }
+
+  document.getElementById('emailInput').addEventListener('keydown', e => { if (e.key === 'Enter') joinWaitlist(); });
+  document.getElementById('emailInput2').addEventListener('keydown', e => { if (e.key === 'Enter') joinWaitlist2(); });
+
+  // ── Announcement bar typewriter ──
+  const announceMessages = [
+    'Coming Soon · Join the Waitlist for Early Access',
+    'Launching June 2026 · iOS',
+    'Founding Member Spots Available · Claim Yours Now',
+    'Everything you forget, in one place.',
+  ];
+  let annIdx = 0;
+  const annEl = document.getElementById('announceText');
+
+  function typeAnn(text, cb) {
+    if (!annEl) return;
+    annEl.textContent = '';
+    let i = 0;
+    const t = setInterval(() => {
+      annEl.textContent += text[i++];
+      if (i >= text.length) { clearInterval(t); setTimeout(cb, 2400); }
+    }, 42);
+  }
+
+  function eraseAnn(text, cb) {
+    if (!annEl) return;
+    let i = text.length;
+    const t = setInterval(() => {
+      annEl.textContent = text.substring(0, --i);
+      if (i <= 0) { clearInterval(t); cb(); }
+    }, 22);
+  }
+
+  function cycleAnn() {
+    const msg = announceMessages[annIdx % announceMessages.length];
+    typeAnn(msg, () => eraseAnn(msg, () => { annIdx++; cycleAnn(); }));
+  }
+
+  cycleAnn();
+
+  // ── Word-by-word headline animation ──
+  const words = document.querySelectorAll('.word');
+  words.forEach((w, i) => {
+    w.style.animationDelay = `${0.45 + i * 0.12}s`;
+    w.style.animationFillMode = 'forwards';
+  });
+
+  // ── Interactive AI Demo ──
+  const PROMPTS = [
+    { q: "How can I reduce my tax?", a: "Based on your records, you've logged $1,244 in deductions — that's an estimated $404 refund at your 32.5% bracket. Adding your work from home expenses and phone bill could push this even higher. Want me to walk you through what qualifies?" },
+    { q: "What bills are due this week?", a: "You have 2 bills due — Telstra ($89) in 3 days and Origin Energy ($142) in 5 days. Both have Pay Now links ready in your Life tab." },
+    { q: "Am I spending too much?", a: "Your expenses are up 12% this month compared to last. Dining out accounts for $340 of that increase. Your income to expense ratio is still healthy at 1.8x — but worth keeping an eye on." }
+  ];
+
+  const CUSTOM = [
+    "Great question — once you're in the app, the AI reads your actual data to give you a real answer.",
+    "Once you join and add your bills and expenses, I can answer that properly. Join the waitlist to be first in!",
+    "In the real app, I'd pull your actual financial data to answer that specifically. This is just a demo."
+  ];
+
+  let aiTyping = false;
+
+  async function showChat(q, a) {
+    if (aiTyping) return;
+    aiTyping = true;
+    const win = document.getElementById('chatWindow');
+    win.innerHTML = '';
+    win.style.justifyContent = 'flex-start';
+    win.style.alignItems = 'stretch';
+    win.style.flexDirection = 'column';
+    win.style.gap = '12px';
+
+    // User bubble
+    const uWrap = document.createElement('div');
+    uWrap.style.cssText = 'display:flex; flex-direction:column; align-items:flex-end;';
+    const uLbl = document.createElement('p');
+    uLbl.style.cssText = 'font-size:9px; font-weight:600; letter-spacing:0.25em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:5px;';
+    uLbl.textContent = 'You';
+    const uBubble = document.createElement('div');
+    uBubble.style.cssText = 'display:inline-block; background:rgba(255,255,255,0.12); border-radius:14px 14px 4px 14px; padding:12px 16px; font-size:13px; font-weight:300; color:rgba(255,255,255,0.88); max-width:88%; line-height:1.6;';
+    uBubble.textContent = q;
+    uWrap.appendChild(uLbl);
+    uWrap.appendChild(uBubble);
+    win.appendChild(uWrap);
+
+    await new Promise(r => setTimeout(r, 500));
+
+    // AI bubble with typing dots
+    const aWrap = document.createElement('div');
+    aWrap.style.cssText = 'display:flex; flex-direction:column; align-items:flex-start;';
+    const aLbl = document.createElement('p');
+    aLbl.style.cssText = 'font-size:9px; font-weight:600; letter-spacing:0.25em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:5px;';
+    aLbl.textContent = 'All Sorted AI';
+    const aBubble = document.createElement('div');
+    aBubble.style.cssText = 'display:inline-block; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:14px 14px 14px 4px; padding:12px 16px; font-size:13px; font-weight:300; color:rgba(255,255,255,0.75); max-width:92%; line-height:1.7; min-width:60px;';
+    aBubble.textContent = '···';
+    aWrap.appendChild(aLbl);
+    aWrap.appendChild(aBubble);
+    win.appendChild(aWrap);
+
+    await new Promise(r => setTimeout(r, 900));
+
+    // Typewriter
+    aBubble.textContent = '';
+    let i = 0;
+    await new Promise(resolve => {
+      const t = setInterval(() => {
+        aBubble.textContent += a[i++];
+        if (i >= a.length) { clearInterval(t); resolve(); }
+      }, 16);
+    });
+    aiTyping = false;
+  }
+
+  function runPrompt(i) { showChat(PROMPTS[i].q, PROMPTS[i].a); }
+
+  function runCustom() {
+    const inp = document.getElementById('aiInput');
+    const q = inp.value.trim();
+    if (!q) return;
+    inp.value = '';
+    showChat(q, CUSTOM[Math.floor(Math.random() * CUSTOM.length)]);
+  }
+
+  setTimeout(() => { if (!aiTyping) runPrompt(0); }, 1800);
+</script>
+</body>
+</html>
