@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>All Sorted, Bills, Tax, Drive & Life. One App.</title>
+<meta name="description" content="All Sorted keeps your bills, ATO tax deductions, GPS drive logbook, savings goals and daily life all in one calm iOS app. Join the waitlist for founding member access."/>
+<meta name="keywords" content="bills app, ATO logbook, tax deductions, budgeting app, GPS mileage tracker, savings goals, personal finance app, Australian finance app"/>
+<link rel="canonical" href="https://allsortedapp.net/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://allsortedapp.net/"/>
+<meta property="og:title" content="All Sorted, Your life, finally under control."/>
+<meta property="og:description" content="Bills, budgeting, ATO tax logbook, GPS drive tracking, savings goals and your daily life. All sorted."/>
+<meta property="og:image" content="https://allsortedapp.net/hero.jpg"/>
+<meta property="og:site_name" content="All Sorted"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="All Sorted, Everything sorted, one app."/>
+<meta name="twitter:image" content="https://allsortedapp.net/hero.jpg"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"MobileApplication","name":"All Sorted","applicationCategory":"FinanceApplication","operatingSystem":"iOS","offers":{"@type":"Offer","price":"3.99","priceCurrency":"AUD"},"url":"https://allsortedapp.net/"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sand:#F7F3EE;
+  --sand2:#EFE9E1;
+  --sand3:#E5DDD3;
+  --bark:#7A6454;
+  --barkD:#5C4A38;
+  --barkL:#A89080;
+  --ink:#2C221A;
+  --ink2:#6B5A4E;
+  --ink3:#A89484;
+  --white:#FDFAF7;
+  --border:#DDD5CB;
+  --green:#3D6B4F;
+  --gold:#B8924A;
+}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,'SF Pro Display','Helvetica Neue',Arial,sans-serif;background:var(--sand);color:var(--ink);font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(247,243,238,0.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(221,213,203,0.6)}
+
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-link{font-size:12px;font-weight:400;letter-spacing:0.06em;color:var(--ink2);text-decoration:none;transition:color 0.2s}
+.nav-link:hover{color:var(--ink)}
+.nav-pill{font-size:11px;font-weight:500;letter-spacing:0.08em;color:var(--bark);border:1px solid var(--bark);padding:7px 18px;border-radius:100px;text-decoration:none;transition:all 0.2s}
+.nav-pill:hover{background:var(--bark);color:var(--white)}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;padding-bottom:80px}
+.hero-img{position:absolute;inset:0;background:url('hero.jpg') center top/cover no-repeat}
+.hero-scrim{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(20,14,10,0.08) 0%,rgba(20,14,10,0.18) 35%,rgba(20,14,10,0.78) 72%,rgba(20,14,10,0.96) 100%)}
+.hero-body{position:relative;z-index:2;width:100%;max-width:720px;margin:0 auto;padding:0 32px;text-align:center}
+.hero-chip{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.18);padding:6px 16px;border-radius:100px;margin-bottom:36px}
+.chip-dot{width:5px;height:5px;border-radius:50%;background:#5DBF84;animation:pulse 2.4s ease-in-out infinite}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(44px,9vw,92px);font-weight:400;line-height:1.04;color:#fff;letter-spacing:-0.01em;margin-bottom:22px}
+.hero-h1 em{font-style:italic;color:rgba(255,255,255,0.7)}
+.hero-rule{width:32px;height:1px;background:rgba(255,255,255,0.25);margin:0 auto 22px}
+.hero-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,0.5);line-height:1.7;margin-bottom:44px;letter-spacing:0.02em}
+
+/* FORM */
+.form-card{background:rgba(253,250,247,0.95);backdrop-filter:blur(20px);border-radius:18px;padding:24px;max-width:440px;margin:0 auto 28px}
+.form-eyebrow{font-size:9px;font-weight:500;letter-spacing:0.32em;text-transform:uppercase;color:var(--bark);margin-bottom:14px;display:block;text-align:center}
+.form-row{display:flex;gap:7px}
+.email-input{flex:1;height:48px;border:1.5px solid var(--border);border-radius:100px;padding:0 18px;font-family:-apple-system,'SF Pro Display','Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:300;color:var(--ink);background:var(--sand);outline:none;transition:border-color 0.2s}
+.email-input::placeholder{color:var(--ink3)}
+.email-input:focus{border-color:var(--barkL)}
+.join-btn{height:48px;padding:0 22px;background:var(--barkD);color:#fff;border:none;border-radius:100px;font-family:-apple-system,'SF Pro Display','Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;white-space:nowrap;flex-shrink:0}
+.join-btn:hover{background:var(--ink)}
+.join-btn:disabled{opacity:0.55;cursor:not-allowed}
+.form-fine{font-size:10px;color:var(--ink3);text-align:center;margin-top:10px}
+.success{display:none;text-align:center;padding:4px 0}
+.success-icon{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;color:var(--green);font-size:18px}
+.success h3{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.success p{font-size:12px;color:var(--ink2);line-height:1.5}
+
+/* TRUST PILLS */
+.trust-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.trust-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);border-radius:100px;padding:7px 14px;font-size:11px;color:rgba(255,255,255,0.55)}
+.trust-pill b{color:rgba(255,255,255,0.85);font-weight:500}
+
+/* SCROLL TICKER */
+.ticker{overflow:hidden;background:var(--barkD);padding:11px 0}
+.ticker-track{display:flex;white-space:nowrap;animation:scroll 30s linear infinite}
+.ticker-item{font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.45);padding:0 36px}
+.ticker-item span{color:rgba(255,255,255,0.75)}
+
+/* SECTIONS */
+.section{padding:100px 32px}
+.wrap{max-width:1080px;margin:0 auto}
+.wrap-sm{max-width:680px;margin:0 auto}
+.eyebrow{font-size:9px;font-weight:500;letter-spacing:0.4em;text-transform:uppercase;color:var(--bark);text-align:center;margin-bottom:16px}
+.section-h{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,52px);font-weight:400;color:var(--ink);text-align:center;line-height:1.15;margin-bottom:14px;letter-spacing:-0.01em}
+.section-lead{font-size:15px;font-weight:300;color:var(--ink2);text-align:center;line-height:1.85;max-width:500px;margin:0 auto 64px}
+
+/* PROBLEM SECTION */
+.problem{background:var(--ink);padding:100px 32px}
+.problem-h{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,52px);font-weight:400;font-style:italic;color:rgba(255,255,255,0.88);text-align:center;line-height:1.25;max-width:700px;margin:0 auto 64px}
+.problem-h em{font-style:normal;color:var(--barkL)}
+.problem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);border-radius:16px;overflow:hidden;max-width:900px;margin:0 auto 64px}
+.stat-cell{background:var(--ink);padding:36px 24px;text-align:left}
+.stat-num{font-family:'Playfair Display',serif;font-size:42px;font-weight:400;color:var(--barkL);line-height:1;margin-bottom:10px}
+.stat-txt{font-size:12px;font-weight:300;color:rgba(255,255,255,0.38);line-height:1.6}
+
+/* FEATURES */
+.features-bg{background:var(--sand2);border-top:1px solid var(--border)}
+.feat-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--white)}
+.feat-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.feat-row:last-child .feat-cell:last-child{}
+.feat-cell{background:var(--white);padding:40px 36px;transition:background 0.2s}
+.feat-cell:hover{background:var(--sand)}
+.feat-cell.dark{background:var(--barkD)}
+.feat-cell.dark:hover{background:var(--ink)}
+.feat-num{font-family:'Playfair Display',serif;font-size:13px;font-weight:400;color:var(--ink3);margin-bottom:20px}
+.feat-cell.dark .feat-num{color:rgba(255,255,255,0.25)}
+.feat-tag{font-size:9px;font-weight:500;letter-spacing:0.3em;text-transform:uppercase;color:var(--bark);display:block;margin-bottom:10px}
+.feat-cell.dark .feat-tag{color:rgba(255,255,255,0.4)}
+.feat-h{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--ink);line-height:1.3;margin-bottom:12px}
+.feat-cell.dark .feat-h{color:var(--white)}
+.feat-p{font-size:13px;font-weight:300;color:var(--ink2);line-height:1.8}
+.feat-cell.dark .feat-p{color:rgba(255,255,255,0.45)}
+
+/* NUMBERS */
+.numbers{background:var(--sand);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 32px;text-align:center}
+.num-grid{display:grid;grid-template-columns:repeat(3,1fr);max-width:640px;margin:48px auto;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--white)}
+.num-cell{padding:36px 24px;text-align:center;border-right:1px solid var(--border)}
+.num-cell:last-child{border-right:none}
+.num-val{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,48px);font-weight:400;color:var(--bark);line-height:1;margin-bottom:8px}
+.num-lbl{font-size:9px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink3)}
+
+/* HOW IT WORKS */
+.how{background:var(--barkD);padding:100px 32px;text-align:center}
+.how .eyebrow{color:rgba(255,255,255,0.3)}
+.how .section-h{color:var(--white)}
+.how .section-lead{color:rgba(255,255,255,0.4)}
+.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;max-width:960px;margin:0 auto 56px;text-align:left}
+.how-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:14px;padding:28px}
+.how-card h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:400;color:rgba(255,255,255,0.88);margin-bottom:10px;line-height:1.3}
+.how-card p{font-size:13px;font-weight:300;color:rgba(255,255,255,0.38);line-height:1.8}
+
+/* TESTIMONIALS */
+.testi-sec{background:var(--sand2);border-top:1px solid var(--border);padding:100px 32px}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;max-width:960px;margin:0 auto 56px}
+.testi-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:36px;position:relative}
+.testi-accent{position:absolute;top:0;left:32px;right:32px;height:2px;background:linear-gradient(90deg,transparent,var(--barkL),transparent);border-radius:0 0 2px 2px}
+.testi-stars{color:var(--gold);font-size:12px;letter-spacing:3px;margin-bottom:18px}
+.testi-quote{font-family:'Playfair Display',serif;font-size:18px;font-weight:400;font-style:italic;color:var(--ink);line-height:1.6;margin-bottom:20px}
+.testi-who{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--bark)}
+
+/* PRICING */
+.pricing-sec{background:var(--sand);padding:100px 32px;text-align:center;border-top:1px solid var(--border)}
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:720px;margin:0 auto 40px}
+.pc{background:var(--white);border:1.5px solid var(--border);border-radius:20px;padding:40px 28px;text-align:center;position:relative;transition:transform 0.2s,box-shadow 0.2s}
+.pc:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(92,74,56,0.1)}
+.pc.featured{background:var(--barkD);border-color:var(--barkD)}
+.pc-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;padding:5px 14px;border-radius:100px;white-space:nowrap}
+.badge-pop{background:var(--white);color:var(--barkD)}
+.badge-val{background:#4A9E6A;color:#fff}
+.pc-period{font-size:9px;font-weight:500;letter-spacing:0.35em;text-transform:uppercase;color:var(--ink3);margin-bottom:18px}
+.pc.featured .pc-period{color:rgba(255,255,255,0.3)}
+.pc-price{font-family:'Playfair Display',serif;font-size:54px;font-weight:400;color:var(--bark);line-height:1;margin-bottom:6px}
+.pc.featured .pc-price{color:var(--white)}
+.pc-per{font-size:11px;color:var(--ink3);margin-bottom:22px}
+.pc.featured .pc-per{color:rgba(255,255,255,0.35)}
+.pc-trial{font-size:11px;font-weight:500;color:var(--green);background:rgba(61,107,79,0.1);border:1px solid rgba(61,107,79,0.2);padding:6px 14px;border-radius:100px;display:inline-block}
+.pc.featured .pc-trial{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.8)}
+
+/* FOUNDING */
+.founding{background:var(--ink);padding:100px 32px;text-align:center}
+.founding-h{font-family:'Playfair Display',serif;font-size:clamp(32px,6vw,64px);font-weight:400;font-style:italic;color:rgba(255,255,255,0.9);line-height:1.15;margin-bottom:14px}
+.founding-h em{font-style:normal;color:var(--barkL)}
+.founding-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,0.35);line-height:1.8;max-width:500px;margin:0 auto 56px}
+.perk-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;max-width:820px;margin:0 auto 48px}
+.perk{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:32px 22px;text-align:center}
+.perk.hi{background:rgba(184,146,74,0.1);border-color:rgba(184,146,74,0.25);position:relative}
+.perk-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;background:var(--gold);color:var(--ink);padding:4px 12px;border-radius:100px;white-space:nowrap}
+.perk-name{font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:8px;margin-top:14px}
+.perk p{font-size:12px;font-weight:300;color:rgba(255,255,255,0.3);line-height:1.7}
+.perk.hi p{color:rgba(255,255,255,0.55)}
+.spots-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:100px;padding:10px 22px;margin-bottom:32px;font-size:12px;font-weight:300;color:rgba(255,255,255,0.45)}
+.spots-pill b{color:var(--white);font-weight:500}
+
+/* FAQ */
+.faq-sec{background:var(--sand2);padding:100px 32px;border-top:1px solid var(--border)}
+.faq-list{max-width:660px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;padding:22px 0;background:none;border:none;cursor:pointer;font-size:14px;font-weight:400;color:var(--ink);text-align:left;gap:16px;line-height:1.4}
+.faq-icon{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s}
+.faq-icon span{font-size:18px;color:var(--bark);line-height:1;transition:transform 0.22s;display:block}
+.faq-item.open .faq-icon{background:var(--bark);border-color:var(--bark)}
+.faq-item.open .faq-icon span{transform:rotate(45deg);color:#fff}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.32s ease}
+.faq-a p{padding:0 0 22px;font-size:14px;font-weight:300;color:var(--ink2);line-height:1.85}
+.faq-item.open .faq-a{max-height:300px}
+
+/* CONNECT */
+.connect{padding:80px 32px;text-align:center;border-top:1px solid var(--border)}
+
+/* BOTTOM CTA */
+.bottom{background:var(--bark);padding:100px 32px;text-align:center}
+.bottom-h{font-family:'Playfair Display',serif;font-size:clamp(32px,6vw,64px);font-weight:400;font-style:italic;color:var(--white);line-height:1.15;margin-bottom:14px}
+.bottom-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,0.5);margin-bottom:48px;line-height:1.7}
+.bottom-form{max-width:420px;margin:0 auto}
+.bottom-form .form-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15)}
+.bottom-form .form-eyebrow{color:rgba(255,255,255,0.35)}
+.bottom-form .email-input{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.18);color:#fff;height:52px;border-radius:12px}
+.bottom-form .email-input::placeholder{color:rgba(255,255,255,0.25)}
+.bottom-form .form-row{flex-direction:column;gap:8px}
+.bottom-form .join-btn{height:52px;border-radius:12px;width:100%;background:var(--white);color:var(--bark);font-size:12px}
+.bottom-form .join-btn:hover{background:var(--sand)}
+.bottom-form .form-fine{color:rgba(255,255,255,0.25)}
+
+/* FOUNDER */
+.founder-sec{padding:64px 32px;background:var(--sand2);border-top:1px solid var(--border);text-align:center}
+.founder-card{display:inline-flex;align-items:center;gap:20px;background:var(--white);border:1px solid var(--border);border-radius:18px;padding:24px 28px;text-decoration:none;transition:all 0.22s;max-width:460px;width:100%}
+.founder-card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(92,74,56,0.1)}
+
+/* FOOTER */
+footer{background:var(--ink);padding:56px 40px 36px}
+.ft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:56px;margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.ft-brand{margin-bottom:12px}
+.ft-tagline{font-size:13px;font-weight:300;color:rgba(255,255,255,0.3);line-height:1.8;margin-bottom:20px}
+.ft-col h4{font-size:9px;font-weight:500;letter-spacing:0.4em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-bottom:18px}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.ft-col a{font-size:13px;font-weight:300;color:rgba(255,255,255,0.38);text-decoration:none;transition:color 0.2s}
+.ft-col a:hover{color:var(--white)}
+.ft-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ft-copy{font-size:11px;color:rgba(255,255,255,0.18)}
+
+/* BUTTON */
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;padding:14px 28px;border-radius:100px;transition:all 0.22s}
+.btn-dark{background:var(--barkD);color:#fff}.btn-dark:hover{background:var(--ink);transform:translateY(-2px)}
+.btn-light{background:var(--white);color:var(--barkD)}.btn-light:hover{background:var(--sand);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.3)}.btn-outline:hover{border-color:rgba(255,255,255,0.6)}
+
+/* REVEAL */
+.r{opacity:1;transform:none}
+.r.on{opacity:1;transform:none}
+
+/* CAROUSEL */
+.carousel{position:relative;overflow:hidden}
+.carousel-track{display:flex;transition:transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);will-change:transform;touch-action:pan-y}
+.slide{min-width:100%;display:flex;flex-direction:column;align-items:center;padding:0 24px}
+.phone{background:#1A1A1C;border-radius:48px;padding:12px;box-shadow:0 32px 80px rgba(44,34,26,0.22);width:260px}
+.phone-inner{border-radius:38px;overflow:hidden;background:var(--sand)}
+.phone-inner img{width:100%;display:block}
+.slide-label{font-family:'Playfair Display',serif;font-size:15px;font-weight:400;font-style:italic;color:var(--bark);margin-top:24px}
+.slide-sub{font-size:12px;font-weight:300;color:var(--ink3);margin-top:4px}
+.carousel-btn{position:absolute;top:42%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--white);cursor:pointer;font-size:20px;color:var(--bark);display:flex;align-items:center;justify-content:center;z-index:5;line-height:1;transition:all 0.2s}
+.carousel-btn:hover{background:var(--bark);color:#fff;border-color:var(--bark)}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:28px}
+.dot{height:3px;border-radius:2px;border:none;cursor:pointer;padding:0;transition:all 0.3s}
+
+/* ANIMATIONS */
+@keyframes pulse{0%,100%{opacity:0.3}50%{opacity:1}}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+  .nav{padding:0 20px}
+  .nav-link{display:none}
+  .feat-row{grid-template-columns:1fr}
+  .problem-grid{grid-template-columns:1fr 1fr}
+  .num-grid{grid-template-columns:1fr;border-radius:12px}
+  .num-cell{border-right:none;border-bottom:1px solid var(--border)}
+  .num-cell:last-child{border-bottom:none}
+  .ft-grid{grid-template-columns:1fr;gap:32px}
+  .form-row{flex-direction:column}
+  .email-input,.join-btn{width:100%;border-radius:12px;height:52px}
+  .price-grid{grid-template-columns:1fr;max-width:320px;margin-left:auto;margin-right:auto}
+  .perk-row{grid-template-columns:1fr 1fr}
+  .hero-body{padding:0 20px}
+}
+@media(max-width:500px){
+  .problem-grid{grid-template-columns:1fr}
+  .perk-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body id="top">
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#top" class="nav-logo" style="font-family:-apple-system,'SF Pro Display','Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:400;letter-spacing:0.55em;text-transform:uppercase;color:var(--ink);text-decoration:none;padding-left:0.55em">ALL SORTED</a>
+  <div class="nav-links">
+    <a href="#features" class="nav-link">Features</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+    <a href="login.html" class="nav-link">Log in</a>
+    <a href="#waitlist" class="nav-pill">Join waitlist</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-scrim"></div>
+  <div class="hero-body">
+    <div class="hero-chip"><span class="chip-dot"></span>Launching 2026 &nbsp;·&nbsp; iOS</div>
+    <h1 class="hero-h1">Your life,<br><em>finally</em><br>under control.</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">Bills, budgeting, tax, drive and life.<br>Everything you forget, in one calm app.</p>
+    <div class="form-card" id="waitlist">
+      <span class="form-eyebrow">Join the waitlist, it&rsquo;s free</span>
+      <div class="form-row" id="formRow">
+        <input type="email" class="email-input" id="emailInput" placeholder="your@email.com" autocomplete="email"/>
+        <button class="join-btn" id="submitBtn" onclick="joinWaitlist()">Join now</button>
+      </div>
+      <div class="success" id="successMsg">
+        <div class="success-icon">&#10003;</div>
+        <h3>You&rsquo;re on the list!</h3>
+        <p>We&rsquo;ll email you the moment All Sorted launches.<br>Welcome to the founding members.</p>
+      </div>
+      <p class="form-fine" id="formNote">No spam. Just your early access invite.</p>
+    </div>
+    <div class="trust-row">
+      <div class="trust-pill"><b id="waitlistCount">50</b>&nbsp;on the waitlist</div>
+      <div class="trust-pill"><span class="chip-dot"></span>&nbsp;3-day free trial</div>
+      <div class="trust-pill"><b id="spotsLeft">150</b>&nbsp;founding spots left</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">ATO Deductions <span>Auto-logged</span></span>
+    <span class="ticker-item">GPS Drive Logbook <span>$0.88 / km</span></span>
+    <span class="ticker-item">3-Day Free Trial <span>No card needed</span></span>
+    <span class="ticker-item">Bills &amp; Subscriptions <span>Tracked</span></span>
+    <span class="ticker-item">Morning Briefing <span>6am daily</span></span>
+    <span class="ticker-item">Founding Spots <span>Limited</span></span>
+    <span class="ticker-item">iOS <span>Launching 2026</span></span>
+    <span class="ticker-item">ATO Deductions <span>Auto-logged</span></span>
+    <span class="ticker-item">GPS Drive Logbook <span>$0.88 / km</span></span>
+    <span class="ticker-item">3-Day Free Trial <span>No card needed</span></span>
+    <span class="ticker-item">Bills &amp; Subscriptions <span>Tracked</span></span>
+    <span class="ticker-item">Morning Briefing <span>6am daily</span></span>
+    <span class="ticker-item">Founding Spots <span>Limited</span></span>
+    <span class="ticker-item">iOS <span>Launching 2026</span></span>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="wrap">
+    <p class="problem-h r">You&rsquo;re not bad with money.<br>You just don&rsquo;t have the <em>right app.</em></p>
+    <div class="problem-grid r">
+      <div class="stat-cell"><div class="stat-num">$2,800</div><div class="stat-txt">Average ATO deductions missed by Australians per year</div></div>
+      <div class="stat-cell"><div class="stat-num">6+</div><div class="stat-txt">Apps the average person uses to manage money, bills and life</div></div>
+      <div class="stat-cell"><div class="stat-num">47%</div><div class="stat-txt">Of Australians say they feel overwhelmed by their finances</div></div>
+      <div class="stat-cell"><div class="stat-num">1</div><div class="stat-txt">App that does all of it, beautifully, without the chaos</div></div>
+    </div>
+    <div style="text-align:center" class="r">
+      <a href="#waitlist" class="btn btn-light">I&rsquo;m ready to be sorted</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section features-bg" id="features">
+  <div class="wrap">
+    <p class="eyebrow r">What&rsquo;s inside</p>
+    <h2 class="section-h r">Six tabs. One sorted life.</h2>
+    <p class="section-lead r">Every feature is connected. A bill flagged links to your ATO. A trip ends and the deduction appears. One tap, everything updates.</p>
+  </div>
+  <div class="wrap r" style="margin-top:0">
+    <div class="feat-list">
+      <div class="feat-row">
+        <div class="feat-cell">
+          <div class="feat-num">01</div>
+          <span class="feat-tag">Wallet</span>
+          <div class="feat-h">Everything you carry, digital</div>
+          <p class="feat-p">Gift cards with balances. Memberships. Discount codes. Loyalty numbers. Passwords stored on your device only, never uploaded.</p>
+        </div>
+        <div class="feat-cell dark">
+          <div class="feat-num">02</div>
+          <span class="feat-tag">Bills</span>
+          <div class="feat-h">Never miss a payment again</div>
+          <p class="feat-p">Smart Pay Now links for Telstra, Netflix, AGL and more. Due date reminders that sync to your calendar. ATO flagging with one tap.</p>
+        </div>
+      </div>
+      <div class="feat-row">
+        <div class="feat-cell">
+          <div class="feat-num">03</div>
+          <span class="feat-tag">Money</span>
+          <div class="feat-h">Expenses, income and bank imports</div>
+          <p class="feat-p">Scan receipts with your camera. Import bank CSVs in seconds. Work expenses automatically flagged for your ATO deductions.</p>
+        </div>
+        <div class="feat-cell">
+          <div class="feat-num">04</div>
+          <span class="feat-tag">Drive</span>
+          <div class="feat-h">GPS logbook. Deduction added instantly.</div>
+          <p class="feat-p">Auto-detect starts your trip when you move. Stop, and $0.88/km lands in your ATO tab automatically. No manual entry. Ever.</p>
+        </div>
+      </div>
+      <div class="feat-row">
+        <div class="feat-cell">
+          <div class="feat-num">05</div>
+          <span class="feat-tag">Life</span>
+          <div class="feat-h">Reminders, wellness and your morning</div>
+          <p class="feat-p">Daily wellness tracking. 6am briefing with your day ahead. Reminders that sync to Google Calendar and Outlook.</p>
+        </div>
+        <div class="feat-cell">
+          <div class="feat-num">06</div>
+          <span class="feat-tag">Budgeting</span>
+          <div class="feat-h">Savings goals and weekly plans</div>
+          <p class="feat-p">Plan fuel, groceries, dining and more. Set savings goals for holidays or home deposits. Watch the progress bar fill in real time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="numbers">
+  <div class="wrap-sm">
+    <p class="eyebrow r">At tax time</p>
+    <h2 class="section-h r">Stop leaving money on the table.</h2>
+    <p class="section-lead r" style="margin-bottom:0">The average Australian misses $2,800 in deductions every year. Not anymore.</p>
+    <div class="num-grid r">
+      <div class="num-cell"><div class="num-val">$0.88</div><div class="num-lbl">per km ATO rate</div></div>
+      <div class="num-cell"><div class="num-val">1 tap</div><div class="num-lbl">add to deductions</div></div>
+      <div class="num-cell"><div class="num-val">Auto</div><div class="num-lbl">trip detection</div></div>
+    </div>
+    <a href="#waitlist" class="btn btn-dark r">Start saving more</a>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <p class="eyebrow r">The detail</p>
+  <h2 class="section-h r" style="color:var(--white)">Everything connected. Nothing missed.</h2>
+  <p class="section-lead r">Every feature works together. No double entry. No switching between apps.</p>
+  <div class="how-grid">
+    <div class="how-card r"><h3>Passwords on your device only</h3><p>Store passwords, PINs and logins in the Wallet tab. Encrypted on your phone, never uploaded to any server.</p></div>
+    <div class="how-card r"><h3>Every trip auto-logged to tax</h3><p>Stop a trip and the ATO deduction appears instantly. $0.88/km straight into your tax tab with no manual entry needed.</p></div>
+    <div class="how-card r"><h3>Bank import in seconds</h3><p>Export a CSV from your bank, import it into All Sorted. Work expenses are automatically flagged as ATO deductions.</p></div>
+    <div class="how-card r"><h3>Pay Now links built in</h3><p>We detect your biller and add a Pay Now link automatically. Telstra, Origin, Netflix, AGL. One tap to pay.</p></div>
+    <div class="how-card r"><h3>Morning briefing at 6am</h3><p>Bills due, reminders for the day, a daily note. Personalised to you every morning before you've had coffee.</p></div>
+    <div class="how-card r"><h3>Savings goals with real progress</h3><p>Set a goal, add deposits, watch the bar fill. Holiday, home deposit, emergency fund, all tracked in one place.</p></div>
+  </div>
+  <a href="#waitlist" class="btn btn-outline r">Join the waitlist</a>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-sec">
+  <div class="wrap">
+    <p class="eyebrow r">Early feedback</p>
+    <h2 class="section-h r">What beta testers are saying.</h2>
+    <p class="section-lead r">Real people. Before launch.</p>
+    <div class="testi-grid">
+      <div class="testi-card r">
+        <div class="testi-accent"></div>
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testi-quote">&ldquo;I&rsquo;ve always been bad at tracking work trips. The auto-detect just works. I get a notification, tap yes, it&rsquo;s done. My accountant is going to love my tax return this year.&rdquo;</p>
+        <div class="testi-who">Jenna, Melbourne</div>
+      </div>
+      <div class="testi-card r">
+        <div class="testi-accent"></div>
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testi-quote">&ldquo;Finally one app that does everything. I used to have six different apps for bills, budget, expenses and tax. Now they all talk to each other and nothing gets missed.&rdquo;</p>
+        <div class="testi-who">Soph, Sydney</div>
+      </div>
+      <div class="testi-card r">
+        <div class="testi-accent"></div>
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testi-quote">&ldquo;The morning briefing is genuinely the first thing I look at. Bills due, reminders, all sorted before coffee. It feels like having a PA who knows your whole financial life.&rdquo;</p>
+        <div class="testi-who">Rhi, Brisbane</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-sec" id="pricing">
+  <div class="wrap-sm">
+    <p class="eyebrow r">Simple pricing</p>
+    <h2 class="section-h r">Start free. Stay if you love it.</h2>
+    <p class="section-lead r">Every plan starts with a 3-day free trial. No credit card required.</p>
+    <div class="price-grid r">
+      <div class="pc">
+        <div class="pc-period">Weekly</div>
+        <div class="pc-price">$3.99</div>
+        <div class="pc-per">per week</div>
+        <div class="pc-trial">3-day free trial</div>
+      </div>
+      <div class="pc featured">
+        <div class="pc-badge badge-pop">Most popular</div>
+        <div class="pc-period">6 months</div>
+        <div class="pc-price">$79.99</div>
+        <div class="pc-per">$13.33 per month</div>
+        <div class="pc-trial">3-day free trial</div>
+      </div>
+      <div class="pc">
+        <div class="pc-badge badge-val">Best value</div>
+        <div class="pc-period">Annual</div>
+        <div class="pc-price">$99.99</div>
+        <div class="pc-per">$8.33 per month</div>
+        <div class="pc-trial">3-day free trial</div>
+      </div>
+    </div>
+    <p class="r" style="font-size:11px;color:var(--ink3);margin-bottom:32px">Cancel anytime via Settings &rsaquo; Apple ID. All prices in AUD.</p>
+    <a href="#waitlist" class="btn btn-dark r">Join free and claim your spot</a>
+  </div>
+</section>
+
+<!-- SCREENS -->
+<section style="padding:96px 0 80px;background:var(--sand);text-align:center;border-top:1px solid var(--border)">
+  <div class="wrap-sm" style="margin-bottom:48px">
+    <p class="eyebrow r">Sneak peek</p>
+    <h2 class="section-h r">Calm. Clean. In control.</h2>
+    <p class="section-lead r" style="margin-bottom:0">Every screen designed to feel good to open, not stressful.</p>
+  </div>
+  <div class="carousel r">
+    <div class="carousel-track" id="track">
+      <div class="slide"><div class="phone"><div class="phone-inner"><img src="screen1.png" alt="All Sorted Drive screen, GPS trip tracking"/></div></div><p class="slide-label">Drive</p><p class="slide-sub">GPS trip tracking for tax time</p></div>
+      <div class="slide"><div class="phone"><div class="phone-inner"><img src="screen2.png" alt="All Sorted Bills screen"/></div></div><p class="slide-label">Bills</p><p class="slide-sub">Track, pay and stay on top</p></div>
+      <div class="slide"><div class="phone"><div class="phone-inner"><img src="screen3.png" alt="All Sorted Money screen"/></div></div><p class="slide-label">Money</p><p class="slide-sub">Income, expenses and tax</p></div>
+    </div>
+    <button class="carousel-btn" style="left:16px" onclick="prevSlide()">&#8249;</button>
+    <button class="carousel-btn" style="right:16px" onclick="nextSlide()">&#8250;</button>
+  </div>
+  <div class="dots">
+    <button class="dot" id="dot0" style="width:28px;background:var(--bark)" onclick="goTo(0)"></button>
+    <button class="dot" id="dot1" style="width:8px;background:var(--border)" onclick="goTo(1)"></button>
+    <button class="dot" id="dot2" style="width:8px;background:var(--border)" onclick="goTo(2)"></button>
+  </div>
+</section>
+
+<!-- FOUNDING -->
+<section class="founding">
+  <div class="wrap-sm">
+    <p class="eyebrow r" style="color:rgba(255,255,255,0.22)">Limited offer</p>
+    <h2 class="founding-h r">The first people in<br>get something <em>special.</em></h2>
+    <p class="founding-sub r">Join before launch and lock in founding member status. Early access, a lifetime founding rate, and a personal thank you from Roxanne.</p>
+    <div class="perk-row r">
+      <div class="perk">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>
+        <div class="perk-name">Early access</div>
+        <p>Get the app before anyone else on launch day.</p>
+      </div>
+      <div class="perk hi">
+        <div class="perk-badge">Most valuable</div>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(184,146,74,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <div class="perk-name">Founding rate</div>
+        <p>Lock in a special founding member rate, forever. Never pay full price.</p>
+      </div>
+      <div class="perk">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        <div class="perk-name">Founding badge</div>
+        <p>Permanently recognised as a founding member in the app.</p>
+      </div>
+      <div class="perk">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <div class="perk-name">Shape the app</div>
+        <p>Your feedback directly shapes every feature we build next.</p>
+      </div>
+    </div>
+    <div class="spots-pill r"><span class="chip-dot"></span>Only <b>&nbsp;<span id="spotsLeft2">150</span>&nbsp;</b> founding spots remaining</div><br>
+    <a href="#waitlist" class="btn btn-light r" style="margin-top:16px">Claim your spot</a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-sec" id="faq">
+  <div class="wrap-sm">
+    <p class="eyebrow r">Questions</p>
+    <h2 class="section-h r" style="margin-bottom:48px">FAQ</h2>
+    <div class="faq-list r">
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">When does All Sorted launch?<div class="faq-icon"><span>+</span></div></button><div class="faq-a"><p>We&rsquo;re launching in 2026 on iOS. Join the waitlist and you&rsquo;ll be first to know, get early access before everyone else, and lock in your founding member rate.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How much does it cost?<div class="faq-icon"><span>+</span></div></button><div class="faq-a"><p>All Sorted is free to download with a 3-day free trial on all plans. After the trial: Weekly at $3.99/week, 6 Months at $79.99 ($13.33/month) or Annual at $99.99 ($8.33/month). All amounts in AUD. Founding members lock in a special rate.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is auto drive detection?<div class="faq-icon"><span>+</span></div></button><div class="faq-a"><p>Turn on Auto-Detect in the Drive tab and All Sorted watches for movement using GPS. When you start moving, it sends a notification. Tap yes to start logging. When you stop, the km and ATO deduction are saved automatically at $0.88/km.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How does the morning briefing work?<div class="faq-icon"><span>+</span></div></button><div class="faq-a"><p>Every morning at 6am, All Sorted sends a personalised notification with your bills due that day, any reminders on your schedule and a daily note. It&rsquo;s like having a PA who knows your finances.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How does the bank connection work?<div class="faq-icon"><span>+</span></div></button><div class="faq-a"><p>Add your bank name in the Money tab, export your transactions as a CSV from your bank&rsquo;s website, and import them. Work expenses are automatically flagged as ATO deductions.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I save passwords in the app?<div class="faq-icon"><span>+</span></div></button><div class="faq-a"><p>Yes. The Wallet tab has a Passwords section where you can store passwords, PINs and login details. Stored on your device only, never uploaded to any server.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Does it work outside Australia?<div class="faq-icon"><span>+</span></div></button><div class="faq-a"><p>Yes. Set your currency, timezone and income tax bracket in Settings and everything adjusts. The ATO logbook features are optimised for Australia but the app works worldwide.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is my data secure?<div class="faq-icon"><span>+</span></div></button><div class="faq-a"><p>Yes. Encrypted connections, row-level security, only you can access your data. Passwords never leave your device. We never sell or share your data. Export or delete everything at any time.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Will there be an Android version?<div class="faq-icon"><span>+</span></div></button><div class="faq-a"><p>iOS first. Android is on the roadmap. Join the waitlist and we&rsquo;ll keep you updated.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section class="connect">
+  <p class="eyebrow r">Follow along</p>
+  <h2 class="section-h r">Behind the build.</h2>
+  <p class="section-lead r">Sneak peeks, feature reveals and real talk about building All Sorted.</p>
+  <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener" class="btn btn-dark r">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+    @allsortedapp
+  </a>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom">
+  <p class="eyebrow r" style="color:rgba(255,255,255,0.3)">Launching 2026</p>
+  <h2 class="bottom-h r">Ready to be sorted?</h2>
+  <p class="bottom-sub r">Join <strong id="waitlistCount2" style="color:rgba(255,255,255,0.85)">50</strong> people already on the waitlist. Claim your founding member spot now.</p>
+  <div class="bottom-form r">
+    <div class="form-card">
+      <span class="form-eyebrow">Claim your spot, free</span>
+      <div class="form-row" id="formRow2">
+        <input type="email" class="email-input" id="emailInput2" placeholder="your@email.com" autocomplete="email"/>
+        <button class="join-btn" id="submitBtn2" onclick="joinWaitlist2()">Claim spot</button>
+      </div>
+      <div class="success" id="successMsg2">
+        <div class="success-icon">&#10003;</div>
+        <h3>You&rsquo;re a founding member!</h3>
+        <p>We&rsquo;ll email you first when All Sorted launches. You&rsquo;re in.</p>
+      </div>
+      <p class="form-fine" id="formNote2">No spam. Just your early access invite when we launch.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder-sec">
+  <a href="founder.html" class="founder-card">
+    <img src="founder.jpg" alt="Roxanne Alterio, founder of All Sorted" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:1.5px solid var(--border)"/>
+    <div style="text-align:left;flex:1">
+      <div style="font-size:9px;font-weight:500;letter-spacing:0.35em;text-transform:uppercase;color:var(--bark);margin-bottom:5px">Meet the founder</div>
+      <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:400;color:var(--ink)">Why I built All Sorted</div>
+      <div style="font-size:12px;font-weight:300;color:var(--ink3);margin-top:3px">Roxanne Alterio &middot; Read my story &rarr;</div>
+    </div>
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-grid">
+    <div>
+      <div class="ft-brand" style="font-family:-apple-system,'SF Pro Display','Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:400;letter-spacing:0.55em;text-transform:uppercase;color:var(--white);padding-left:0.55em;margin-bottom:12px">ALL SORTED</div>
+      <p class="ft-tagline">Bills, budgeting, tax, drive and life.<br>One app. Everything sorted.</p>
+      <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener" style="font-size:11px;font-weight:400;letter-spacing:0.1em;color:rgba(255,255,255,0.28);text-decoration:none">@allsortedapp</a>
+    </div>
+    <div class="ft-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#top">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#waitlist">Join waitlist</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="login.html">Member login</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="privacy.html">Privacy policy</a></li>
+        <li><a href="terms.html">Terms of use</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#ef878a838380af8e83839c809d9b8a8b8e9f9fc1818a9b">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <p class="ft-copy">&copy; 2026 All Sorted App &middot; ABN listed on privacy policy</p>
+    <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener" style="font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.2);text-decoration:none">Instagram</a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+let count=50;
+function upd(n){
+  ['waitlistCount','waitlistCount2'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=n;});
+  ['spotsLeft','spotsLeft2'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=Math.max(0,200-n);});
+}
+let cur=0,step=50/(2200/16);
+const t=setInterval(()=>{cur+=step;if(cur>=50){cur=50;clearInterval(t);}upd(Math.floor(cur));},16);
+setInterval(()=>{if(Math.random()>0.6){count++;upd(count);}},15000);
+
+function toggleFaq(btn){
+  const item=btn.parentElement,open=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!open)item.classList.add('open');
+}
+
+function joinWaitlist(){
+  const e=document.getElementById('emailInput');
+  if(!e.value.trim()||!e.value.includes('@')){e.style.borderColor='#9B4040';setTimeout(()=>e.style.borderColor='',1500);return;}
+  document.getElementById('submitBtn').disabled=true;
+  document.getElementById('submitBtn').textContent='Joining...';
+  fetch('https://formspree.io/f/xwvwrywg',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:e.value.trim(),source:'hero'})}).catch(()=>{}).finally(()=>{
+    document.getElementById('formRow').style.display='none';
+    document.getElementById('formNote').style.display='none';
+    document.getElementById('successMsg').style.display='block';
+    count++;upd(count);
+  });
+}
+function joinWaitlist2(){
+  const e=document.getElementById('emailInput2');
+  if(!e.value.trim()||!e.value.includes('@')){e.style.borderColor='rgba(155,64,64,0.5)';setTimeout(()=>e.style.borderColor='',1500);return;}
+  document.getElementById('submitBtn2').disabled=true;
+  document.getElementById('submitBtn2').textContent='Joining...';
+  fetch('https://formspree.io/f/xwvwrywg',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:e.value.trim(),source:'bottom'})}).catch(()=>{}).finally(()=>{
+    document.getElementById('formRow2').style.display='none';
+    document.getElementById('formNote2').style.display='none';
+    document.getElementById('successMsg2').style.display='block';
+    count++;upd(count);
+  });
+}
+
+let cs=0;const tr=document.getElementById('track');
+function goTo(n){cs=(n+3)%3;if(tr)tr.style.transform=`translateX(-${cs*100}%)`;for(let i=0;i<3;i++){const d=document.getElementById('dot'+i);if(d){d.style.width=i===cs?'28px':'8px';d.style.background=i===cs?'var(--bark)':'var(--border)';}}}
+function nextSlide(){goTo(cs+1);}function prevSlide(){goTo(cs-1);}
+let at=setInterval(nextSlide,4000);
+if(tr){
+  let sx=0,sy=0;
+  tr.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;clearInterval(at);},{passive:true});
+  tr.addEventListener('touchend',e=>{const dx=sx-e.changedTouches[0].clientX,dy=Math.abs(sy-e.changedTouches[0].clientY);if(Math.abs(dx)>40&&Math.abs(dx)>dy){dx>0?nextSlide():prevSlide();}at=setInterval(nextSlide,4000);},{passive:true});
+  let mx=0,md=false;
+  tr.addEventListener('mousedown',e=>{mx=e.clientX;md=true;clearInterval(at);tr.style.cursor='grabbing';});
+  tr.addEventListener('mouseup',e=>{if(!md)return;if(Math.abs(mx-e.clientX)>40){mx>e.clientX?nextSlide():prevSlide();}md=false;at=setInterval(nextSlide,4000);tr.style.cursor='grab';});
+  tr.addEventListener('mouseleave',()=>{md=false;tr.style.cursor='grab';});
+  tr.style.cursor='grab';
+}
+document.getElementById('emailInput').addEventListener('keydown',e=>{if(e.key==='Enter')j

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Sorted — Sign In</title>
+  <meta name="description" content="Sign in to All Sorted — your bills, budgeting, tax, drive and life app." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/supabase/2.39.3/supabase.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream:  #F5F0EA; --cream2: #EDE5DC; --cream3: #E4D8CC;
+      --taupe:  #9B8478; --taupeD: #7A6454; --taupeL: #C4B5A0;
+      --t0: #3C2E22; --t1: #5C4A38; --t2: #8C7A68; --t3: #B8A898;
+      --white: #FDFAF7; --b1: #E8E0D8; --b0: #D8CEC4;
+      --green: #4A7A5E; --greenP: #E2F0E8;
+      --red: #A04040; --redP: #F5E2E2;
+    }
+    html, body { height: 100%; }
+    body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--t0); font-weight: 300; -webkit-font-smoothing: antialiased; overflow: hidden; }
+
+    /* ── LAYOUT ── */
+    .shell {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 100vh;
+    }
+
+    /* ── LEFT PANEL — brand ── */
+    .left {
+      position: relative;
+      background: var(--taupeD);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 52px 56px;
+      overflow: hidden;
+    }
+
+    /* subtle grain overlay */
+    .left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.15;
+      pointer-events: none;
+    }
+
+    /* decorative circle */
+    .left::after {
+      content: '';
+      position: absolute;
+      bottom: -120px;
+      right: -120px;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+      pointer-events: none;
+    }
+
+    .left-inner { position: relative; z-index: 2; }
+
+    .brand-name {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      padding-left: 0.55em;
+      text-decoration: none;
+    }
+
+    .brand-hero {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 4vw, 58px);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .brand-hero em { font-style: italic; color: var(--taupeL); }
+
+    .brand-sub {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.75;
+      max-width: 320px;
+    }
+
+    /* feature pills */
+    .feature-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 32px;
+    }
+
+    .fpill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    .fpill-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--taupeL);
+    }
+
+    .left-footer {
+      position: relative;
+      z-index: 2;
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ── RIGHT PANEL — form ── */
+    .right {
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      overflow-y: auto;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .form-header { margin-bottom: 40px; }
+
+    .form-eyebrow {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 10px;
+    }
+
+    .form-title {
+      font-size: 26px;
+      font-weight: 300;
+      color: var(--t0);
+      letter-spacing: 0.02em;
+    }
+
+    .form-title span {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--taupe);
+    }
+
+    /* tabs */
+    .auth-tabs {
+      display: flex;
+      border-bottom: 1.5px solid var(--b1);
+      margin-bottom: 32px;
+    }
+
+    .auth-tab {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--t3);
+      padding: 0 0 14px;
+      margin-right: 28px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1.5px;
+      transition: all 0.2s;
+    }
+
+    .auth-tab.active { color: var(--taupeD); border-bottom-color: var(--taupeD); }
+
+    /* fields */
+    .field { margin-bottom: 18px; }
+
+    .field-label {
+      display: block;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 8px;
+    }
+
+    .field-input {
+      width: 100%;
+      height: 50px;
+      border: 1.5px solid var(--b1);
+      border-radius: 12px;
+      padding: 0 16px;
+      font-family: 'Jost', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--t0);
+      background: var(--cream);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .field-input::placeholder { color: var(--t3); }
+    .field-input:focus { border-color: var(--taupeL); box-shadow: 0 0 0 3px rgba(196,181,160,0.15); }
+    .field-input.error { border-color: var(--red); background: var(--redP); }
+
+    .field-password { position: relative; }
+    .field-password .field-input { padding-right: 48px; }
+    .show-pass {
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer; color: var(--t3); font-size: 12px;
+      font-family: 'Jost', sans-serif; font-weight: 500; letter-spacing: 0.05em;
+      transition: color 0.2s; padding: 4px;
+    }
+    .show-pass:hover { color: var(--t0); }
+
+    .forgot-link {
+      display: block;
+      text-align: right;
+      font-size: 11px;
+      color: var(--taupe);
+      text-decoration: none;
+      margin-top: -10px;
+      margin-bottom: 18px;
+      transition: color 0.2s;
+    }
+    .forgot-link:hover { color: var(--taupeD); }
+
+    /* submit button */
+    .submit-btn {
+      width: 100%;
+      height: 52px;
+      background: var(--taupeD);
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .submit-btn:hover:not(:disabled) { background: var(--taupe); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(122,100,84,0.25); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    /* spinner */
+    .spinner {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: var(--white);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    .spinner.show { display: block; }
+
+    /* divider */
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--t3);
+    }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--b1); }
+
+    /* terms */
+    .terms-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .terms-check {
+      width: 18px; height: 18px;
+      border: 1.5px solid var(--b1);
+      border-radius: 5px;
+      background: var(--cream);
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+    }
+
+    .terms-check.checked { background: var(--taupeD); border-color: var(--taupeD); }
+    .terms-check.checked::after { content: '✓'; font-size: 11px; color: white; }
+
+    .terms-text { font-size: 11px; color: var(--t2); line-height: 1.6; }
+    .terms-text a { color: var(--taupe); text-decoration: none; }
+    .terms-text a:hover { color: var(--taupeD); }
+
+    /* error / success */
+    .msg-box {
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .msg-box.error { background: var(--redP); color: var(--red); border: 1px solid rgba(160,64,64,0.2); display: block; }
+    .msg-box.success { background: var(--greenP); color: var(--green); border: 1px solid rgba(74,122,94,0.2); display: block; }
+
+    /* dashboard (after login) */
+    .dashboard { display: none; }
+    .dashboard.show { display: block; }
+    .login-form { display: block; }
+    .login-form.hide { display: none; }
+
+    /* dashboard content */
+    .dash-greeting {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 8px;
+    }
+
+    .dash-name {
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--t0);
+      margin-bottom: 4px;
+    }
+
+    .dash-sub { font-size: 13px; color: var(--t2); margin-bottom: 36px; }
+
+    .dash-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .dash-card {
+      background: var(--cream);
+      border: 1px solid var(--b1);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .dash-card-label {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--t3); margin-bottom: 6px;
+    }
+
+    .dash-card-val {
+      font-size: 22px; font-weight: 300; color: var(--taupeD);
+    }
+
+    .dash-cta {
+      width: 100%;
+      padding: 14px;
+      background: var(--taupeD);
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 10px;
+    }
+    .dash-cta:hover { background: var(--taupe); }
+
+    .dash-signout {
+      width: 100%;
+      padding: 12px;
+      background: none;
+      color: var(--t3);
+      border: 1.5px solid var(--b1);
+      border-radius: 12px;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dash-signout:hover { color: var(--t0); border-color: var(--b0); }
+
+    /* mobile redirect */
+    .mobile-notice {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--cream);
+      z-index: 100;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    @media (max-width: 800px) {
+      .shell { display: none; }
+      .mobile-notice { display: flex; }
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .fade-in { animation: fadeIn 0.4s ease forwards; }
+  </style>
+</head>
+<body>
+
+<!-- MOBILE NOTICE -->
+<div class="mobile-notice">
+  <div style="font-size:11px;font-weight:400;letter-spacing:0.55em;text-transform:uppercase;color:var(--taupe);margin-bottom:32px;">All Sorted</div>
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--t0);margin-bottom:16px;line-height:1.3;">Use the app<br>on your phone.</h1>
+  <p style="font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:32px;">The desktop portal is for account management. Download the All Sorted app for the full experience.</p>
+  <a href="https://allsortedapp.net" style="display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);background:var(--taupeD);padding:14px 28px;border-radius:100px;text-decoration:none;">Back to allsortedapp.net</a>
+</div>
+
+<!-- DESKTOP SHELL -->
+<div class="shell">
+
+  <!-- LEFT BRAND PANEL -->
+  <div class="left">
+    <div class="left-inner">
+      <a href="https://allsortedapp.net" class="brand-name">All Sorted</a>
+    </div>
+
+    <div class="left-inner" style="margin-top: auto; padding-top: 40px;">
+      <h2 class="brand-hero">Your life,<br><em>finally</em> under<br>control.</h2>
+      <p class="brand-sub">Bills, budgeting, tax, drive and life — all in one calm, beautiful app. Your data, always yours.</p>
+      <div class="feature-pills">
+        <div class="fpill"><span class="fpill-dot"></span>Wallet</div>
+        <div class="fpill"><span class="fpill-dot"></span>Bills</div>
+        <div class="fpill"><span class="fpill-dot"></span>Money</div>
+        <div class="fpill"><span class="fpill-dot"></span>Drive</div>
+        <div class="fpill"><span class="fpill-dot"></span>Life</div>
+        <div class="fpill"><span class="fpill-dot"></span>Budgeting</div>
+      </div>
+    </div>
+
+    <div class="left-footer">
+      © 2026 All Sorted · <a href="https://allsortedapp.net/privacy.html" style="color:inherit;text-decoration:none;">Privacy</a> · <a href="https://allsortedapp.net/terms.html" style="color:inherit;text-decoration:none;">Terms</a>
+    </div>
+  </div>
+
+  <!-- RIGHT FORM PANEL -->
+  <div class="right">
+    <div class="form-container fade-in">
+
+      <!-- HEADER -->
+      <div class="form-header">
+        <div class="form-eyebrow">Member Portal</div>
+        <div class="form-title">Welcome <span>back.</span></div>
+      </div>
+
+      <!-- TABS -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchTab('in')" id="tab-in">Sign In</button>
+        <button class="auth-tab" onclick="switchTab('up')" id="tab-up">Create Account</button>
+      </div>
+
+      <!-- MESSAGE BOX -->
+      <div class="msg-box" id="msgBox"></div>
+
+      <!-- SIGN IN FORM -->
+      <div id="formSignIn" class="login-form">
+        <div class="field">
+          <label class="field-label" for="siEmail">Email address</label>
+          <input type="email" class="field-input" id="siEmail" placeholder="you@email.com" autocomplete="email" />
+        </div>
+        <div class="field">
+          <label class="field-label">Password</label>
+          <div class="field-password">
+            <input type="password" class="field-input" id="siPass" placeholder="••••••••" autocomplete="current-password" />
+            <button class="show-pass" onclick="togglePass('siPass', this)" type="button">Show</button>
+          </div>
+        </div>
+        <a href="#" class="forgot-link" onclick="handleForgot(event)">Forgot password?</a>
+        <button class="submit-btn" id="siBtn" onclick="handleSignIn()">
+          <div class="spinner" id="siSpinner"></div>
+          <span id="siBtnText">Sign In</span>
+        </button>
+      </div>
+
+      <!-- SIGN UP FORM -->
+      <div id="formSignUp" class="login-form hide">
+        <div class="field">
+          <label class="field-label" for="suName">Your name</label>
+          <input type="text" class="field-input" id="suName" placeholder="Roxanne" autocomplete="given-name" />
+        </div>
+        <div class="field">
+          <label class="field-label" for="suEmail">Email address</label>
+          <input type="email" class="field-input" id="suEmail" placeholder="you@email.com" autocomplete="email" />
+        </div>
+        <div class="field">
+          <label class="field-label">Password</label>
+          <div class="field-password">
+            <input type="password" class="field-input" id="suPass" placeholder="Min. 8 characters" autocomplete="new-password" />
+            <button class="show-pass" onclick="togglePass('suPass', this)" type="button">Show</button>
+          </div>
+        </div>
+        <div class="terms-row">
+          <div class="terms-check" id="termsCheck" onclick="toggleTerms()"></div>
+          <div class="terms-text">I agree to the <a href="https://allsortedapp.net/terms.html" target="_blank">Terms of Use</a> and <a href="https://allsortedapp.net/privacy.html" target="_blank">Privacy Policy</a></div>
+        </div>
+        <button class="submit-btn" id="suBtn" onclick="handleSignUp()">
+          <div class="spinner" id="suSpinner"></div>
+          <span id="suBtnText">Create Account</span>
+        </button>
+      </div>
+
+      <!-- DASHBOARD (after sign in) -->
+      <div class="dashboard" id="dashboard">
+        <div class="dash-greeting" id="dashGreeting">Good morning</div>
+        <div class="dash-name" id="dashName">Welcome back</div>
+        <div class="dash-sub" id="dashSub">You're signed in to All Sorted.</div>
+
+        <div class="dash-grid">
+          <div class="dash-card">
+            <div class="dash-card-label">Account</div>
+            <div class="dash-card-val" id="dashEmail" style="font-size:13px;word-break:break-all;">—</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-label">Status</div>
+            <div class="dash-card-val" style="font-size:15px;color:var(--green);">Active</div>
+          </div>
+        </div>
+
+        <button class="dash-cta" onclick="openApp()">Open All Sorted App</button>
+        <button class="dash-signout" onclick="handleSignOut()">Sign Out</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Supabase init ──
+  // Replace these with your real Supabase URL and anon key
+  const SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co';
+  const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY';
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  let termsAgreed = false;
+
+  // ── Tab switch ──
+  function switchTab(tab) {
+    clearMsg();
+    document.getElementById('tab-in').classList.toggle('active', tab === 'in');
+    document.getElementById('tab-up').classList.toggle('active', tab === 'up');
+    document.getElementById('formSignIn').classList.toggle('hide', tab !== 'in');
+    document.getElementById('formSignUp').classList.toggle('hide', tab !== 'up');
+    if (tab === 'in') {
+      document.querySelector('.form-title').innerHTML = 'Welcome <span>back.</span>';
+    } else {
+      document.querySelector('.form-title').innerHTML = 'Create your <span>account.</span>';
+    }
+  }
+
+  // ── Show/hide password ──
+  function togglePass(id, btn) {
+    const inp = document.getElementById(id);
+    const show = inp.type === 'password';
+    inp.type = show ? 'text' : 'password';
+    btn.textContent = show ? 'Hide' : 'Show';
+  }
+
+  // ── Terms toggle ──
+  function toggleTerms() {
+    termsAgreed = !termsAgreed;
+    document.getElementById('termsCheck').classList.toggle('checked', termsAgreed);
+  }
+
+  // ── Message helpers ──
+  function showMsg(text, type) {
+    const el = document.getElementById('msgBox');
+    el.textContent = text;
+    el.className = 'msg-box ' + type;
+  }
+  function clearMsg() {
+    const el = document.getElementById('msgBox');
+    el.className = 'msg-box';
+    el.textContent = '';
+  }
+
+  // ── Loading state ──
+  function setLoading(prefix, loading) {
+    const btn = document.getElementById(prefix + 'Btn');
+    const spinner = document.getElementById(prefix + 'Spinner');
+    const text = document.getElementById(prefix + 'BtnText');
+    btn.disabled = loading;
+    spinner.classList.toggle('show', loading);
+    text.style.opacity = loading ? '0' : '1';
+  }
+
+  // ── Sign in ──
+  async function handleSignIn() {
+    clearMsg();
+    const email = document.getElementById('siEmail').value.trim();
+    const pass = document.getElementById('siPass').value;
+    if (!email || !email.includes('@')) { showMsg('Please enter a valid email address.', 'error'); return; }
+    if (!pass) { showMsg('Please enter your password.', 'error'); return; }
+    setLoading('si', true);
+    try {
+      const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
+      if (error) throw error;
+      await showDashboard(data.user);
+    } catch(e) {
+      const msg = e.message || '';
+      if (msg.includes('Invalid login') || msg.includes('invalid_credentials')) showMsg('Incorrect email or password. Please try again.', 'error');
+      else if (msg.includes('Email not confirmed')) showMsg('Please verify your email before signing in.', 'error');
+      else showMsg('Something went wrong. Please try again.', 'error');
+    } finally {
+      setLoading('si', false);
+    }
+  }
+
+  // ── Sign up ──
+  async function handleSignUp() {
+    clearMsg();
+    const name = document.getElementById('suName').value.trim();
+    const email = document.getElementById('suEmail').value.trim();
+    const pass = document.getElementById('suPass').value;
+    if (!name) { showMsg('Please enter your name.', 'error'); return; }
+    if (!email || !email.includes('@')) { showMsg('Please enter a valid email address.', 'error'); return; }
+    if (!pass || pass.length < 8) { showMsg('Password must be at least 8 characters.', 'error'); return; }
+    if (!termsAgreed) { showMsg('Please agree to the Terms of Use and Privacy Policy.', 'error'); return; }
+    setLoading('su', true);
+    try {
+      const { data, error } = await sb.auth.signUp({ email, password: pass });
+      if (error) throw error;
+      if (data.user) {
+        sb.from('profiles').upsert({ id: data.user.id, email, name }).then(() => {}).catch(() => {});
+        showMsg('Account created! Check your email to verify your address, then sign in.', 'success');
+        setTimeout(() => switchTab('in'), 2000);
+      }
+    } catch(e) {
+      const msg = e.message || '';
+      if (msg.includes('already registered') || msg.includes('already been registered')) showMsg('An account with this email already exists. Try signing in.', 'error');
+      else showMsg('Something went wrong. Please try again.', 'error');
+    } finally {
+      setLoading('su', false);
+    }
+  }
+
+  // ── Forgot password ──
+  async function handleForgot(e) {
+    e.preventDefault();
+    const email = document.getElementById('siEmail').value.trim();
+    if (!email || !email.includes('@')) { showMsg('Enter your email address above first.', 'error'); return; }
+    clearMsg();
+    try {
+      await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.href });
+      showMsg('Password reset email sent. Check your inbox.', 'success');
+    } catch {
+      showMsg('Could not send reset email. Please try again.', 'error');
+    }
+  }
+
+  // ── Dashboard ──
+  async function showDashboard(user) {
+    const hour = new Date().getHours();
+    const greet = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+    let name = user.email.split('@')[0];
+    try {
+      const { data } = await sb.from('profiles').select('name').eq('id', user.id).single();
+      if (data?.name) name = data.name.split(' ')[0];
+    } catch {}
+    document.getElementById('dashGreeting').textContent = greet;
+    document.getElementById('dashName').textContent = name;
+    document.getElementById('dashSub').textContent = 'You\'re signed in and sorted.';
+    document.getElementById('dashEmail').textContent = user.email;
+    document.getElementById('formSignIn').classList.add('hide');
+    document.getElementById('formSignUp').classList.add('hide');
+    document.querySelector('.auth-tabs').style.display = 'none';
+    document.querySelector('.form-header .form-eyebrow').textContent = 'Member Portal';
+    document.querySelector('.form-header .form-title').innerHTML = 'You\'re <span>sorted.</span>';
+    document.getElementById('dashboard').classList.add('show');
+    clearMsg();
+  }
+
+  // ── Open app (deep link) ──
+  function openApp() {
+    window.location.href = 'allsorted://home';
+    setTimeout(() => {
+      window.open('https://allsortedapp.net', '_blank');
+    }, 1500);
+  }
+
+  // ── Sign out ──
+  async function handleSignOut() {
+    await sb.auth.signOut().catch(() => {});
+    document.getElementById('dashboard').classList.remove('show');
+    document.querySelector('.auth-tabs').style.display = 'flex';
+    document.querySelector('.form-header .form-title').innerHTML = 'Welcome <span>back.</span>';
+    document.querySelector('.form-header .form-eyebrow').textContent = 'Member Portal';
+    switchTab('in');
+    document.getElementById('siEmail').value = '';
+    document.getElementById('siPass').value = '';
+  }
+
+  // ── Check existing session on load ──
+  (async () => {
+    try {
+      const { data: { session } } = await sb.auth.getSession();
+      if (session?.user) await showDashboard(session.user);
+    } catch {}
+  })();
+
+  // ── Enter key ──
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Enter') return;
+    if (!document.getElementById('formSignIn').classList.contains('hide')) handleSignIn();
+    else if (!document.getElementById('formSignUp').classList.contains('hide')) handleSignUp();
+  });
+</script>
+</body>
+</html>
