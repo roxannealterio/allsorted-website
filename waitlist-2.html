@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Join the Waitlist — All Sorted | Founding Member Access</title>
+<meta name="description" content="Join the All Sorted waitlist. Get founding member access, a locked-in rate forever, automatic affiliate status and an exclusive invite to our launch party. iOS app launching June 2026."/>
+<link rel="canonical" href="https://allsortedapp.net/waitlist"/>
+<meta property="og:title" content="Join the All Sorted Waitlist — Founding Member Access"/>
+<meta property="og:description" content="Be one of the first 200. Lock in your founding rate, get early access, automatic affiliate status and an exclusive launch party invite."/>
+<meta property="og:image" content="https://allsortedapp.net/hero.jpg"/>
+<meta property="og:url" content="https://allsortedapp.net/waitlist"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sand:#F7F3EE;--sand2:#EFE9E1;--sand3:#E5DDD3;
+  --bark:#7A6454;--barkD:#5C4A38;--barkL:#A89080;
+  --ink:#2C221A;--ink2:#6B5A4E;--ink3:#A89484;
+  --white:#FDFAF7;--border:#DDD5CB;--green:#3D6B4F;--gold:#B8924A;
+}
+html{scroll-behavior:smooth;background:var(--sand)}
+body{font-family:-apple-system,'SF Pro Display','Helvetica Neue',Arial,sans-serif;background:var(--sand);color:var(--ink);font-weight:300;-webkit-font-smoothing:antialiased;min-height:100vh}
+
+/* NAV */
+.nav{padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.nav-logo{font-size:12px;font-weight:400;letter-spacing:0.55em;text-transform:uppercase;color:var(--ink);text-decoration:none;padding-left:0.55em}
+.nav-back{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:400;color:var(--ink2);text-decoration:none;transition:color 0.2s}
+.nav-back:hover{color:var(--ink)}
+.nav-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+
+/* HERO STRIP */
+.hero-strip{background:var(--ink);padding:48px 24px 40px;text-align:center}
+.page-eyebrow{font-size:9px;font-weight:500;letter-spacing:0.4em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px}
+.page-h{font-family:'Playfair Display',serif;font-size:clamp(32px,7vw,56px);font-weight:400;color:var(--white);line-height:1.1;margin-bottom:12px}
+.page-h em{font-style:italic;color:var(--barkL)}
+.page-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,0.45);line-height:1.7;max-width:420px;margin:0 auto}
+
+/* SCARCITY BAR */
+.scarcity-wrap{background:var(--white);border-bottom:1px solid var(--border);padding:16px 24px}
+.scarcity-inner{max-width:580px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.scarcity-text{font-size:12px;font-weight:300;color:var(--ink2)}
+.scarcity-text b{font-weight:600;color:var(--ink)}
+.bar-wrap{flex:1;max-width:180px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.bar{height:100%;background:linear-gradient(90deg,var(--barkD),var(--barkL));border-radius:2px;transition:width 1.2s ease}
+.chip-dot{width:5px;height:5px;border-radius:50%;background:#5DBF84;display:inline-block;animation:pulse 2.4s ease-in-out infinite;vertical-align:middle;margin-right:5px}
+
+/* MAIN CONTENT */
+.page-body{max-width:580px;margin:0 auto;padding:40px 24px 80px}
+
+/* PERKS GRID */
+.perks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.perk{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:22px 18px;text-align:center}
+.perk.gold{background:rgba(184,146,74,0.06);border-color:rgba(184,146,74,0.3);position:relative}
+.perk-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:8px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;background:var(--gold);color:var(--white);padding:3px 10px;border-radius:100px;white-space:nowrap}
+.perk svg{width:20px;height:20px;stroke:var(--bark);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin-bottom:10px;display:block;margin-left:auto;margin-right:auto}
+.perk.gold svg{stroke:var(--gold)}
+.perk-name{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);margin-bottom:5px}
+.perk p{font-size:12px;font-weight:300;color:var(--ink3);line-height:1.55}
+
+/* AFFILIATE CARD */
+.affiliate-card{background:linear-gradient(135deg,rgba(184,146,74,0.1),rgba(184,146,74,0.03));border:1px solid rgba(184,146,74,0.3);border-radius:16px;padding:22px;margin-bottom:10px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.affiliate-icon{width:36px;height:36px;border-radius:9px;background:rgba(184,146,74,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.affiliate-icon svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.affiliate-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.affiliate-card p{font-size:12px;font-weight:300;color:var(--ink2);line-height:1.65;margin:0}
+
+/* PARTY CARD */
+.party-card{background:var(--barkD);border-radius:16px;padding:20px 22px;margin-bottom:28px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.party-icon{width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.party-icon svg{width:18px;height:18px;stroke:rgba(255,255,255,0.75);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.party-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:5px}
+.party-card p{font-size:12px;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.65;margin:0}
+.party-card strong{color:var(--white);font-weight:500}
+
+/* FORM */
+.form-card{background:var(--white);border:1.5px solid var(--border);border-radius:20px;padding:28px;margin-bottom:14px}
+.form-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:var(--ink);margin-bottom:20px}
+.field{margin-bottom:14px}
+.field-label{display:block;font-size:9px;font-weight:600;letter-spacing:0.32em;text-transform:uppercase;color:var(--bark);margin-bottom:7px}
+.field-input{width:100%;height:50px;border:1.5px solid var(--border);border-radius:12px;padding:0 16px;font-family:inherit;font-size:14px;font-weight:300;color:var(--ink);background:var(--sand);outline:none;transition:border-color 0.2s}
+.field-input::placeholder{color:var(--ink3)}
+.field-input:focus{border-color:var(--barkL);background:var(--white)}
+.submit-btn{width:100%;height:52px;background:var(--barkD);color:var(--white);border:none;border-radius:12px;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:0.06em;cursor:pointer;transition:all 0.2s;margin-top:6px}
+.submit-btn:hover{background:var(--ink);transform:translateY(-1px)}
+.submit-btn:disabled{opacity:0.55;cursor:not-allowed;transform:none}
+.form-fine{font-size:10px;color:var(--ink3);text-align:center;margin-top:12px;line-height:1.5}
+
+/* SUCCESS */
+.success-wrap{display:none;text-align:center;padding:32px 0}
+.success-icon{width:56px;height:56px;border-radius:50%;border:2px solid var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:var(--green);font-size:24px}
+.success-wrap h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:var(--ink);margin-bottom:10px}
+.success-wrap p{font-size:14px;font-weight:300;color:var(--ink2);line-height:1.75;max-width:340px;margin:0 auto 24px}
+.success-back{display:inline-block;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--white);background:var(--barkD);padding:12px 28px;border-radius:100px;text-decoration:none;transition:all 0.2s}
+.success-back:hover{background:var(--ink)}
+
+/* FOOTER */
+footer{background:var(--ink);padding:36px 24px;text-align:center;border-top:1px solid rgba(255,255,255,0.06)}
+footer p{font-size:11px;color:rgba(255,255,255,0.2);margin-bottom:10px}
+footer a{font-size:11px;color:rgba(255,255,255,0.35);text-decoration:none;margin:0 10px;transition:color 0.2s}
+footer a:hover{color:var(--white)}
+
+@keyframes pulse{0%,100%{opacity:0.3}50%{opacity:1}}
+@media(max-width:500px){
+  .nav{padding:0 20px}
+  .perks{grid-template-columns:1fr}
+  .affiliate-card,.party-card{grid-template-columns:1fr;text-align:center}
+  .affiliate-icon,.party-icon{margin:0 auto}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Back
+  </a>
+  <a href="index.html" class="nav-logo">ALL SORTED</a>
+  <div style="width:48px"></div>
+</nav>
+
+<!-- HERO STRIP -->
+<div class="hero-strip">
+  <p class="page-eyebrow">Founding member waitlist</p>
+  <h1 class="page-h">Be part of it<br>from day <em>one.</em></h1>
+  <p class="page-sub">The first 200 people get something the rest never will. Join now before the spots are gone.</p>
+</div>
+
+<!-- SCARCITY -->
+<div class="scarcity-wrap">
+  <div class="scarcity-inner">
+    <div class="scarcity-text"><span class="chip-dot"></span><b id="spotsGone">0</b> of 200 founding spots claimed</div>
+    <div class="bar-wrap"><div class="bar" id="scarcityBar" style="width:0%"></div></div>
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- PERKS -->
+  <div class="perks">
+    <div class="perk">
+      <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>
+      <div class="perk-name">Early access</div>
+      <p>First in on launch day, June 2026</p>
+    </div>
+    <div class="perk gold">
+      <div class="perk-badge">Most valuable</div>
+      <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      <div class="perk-name">Founding rate</div>
+      <p>Locked in forever. Never pay full price</p>
+    </div>
+    <div class="perk">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      <div class="perk-name">Founding badge</div>
+      <p>Permanently recognised in the app</p>
+    </div>
+    <div class="perk">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <div class="perk-name">Shape the app</div>
+      <p>Your feedback builds what comes next</p>
+    </div>
+  </div>
+
+  <!-- AFFILIATE -->
+  <div class="affiliate-card">
+    <div class="affiliate-icon">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    </div>
+    <div>
+      <div class="affiliate-label">Automatic affiliate included</div>
+      <p>Every founding member becomes an affiliate from day one. Share your personal referral link and earn a bonus every time someone subscribes. No application needed. Activates automatically when you join.</p>
+    </div>
+  </div>
+
+  <!-- PARTY -->
+  <div class="party-card">
+    <div class="party-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    </div>
+    <div>
+      <div class="party-label">Exclusive launch party</div>
+      <p><strong>Every waitlist member gets a personal invitation</strong> to the All Sorted launch party. Details announced closer to June 2026.</p>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-card" id="formCard">
+    <div class="form-title">Claim your founding spot</div>
+    <div class="field">
+      <label class="field-label" for="nameInput">Your name</label>
+      <input type="text" class="field-input" id="nameInput" placeholder="Roxanne" autocomplete="given-name"/>
+    </div>
+    <div class="field">
+      <label class="field-label" for="emailInput">Email address</label>
+      <input type="email" class="field-input" id="emailInput" placeholder="your@email.com" autocomplete="email"/>
+    </div>
+    <button class="submit-btn" id="submitBtn" onclick="join()">Join the waitlist &rarr;</button>
+    <p class="form-fine">Free to join. No credit card. Unsubscribe anytime.<br>By joining you agree to our <a href="terms.html" style="color:var(--bark)">Terms</a> and <a href="privacy.html" style="color:var(--bark)">Privacy Policy</a>.</p>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-wrap" id="successMsg">
+    <div class="success-icon">&#10003;</div>
+    <h2>You&rsquo;re in.</h2>
+    <p>Welcome to the founding members. We&rsquo;ll email you when All Sorted launches, along with your launch party invite and affiliate details.</p>
+    <a href="index.html" class="success-back">Explore All Sorted</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 All Sorted App Pty Ltd</p>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="mailto:info@allsortedapp.net">Contact</a>
+  </div>
+</footer>
+
+<script>
+// Scarcity counter — matches hero (animates to 23)
+const TARGET = 23;
+let count = TARGET;
+function updSpots(n){
+  const el=document.getElementById('spotsGone');
+  if(el)el.textContent=n;
+  const bar=document.getElementById('scarcityBar');
+  if(bar)bar.style.width=Math.min((n/200)*100,100)+'%';
+}
+let cur=0;
+const timer=setInterval(()=>{
+  cur=Math.min(cur+TARGET/120,TARGET);
+  updSpots(Math.floor(cur));
+  if(cur>=TARGET)clearInterval(timer);
+},16);
+
+// Form submit
+function join(){
+  const name=document.getElementById('nameInput').value.trim();
+  const email=document.getElementById('emailInput').value.trim();
+  const btn=document.getElementById('submitBtn');
+  if(!name){
+    document.getElementById('nameInput').style.borderColor='#9B4040';
+    setTimeout(()=>document.getElementById('nameInput').style.borderColor='',1500);
+    return;
+  }
+  if(!email||!email.includes('@')){
+    document.getElementById('emailInput').style.borderColor='#9B4040';
+    setTimeout(()=>document.getElementById('emailInput').style.borderColor='',1500);
+    return;
+  }
+  btn.disabled=true;
+  btn.textContent='Joining...';
+  fetch('https://formspree.io/f/xwvwrywg',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({name,email,source:'waitlist-page'})
+  }).catch(()=>{}).finally(()=>{
+    document.getElementById('formCard').style.display='none';
+    document.getElementById('successMsg').style.display='block';
+    count++;
+    updSpots(count);
+  });
+}
+document.getElementById('emailInput').addEventListener('keydown',e=>{if(e.key==='Enter')join();});
+</script>
+</body>
+</html>
