@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>All Sorted &middot; Bills, Tax and Life Organiser App | Launching June 2026</title>
+<meta name="description" content="All Sorted: bills with BPAY, ATO tax deductions, GPS drive logbook, wellness tracking, calendar with friend invites, savings goals and a customisable home screen. One iOS app. Launching June 2026."/>
+<link rel="canonical" href="https://allsortedapp.net/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://allsortedapp.net/"/>
+<meta property="og:title" content="All Sorted. Your life, finally under control."/>
+<meta property="og:description" content="Bills, BPAY, budgeting, ATO tax, GPS drive logbook, wellness and savings goals. All in one iOS app. Launching June 2026."/>
+<meta property="og:image" content="https://allsortedapp.net/hero.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--sand:#F5F0EA;--sand2:#EDE5DC;--sand3:#E5DDD4;--bark:#9A8572;--barkD:#59493C;--barkL:#CBB9A3;--ink:#2C1E14;--ink2:#59493C;--ink3:#9A8572;--white:#FDFAF7;--border:#D8CCBF;--green:#68988A;--gold:#CBB9A3;--gradTL:#59493C;--gradMid:#9A8572;--gradBR:#CBB9A3}
+html{scroll-behavior:smooth;background:#2A1E16}
+body{font-family:'DM Sans','SF Pro Display','Helvetica Neue',Arial,sans-serif;background:var(--sand);color:var(--ink);font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;background:transparent;border-bottom:1px solid transparent;transition:background 0.4s ease,border-color 0.4s ease}
+.nav.scrolled{background:rgba(247,243,238,0.96);border-color:rgba(221,213,203,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.nav-logo{font-size:12px;font-weight:400;letter-spacing:0.55em;text-transform:uppercase;text-decoration:none;padding-left:0.55em;transition:color 0.3s;color:var(--ink)}
+.nav.scrolled .nav-logo{color:var(--ink)}.nav:not(.scrolled) .nav-logo{color:var(--ink)}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-link{font-size:12px;font-weight:400;letter-spacing:0.04em;text-decoration:none;transition:color 0.2s;color:var(--ink2)}
+.nav.scrolled .nav-link{color:var(--ink2)}
+.nav-link:hover{color:var(--ink)}
+.nav.scrolled .nav-link:hover{color:var(--ink)}
+.nav-pill{font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;padding:8px 20px;border-radius:100px;text-decoration:none;transition:all 0.25s;color:var(--barkD);border:1.5px solid var(--bark)}
+.nav-pill:hover{background:var(--barkD);color:#fff}
+.nav.scrolled .nav-pill{color:var(--barkD);border-color:var(--bark)}
+.nav.scrolled .nav-pill:hover{background:var(--bark);color:#fff}
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:#F4F1EC;padding:100px 32px 72px}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(154,133,114,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(154,133,114,.07) 1px,transparent 1px);background-size:44px 44px;z-index:0;pointer-events:none}
+.hero::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:900px;height:700px;border-radius:50%;background:radial-gradient(ellipse,rgba(203,185,163,.22) 0%,transparent 65%);z-index:0;pointer-events:none}
+.hero-img{display:none}
+.hero-scrim{display:none}
+.hero-body{position:relative;z-index:1;width:100%;max-width:700px;margin:0 auto;padding:0 28px;text-align:center}
+.urgency-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(154,133,114,.1);border:1px solid rgba(154,133,114,.25);border-radius:100px;padding:7px 16px;margin-bottom:28px}
+.chip-dot{width:6px;height:6px;border-radius:50%;background:#90C8B0;animation:pulse 2.4s ease-in-out infinite;flex-shrink:0}
+.urgency-chip span{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--bark)}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(42px,6.5vw,70px);font-weight:400;line-height:1.05;color:var(--ink);letter-spacing:-0.02em;margin-bottom:20px}
+.hero-h1 em{font-style:italic;color:var(--bark)}
+.hero-sub{font-size:16px;font-weight:300;color:var(--ink3);line-height:1.8;margin-bottom:40px;max-width:520px;margin-left:auto;margin-right:auto}
+.hero-cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--barkD);color:#fff;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:0.02em;padding:16px 34px;border-radius:100px;text-decoration:none;transition:all 0.22s;box-shadow:0 8px 32px rgba(89,73,60,.28);margin-bottom:16px}
+.hero-cta-btn:hover{background:var(--ink);transform:translateY(-2px);box-shadow:0 16px 48px rgba(89,73,60,.36)}
+.hero-trust{display:flex;align-items:center;justify-content:center;gap:10px;font-size:12px;font-weight:300;color:var(--ink3);margin-top:4px;margin-bottom:60px}
+.trust-avatars{display:flex}
+.ta{width:28px;height:28px;border-radius:50%;background:var(--barkL);border:2px solid var(--white);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:var(--white);margin-left:-8px}
+.ta:first-child{margin-left:0}
+.trust-count{font-weight:700;color:#fff}
+.party-banner{background:#59493C;padding:15px 32px;text-align:center}
+.party-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.party-text{font-size:13px;font-weight:300;color:rgba(255,255,255,0.65);line-height:1.5}
+.party-text strong{font-weight:500;color:var(--white)}
+.party-tag{font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.75);padding:4px 12px;border-radius:100px;white-space:nowrap}
+.ticker{overflow:hidden;background:#59493C;padding:12px 0}
+.ticker-track{display:flex;white-space:nowrap;animation:scroll 36s linear infinite}
+.ticker-item{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.28);padding:0 40px}
+.ticker-item span{color:rgba(255,255,255,0.65)}
+.perks-hero{background:var(--sand2);border-top:1px solid var(--border);padding:96px 32px;text-align:center}
+.perk-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:32px 26px;text-align:left;transition:transform 0.2s,box-shadow 0.2s;position:relative;overflow:hidden}
+.perk-card:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(92,74,56,0.1)}
+.perk-card.gold-card{background:linear-gradient(135deg, #59493C 0%, #9A8572 50%, #CBB9A3 100%);border-color:#59493C}
+.perk-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--barkL),transparent)}
+.perk-card.gold-card::before{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.perk-icon{width:36px;height:36px;border-radius:10px;background:var(--sand2);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.perk-card.gold-card .perk-icon{background:rgba(255,255,255,0.1)}
+.perk-title{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:8px;line-height:1.3}
+.perk-card.gold-card .perk-title{color:var(--white)}
+.perk-desc{font-size:12.5px;font-weight:300;color:var(--ink2);line-height:1.75}
+.perk-card.gold-card .perk-desc{color:rgba(255,255,255,0.5)}
+.perk-lozenge{display:inline-block;font-size:8px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;background:var(--gold);color:var(--ink);padding:3px 10px;border-radius:100px;margin-bottom:12px}
+.screens-sec{padding:88px 0 72px;background:var(--sand);text-align:center;border-top:1px solid var(--border)}
+.carousel{position:relative;overflow:hidden}
+.carousel-track{display:flex;transition:transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);will-change:transform;touch-action:pan-y}
+.slide{min-width:100%;display:flex;flex-direction:column;align-items:center;padding:0 24px}
+.phone{background:#1A1A1C;border-radius:48px;padding:12px;box-shadow:0 28px 72px rgba(44,34,26,0.22);width:256px}
+.phone-inner{border-radius:38px;overflow:hidden;background:var(--sand)}
+.phone-inner img{width:100%;display:block}
+.slide-label{font-family:'Playfair Display',serif;font-size:15px;font-weight:400;font-style:italic;color:var(--bark);margin-top:22px}
+.slide-sub{font-size:12px;font-weight:300;color:var(--ink3);margin-top:4px}
+.carousel-btn{position:absolute;top:42%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--white);cursor:pointer;font-size:20px;color:var(--bark);display:flex;align-items:center;justify-content:center;z-index:5;line-height:1;transition:all 0.2s}
+.carousel-btn:hover{background:var(--bark);color:#fff;border-color:var(--bark)}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:24px}
+.dot{height:3px;border-radius:2px;border:none;cursor:pointer;padding:0;transition:all 0.3s}
+.problem{background:linear-gradient(135deg, #59493C 0%, #9A8572 50%, #CBB9A3 100%);padding:96px 32px}
+.problem-h{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,50px);font-weight:400;font-style:italic;color:rgba(255,255,255,0.88);text-align:center;line-height:1.25;max-width:680px;margin:0 auto 60px}
+.problem-h em{font-style:normal;color:var(--barkL)}
+.problem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);border-radius:16px;overflow:hidden;max-width:880px;margin:0 auto 60px}
+.stat-cell{background:var(--ink);padding:32px 22px}
+.stat-num{font-family:'Playfair Display',serif;font-size:40px;font-weight:400;color:#CBB9A3;line-height:1;margin-bottom:10px}
+.stat-txt{font-size:12px;font-weight:300;color:rgba(255,255,255,0.38);line-height:1.6}
+.section{padding:96px 32px}
+.wrap{max-width:1080px;margin:0 auto}
+.wrap-sm{max-width:680px;margin:0 auto}
+.eyebrow{font-size:9px;font-weight:500;letter-spacing:0.4em;text-transform:uppercase;color:var(--bark);text-align:center;margin-bottom:16px}
+.section-h{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,44px);font-weight:400;color:var(--ink);text-align:center;line-height:1.15;margin-bottom:14px;letter-spacing:-0.01em}
+.section-lead{font-size:15px;font-weight:300;color:var(--ink2);text-align:center;line-height:1.85;max-width:500px;margin:0 auto 64px}
+.features-bg{background:var(--sand2);border-top:1px solid var(--border)}
+.feat-list{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--white)}
+.feat-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
+.feat-cell{background:var(--white);padding:40px 36px;transition:background 0.2s}
+.feat-cell:hover{background:var(--sand)}.feat-row:last-child{border-bottom:none}
+.feat-cell.dark{background:var(--barkD)}
+.feat-cell.dark:hover{background:var(--ink)}
+.feat-num{font-family:'Playfair Display',serif;font-size:13px;font-weight:400;color:var(--ink3);margin-bottom:18px}
+.feat-cell.dark .feat-num{color:rgba(255,255,255,0.2)}
+.feat-tag{font-size:9px;font-weight:500;letter-spacing:0.3em;text-transform:uppercase;color:var(--bark);display:block;margin-bottom:10px}
+.feat-cell.dark .feat-tag{color:rgba(255,255,255,0.4)}
+.feat-h{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--ink);line-height:1.3;margin-bottom:10px}
+.feat-cell.dark .feat-h{color:var(--white)}
+.feat-p{font-size:13px;font-weight:300;color:var(--ink2);line-height:1.8}
+.feat-cell.dark .feat-p{color:rgba(255,255,255,0.45)}
+.numbers{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 32px;text-align:center}
+.num-grid{display:grid;grid-template-columns:repeat(3,1fr);max-width:620px;margin:44px auto;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.num-cell{padding:32px 20px;text-align:center;border-right:1px solid var(--border)}
+.num-cell:last-child{border-right:none}
+.num-val{font-family:'Playfair Display',serif;font-size:clamp(30px,5vw,46px);font-weight:400;color:var(--bark);line-height:1;margin-bottom:8px}
+.num-lbl{font-size:9px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink3)}
+.how{background:linear-gradient(135deg, #59493C 0%, #9A8572 50%, #CBB9A3 100%);padding:96px 32px;text-align:center}
+.how .eyebrow{color:rgba(255,255,255,0.3)}
+.how .section-h{color:var(--white)}
+.how .section-lead{color:rgba(255,255,255,0.4)}
+.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;max-width:940px;margin:0 auto 52px;text-align:left}
+.how-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:26px}
+.how-card h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:400;color:rgba(255,255,255,0.88);margin-bottom:8px;line-height:1.3}
+.how-card p{font-size:13px;font-weight:300;color:rgba(255,255,255,0.38);line-height:1.8}
+.testi-sec{background:var(--sand2);border-top:1px solid var(--border);padding:96px 32px}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;max-width:940px;margin:0 auto 52px}
+.testi-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:32px;position:relative}
+.testi-accent{position:absolute;top:0;left:28px;right:28px;height:2px;background:linear-gradient(90deg,transparent,var(--barkL),transparent)}
+.testi-stars{color:#B89060;font-size:12px;letter-spacing:3px;margin-bottom:16px}
+.testi-quote{font-family:'Playfair Display',serif;font-size:17px;font-weight:400;font-style:italic;color:var(--ink);line-height:1.6;margin-bottom:18px}
+.testi-who{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--bark)}
+.founder-strip{background:var(--sand2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:72px 32px}
+.founder-strip-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:84px 1fr;gap:36px;align-items:center}
+.founder-photo{width:84px;height:84px;border-radius:50%;object-fit:cover;object-position:center top;border:2px solid var(--border);flex-shrink:0}
+.founder-quote{font-family:'Playfair Display',serif;font-size:clamp(17px,2.5vw,23px);font-weight:400;font-style:italic;color:var(--ink);line-height:1.5;margin-bottom:12px}
+.founder-attr{font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--bark)}
+.founder-attr span{font-weight:300;text-transform:none;letter-spacing:0;color:var(--ink3);margin-left:4px}
+.founder-readmore{display:inline-block;margin-top:10px;font-size:12px;color:var(--bark);text-decoration:none;transition:color 0.2s}
+.founder-readmore:hover{color:var(--ink)}
+.faq-sec{background:var(--sand2);padding:96px 32px;border-top:1px solid var(--border)}
+.faq-list{max-width:640px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;padding:20px 0;background:none;border:none;cursor:pointer;font-family:inherit;font-size:14px;font-weight:400;color:var(--ink);text-align:left;gap:16px;line-height:1.45}
+.faq-icon{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.25s}
+.faq-icon span{font-size:16px;color:var(--bark);line-height:1;transition:transform 0.25s;display:block;pointer-events:none}
+.faq-item.open .faq-icon{background:var(--bark);border-color:var(--bark)}
+.faq-item.open .faq-icon span{transform:rotate(45deg);color:#fff}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.38s ease}
+.faq-a p{padding:0 0 20px;font-size:14px;font-weight:300;color:var(--ink2);line-height:1.85}
+.faq-item.open .faq-a{max-height:500px}
+.connect{background:var(--sand2);padding:76px 32px;text-align:center;border-top:1px solid var(--border)}
+.bottom{background:linear-gradient(135deg, #59493C 0%, #9A8572 50%, #CBB9A3 100%);padding:96px 32px;text-align:center}
+.bottom-h{font-family:'Playfair Display',serif;font-size:clamp(30px,6vw,56px);font-weight:400;font-style:italic;color:var(--white);line-height:1.15;margin-bottom:14px}
+.bottom-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,0.5);margin-bottom:40px;line-height:1.7;max-width:440px;margin-left:auto;margin-right:auto}
+.bottom-cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--barkD);font-family:inherit;font-size:13px;font-weight:500;padding:16px 34px;border-radius:100px;text-decoration:none;transition:all 0.22s;box-shadow:0 8px 32px rgba(0,0,0,0.2)}
+.bottom-cta-btn:hover{background:var(--sand);transform:translateY(-2px)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;border-radius:100px;transition:all 0.22s}
+.btn-dark{background:var(--ink);color:var(--white)}
+.btn-dark:hover{background:var(--barkD);transform:translateY(-2px)}
+.btn-light{background:var(--white);color:var(--ink)}
+.btn-light:hover{background:var(--sand);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.22)}
+.btn-outline:hover{background:rgba(255,255,255,0.08);color:#fff}
+footer{background:linear-gradient(135deg, #59493C 0%, #9A8572 50%, #CBB9A3 100%);padding:60px 40px 32px}
+.ft-grid{display:grid;grid-template-columns:1fr auto auto;gap:60px;max-width:960px;margin:0 auto 40px}
+.ft-tagline{font-size:12px;font-weight:300;color:rgba(255,255,255,0.28);line-height:1.7;margin-bottom:12px;max-width:220px}
+.ft-col h4{font-size:9px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:14px}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.ft-col ul li a{font-size:12px;font-weight:300;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.2s}
+.ft-col ul li a:hover{color:#fff}
+.ft-bottom{border-top:1px solid rgba(255,255,255,0.07);padding-top:24px;max-width:960px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.ft-copy{font-size:11px;color:rgba(255,255,255,0.2)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.theme-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:800px;margin:0 auto 52px}
+@media(max-width:768px){
+  .nav{padding:0 20px}
+  .nav-links .nav-link{display:none}
+  .problem-grid{grid-template-columns:1fr 1fr}
+  .feat-row{grid-template-columns:1fr}
+  .ft-grid{grid-template-columns:1fr;gap:32px}
+  .perk-row-2col{grid-template-columns:1fr !important}
+  .theme-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+}
+
+/* Icon gradient applied to dark sections */
+.problem{ background:linear-gradient(135deg, #59493C 0%, #9A8572 50%, #CBB9A3 100%) !important; }
+.how{ background:linear-gradient(135deg, #59493C 0%, #9A8572 50%, #CBB9A3 100%) !important; }
+.bottom{ background:linear-gradient(135deg, #59493C 0%, #9A8572 50%, #CBB9A3 100%) !important; }
+footer{ background:linear-gradient(135deg, #59493C 0%, #9A8572 50%, #CBB9A3 100%) !important; }
+.ticker{ background:#59493C !important; }
+.party-banner{ background:#59493C !important; }
+html{ background:#59493C; }
+.nav-pill:hover{ background:rgba(255,255,255,0.15); }
+.nav.scrolled .nav-pill:hover{ background:#59493C;color:#fff; }
+.chip-dot{ background:#CBB9A3; }
+.perk-card.gold-card{ background:linear-gradient(135deg, #59493C 0%, #9A8572 50%, #CBB9A3 100%);border-color:#59493C; }
+.feat-cell.dark{ background:linear-gradient(135deg, #59493C 0%, #9A8572 50%, #CBB9A3 100%); }
+.feat-cell.dark:hover{ background:linear-gradient(135deg,#4A3C31 0%,#8A7562 50%,#BBA98F 100%); }
+.btn-dark{ background:#59493C; }
+.btn-dark:hover{ background:#4A3C31; }
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-body>*{animation:fadeUp .65s ease both}
+.hero-body>*:nth-child(1){animation-delay:.1s}
+.hero-body>*:nth-child(2){animation-delay:.2s}
+.hero-body>*:nth-child(3){animation-delay:.3s}
+.hero-body>*:nth-child(4){animation-delay:.4s}
+.hero-body>*:nth-child(5){animation-delay:.5s}
+.hero>div:last-child{animation:fadeUp .75s ease .65s both}
+</style>
+</head>
+<body id="top">
+
+<nav class="nav" id="mainNav">
+  <a href="#top" class="nav-logo">ALL SORTED</a>
+  <div class="nav-links">
+    <a href="#features" class="nav-link">Features</a>
+    <a href="#wellness" class="nav-link">Wellness</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+    <a href="login.html" class="nav-link">Log in</a>
+    <a href="waitlist.html" class="nav-pill">Join free</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-scrim"></div>
+  <div class="hero-body">
+
+    <h1 class="hero-h1">One app.<br><em>Every part of life.</em></h1>
+    <p class="hero-sub">Bills, BPAY, ATO deductions, GPS drive logbook, calendar, wellness, to&nbsp;dos, grocery list and alarm. All connected. Share lists with your partner, team or family.</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:20px">
+      <a href="waitlist.html" class="hero-cta-btn" style="margin-bottom:0">
+        Join the waitlist free
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#features" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--ink2);font-family:inherit;font-size:13px;font-weight:400;padding:16px 24px;border-radius:100px;text-decoration:none;border:1.5px solid var(--border);transition:all .22s" onmouseover="this.style.borderColor='var(--bark)';this.style.color='var(--barkD)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--ink2)'">See what&rsquo;s inside</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-avatars"><div class="ta">R</div><div class="ta">J</div><div class="ta">S</div><div class="ta">M</div><div class="ta">+</div></div>
+      <span><span id="waitlistCount" class="trust-count" style="font-weight:600;color:var(--ink)">23</span> people already have their spot</span>
+    </div>
+  </div>
+
+  <!-- UI MOCKUP — Kinso-style app preview -->
+  <div style="position:relative;z-index:1;width:100%;max-width:880px;margin:0 auto;padding:0 20px">
+    <div style="position:relative">
+      <!-- Floating tax card -->
+      <div style="position:absolute;bottom:-16px;left:0;background:#fff;border-radius:16px;box-shadow:0 16px 48px rgba(44,30,20,.13);border:1px solid rgba(216,204,191,.6);padding:14px 18px;width:176px;z-index:10;display:none" id="floatCard1">
+        <div style="font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--bark);margin-bottom:6px">Tax saved this year</div>
+        <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:var(--barkD);line-height:1;margin-bottom:2px">$2,640</div>
+        <div style="font-size:9px;color:var(--ink3);font-weight:300">47 trips &middot; 12 receipts</div>
+      </div>
+      <!-- Floating morning card -->
+      <div style="position:absolute;top:-12px;right:0;background:var(--barkD);border-radius:14px;box-shadow:0 12px 36px rgba(89,73,60,.28);padding:12px 16px;width:158px;z-index:10;display:none" id="floatCard2">
+        <div style="font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px">Morning briefing</div>
+        <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:#fff;margin-bottom:2px">7:00 AM</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:300">Bills &middot; Schedule &middot; Quote</div>
+      </div>
+
+      <div style="background:#fff;border-radius:22px;box-shadow:0 32px 80px rgba(44,30,20,.11),0 8px 24px rgba(44,30,20,.06);border:1px solid rgba(216,204,191,.5);overflow:hidden">
+        <!-- Mockup top bar -->
+        <div style="background:#F4F1EC;border-bottom:1px solid rgba(216,204,191,.6);padding:14px 20px;display:flex;align-items:center;gap:12px">
+          <div style="display:flex;gap:6px">
+            <div style="width:10px;height:10px;border-radius:50%;background:#FF5F57"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#FEBC2E"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#28C840"></div>
+          </div>
+          <div style="flex:1;text-align:center;font-size:11px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--bark)">ALL SORTED</div>
+          <div style="width:28px;height:28px;border-radius:8px;background:rgba(154,133,114,.1);border:1px solid rgba(154,133,114,.2);display:flex;align-items:center;justify-content:center">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--bark)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 1 1 4.93 19.07"/></svg>
+          </div>
+        </div>
+        <!-- Three column mockup body -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr">
+          <!-- Calendar -->
+          <div style="padding:20px;border-right:1px solid rgba(216,204,191,.5)">
+            <div style="font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--bark);margin-bottom:12px">Calendar</div>
+            <div style="display:flex;gap:4px;margin-bottom:14px">
+              <div style="flex:1;text-align:center;padding:7px 2px;border-radius:9px;border:1px solid transparent"><div style="font-size:6px;font-weight:600;letter-spacing:.08em;color:var(--ink3);text-transform:uppercase;margin-bottom:3px">MON</div><div style="font-size:13px;font-weight:400;color:var(--ink)">19</div><div style="width:4px;height:4px;border-radius:50%;margin:3px auto 0;background:transparent"></div></div>
+              <div style="flex:1;text-align:center;padding:7px 2px;border-radius:9px;border:1px solid transparent"><div style="font-size:6px;font-weight:600;letter-spacing:.08em;color:var(--ink3);text-transform:uppercase;margin-bottom:3px">TUE</div><div style="font-size:13px;font-weight:400;color:var(--ink)">20</div><div style="width:4px;height:4px;border-radius:50%;margin:3px auto 0;background:var(--barkL)"></div></div>
+              <div style="flex:1;text-align:center;padding:7px 2px;border-radius:9px;background:var(--barkD);border:1px solid var(--barkD)"><div style="font-size:6px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:3px">WED</div><div style="font-size:13px;font-weight:600;color:#fff">21</div><div style="width:4px;height:4px;border-radius:50%;margin:3px auto 0;background:rgba(255,255,255,.45)"></div></div>
+              <div style="flex:1;text-align:center;padding:7px 2px;border-radius:9px;border:1px solid transparent"><div style="font-size:6px;font-weight:600;letter-spacing:.08em;color:var(--ink3);text-transform:uppercase;margin-bottom:3px">THU</div><div style="font-size:13px;font-weight:400;color:var(--ink)">22</div><div style="width:4px;height:4px;border-radius:50%;margin:3px auto 0;background:var(--barkL)"></div></div>
+              <div style="flex:1;text-align:center;padding:7px 2px;border-radius:9px;border:1.5px solid var(--bark)"><div style="font-size:6px;font-weight:600;letter-spacing:.08em;color:var(--bark);text-transform:uppercase;margin-bottom:3px">FRI</div><div style="font-size:13px;font-weight:400;color:var(--barkD)">23</div><div style="width:4px;height:4px;border-radius:50%;margin:3px auto 0;background:transparent"></div></div>
+              <div style="flex:1;text-align:center;padding:7px 2px;border-radius:9px;border:1px solid transparent"><div style="font-size:6px;font-weight:600;letter-spacing:.08em;color:var(--ink3);text-transform:uppercase;margin-bottom:3px">SAT</div><div style="font-size:13px;font-weight:400;color:var(--ink)">24</div><div style="width:4px;height:4px;border-radius:50%;margin:3px auto 0;background:transparent"></div></div>
+              <div style="flex:1;text-align:center;padding:7px 2px;border-radius:9px;border:1px solid transparent"><div style="font-size:6px;font-weight:600;letter-spacing:.08em;color:var(--ink3);text-transform:uppercase;margin-bottom:3px">SUN</div><div style="font-size:13px;font-weight:400;color:var(--ink)">25</div><div style="width:4px;height:4px;border-radius:50%;margin:3px auto 0;background:transparent"></div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:7px;padding:7px 9px;border-radius:9px;background:rgba(245,240,234,.8);border:1px solid rgba(216,204,191,.4);margin-bottom:5px"><div style="width:7px;height:7px;border-radius:50%;background:#90A8C0;flex-shrink:0"></div><div><div style="font-size:10px;font-weight:500;color:var(--ink)">Client meeting</div><div style="font-size:8px;color:var(--ink3)">9:00 AM</div></div></div>
+            <div style="display:flex;align-items:center;gap:7px;padding:7px 9px;border-radius:9px;background:rgba(245,240,234,.8);border:1px solid rgba(216,204,191,.4);margin-bottom:5px"><div style="width:7px;height:7px;border-radius:50%;background:#A8C4B8;flex-shrink:0"></div><div><div style="font-size:10px;font-weight:500;color:var(--ink)">Fresha &mdash; Hair</div><div style="font-size:8px;color:var(--ink3)">2:30 PM</div></div></div>
+            <div style="display:flex;align-items:center;gap:7px;padding:7px 9px;border-radius:9px;background:rgba(245,240,234,.8);border:1px solid rgba(216,204,191,.4)"><div style="width:7px;height:7px;border-radius:50%;background:#C0A870;flex-shrink:0"></div><div><div style="font-size:10px;font-weight:500;color:var(--ink)">Dinner with Jess</div><div style="font-size:8px;color:var(--ink3)">7:00 PM</div></div></div>
+            <div style="display:flex;align-items:center;gap:7px;padding:6px 9px;border-radius:9px;background:rgba(154,133,114,.07);border:1px solid rgba(154,133,114,.18);margin-top:8px">
+              <div style="display:flex"><div style="width:16px;height:16px;border-radius:50%;background:var(--barkL);border:1.5px solid #fff;font-size:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">R</div><div style="width:16px;height:16px;border-radius:50%;background:#A8C4B8;border:1.5px solid #fff;font-size:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;margin-left:-5px">J</div></div>
+              <div style="font-size:9px;color:var(--ink2);flex:1">Shared with Jess</div>
+              <div style="font-size:8px;font-weight:600;color:var(--bark);background:rgba(154,133,114,.12);padding:2px 6px;border-radius:20px">Shared</div>
+            </div>
+          </div>
+          <!-- Daily: To Dos + Grocery -->
+          <div style="padding:20px;border-right:1px solid rgba(216,204,191,.5)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+              <div style="font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--bark)">To Do</div>
+              <div style="font-size:8px;font-weight:600;color:var(--bark);background:rgba(154,133,114,.1);padding:2px 7px;border-radius:20px">Share</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(216,204,191,.4)"><div style="width:16px;height:16px;border-radius:50%;background:var(--bark);border:1.5px solid var(--bark);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="7" height="5" viewBox="0 0 10 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l3 3 5-6"/></svg></div><div style="font-size:10px;color:var(--ink3);text-decoration:line-through">Call accountant</div></div>
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(216,204,191,.4)"><div style="width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(216,204,191,.8);flex-shrink:0"></div><div style="font-size:10px;color:var(--ink)">Submit expense report</div></div>
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(216,204,191,.4)"><div style="width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(216,204,191,.8);flex-shrink:0"></div><div style="font-size:10px;color:var(--ink)">Book car service</div></div>
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 0"><div style="width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(216,204,191,.8);flex-shrink:0"></div><div style="font-size:10px;color:var(--ink)">Renew insurance</div></div>
+            <div style="margin-top:14px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+                <div style="font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--bark)">Grocery</div>
+                <div style="font-size:8px;font-weight:600;color:var(--bark);background:rgba(154,133,114,.1);padding:2px 7px;border-radius:20px">Share</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(216,204,191,.4)"><div style="width:16px;height:16px;border-radius:50%;background:var(--bark);border:1.5px solid var(--bark);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="7" height="5" viewBox="0 0 10 8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l3 3 5-6"/></svg></div><div style="font-size:10px;color:var(--ink3);text-decoration:line-through">Milk</div></div>
+              <div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(216,204,191,.4)"><div style="width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(216,204,191,.8);flex-shrink:0"></div><div style="font-size:10px;color:var(--ink)">Chicken breast</div></div>
+              <div style="display:flex;align-items:center;gap:8px;padding:5px 0"><div style="width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(216,204,191,.8);flex-shrink:0"></div><div style="font-size:10px;color:var(--ink)">Avocado &times; 3</div></div>
+            </div>
+          </div>
+          <!-- Bills + Drive -->
+          <div style="padding:20px">
+            <div style="font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--bark);margin-bottom:12px">Bills &amp; Drive</div>
+            <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(216,204,191,.4)"><div style="width:26px;height:26px;border-radius:7px;background:rgba(144,168,192,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#90A8C0" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/></svg></div><div style="flex:1;min-width:0"><div style="font-size:10px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Electricity</div><div style="font-size:8px;color:var(--ink3)">Due 28 Apr</div></div><div style="font-size:10px;font-weight:600;color:var(--barkD)">$186</div></div>
+            <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(216,204,191,.4)"><div style="width:26px;height:26px;border-radius:7px;background:rgba(168,196,184,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#A8C4B8" stroke-width="2" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div style="flex:1;min-width:0"><div style="font-size:10px;font-weight:500;color:var(--ink)">Netflix</div><div style="font-size:8px;color:var(--ink3)">Due 2 May</div></div><div style="font-size:10px;font-weight:600;color:var(--barkD)">$22.99</div></div>
+            <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(216,204,191,.4)"><div style="width:26px;height:26px;border-radius:7px;background:rgba(192,168,112,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#C0A870" stroke-width="2" stroke-linecap="round"><path d="M19 17H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h14l3 4-3 6z"/></svg></div><div style="flex:1;min-width:0"><div style="font-size:10px;font-weight:500;color:var(--ink)">Car insurance</div><div style="font-size:8px;color:var(--ink3)">Due 15 May</div></div><div style="font-size:10px;font-weight:600;color:var(--barkD)">$94</div></div>
+            <div style="margin-top:10px;padding:10px;background:rgba(154,133,114,.07);border-radius:10px;border:1px solid rgba(154,133,114,.15)">
+              <div style="font-size:7px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--bark);margin-bottom:5px">Last trip</div>
+              <div style="font-size:10px;font-weight:500;color:var(--ink);margin-bottom:2px">Client visit &mdash; 23.4 km</div>
+              <div style="font-size:9px;color:var(--ink3);font-weight:300">$20.59 &rarr; ATO deduction</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="party-banner">
+  <div class="party-inner">
+    <p class="party-text"><strong>Every waitlist member gets a personal invite to our exclusive launch party.</strong> Join the list to secure yours.</p>
+    <div class="party-tag">Members only</div>
+  </div>
+</div>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">iOS App <span>Coming June 2026</span></span>
+    <span class="ticker-item">Share To&#8209;Dos <span>With Partner &amp; Team</span></span>
+    <span class="ticker-item">Share Grocery List <span>With Family</span></span>
+    <span class="ticker-item">Alarm + Spotify <span>Wake Up Your Way</span></span>
+    <span class="ticker-item">ATO Deductions <span>Auto-logged</span></span>
+    <span class="ticker-item">GPS Drive Logbook <span>$0.88 per km</span></span>
+    <span class="ticker-item">BPAY <span>Pay bills in the app</span></span>
+    <span class="ticker-item">Booking Calendar Sync <span>Fresha, Vagaro &amp; More</span></span>
+    <span class="ticker-item">Calendar Invites <span>Share with friends</span></span>
+    <span class="ticker-item">Health <span>Steps and Sleep synced</span></span>
+    <span class="ticker-item">Morning Reminder <span>7am Daily Briefing</span></span>
+    <span class="ticker-item">Four Colour Themes <span>Make it yours</span></span>
+    <span class="ticker-item">Launch Party <span>Waitlist only</span></span>
+    <span class="ticker-item">Founding Spots <span>Limited to 200</span></span>
+    <span class="ticker-item">Free to Join <span>No card needed</span></span>
+    <span class="ticker-item">iOS App <span>Coming June 2026</span></span>
+    <span class="ticker-item">Share To&#8209;Dos <span>With Partner &amp; Team</span></span>
+    <span class="ticker-item">Share Grocery List <span>With Family</span></span>
+    <span class="ticker-item">Alarm + Spotify <span>Wake Up Your Way</span></span>
+    <span class="ticker-item">ATO Deductions <span>Auto-logged</span></span>
+    <span class="ticker-item">GPS Drive Logbook <span>$0.88 per km</span></span>
+    <span class="ticker-item">BPAY <span>Pay bills in the app</span></span>
+    <span class="ticker-item">Booking Calendar Sync <span>Fresha, Vagaro &amp; More</span></span>
+    <span class="ticker-item">Calendar Invites <span>Share with friends</span></span>
+    <span class="ticker-item">Health <span>Steps and Sleep synced</span></span>
+    <span class="ticker-item">Morning Reminder <span>7am Daily Briefing</span></span>
+    <span class="ticker-item">Four Colour Themes <span>Make it yours</span></span>
+    <span class="ticker-item">Launch Party <span>Waitlist only</span></span>
+    <span class="ticker-item">Founding Spots <span>Limited to 200</span></span>
+    <span class="ticker-item">Free to Join <span>No card needed</span></span>
+  </div>
+</div>
+
+<section class="perks-hero">
+  <div style="max-width:620px;margin:0 auto 52px">
+    <p class="eyebrow">Why join now</p>
+    <h2 class="section-h" style="margin-bottom:16px">200 founding spots.<br><em style="font-style:italic;color:var(--bark)">Locked in forever.</em></h2>
+    <p style="font-size:15px;font-weight:300;color:var(--ink2);line-height:1.85;text-align:center">The first 200 people to join All Sorted become founding members. The benefits are permanent, exclusive and cannot be earned any other way. Free to join and takes 30 seconds.</p>
+  </div>
+  <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(92,74,56,0.06);border:1.5px solid var(--border);border-radius:100px;padding:12px 22px;margin-bottom:48px">
+    <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#D4A898;animation:pulse 2s ease-in-out infinite;flex-shrink:0"></span>
+    <span style="font-size:13px;font-weight:300;color:var(--ink2)"><b style="font-weight:600;color:var(--ink)"><span id="spotsLeftPerks">177</span> of 200</b> founding spots still available</span>
+  </div>
+  <div style="max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:12px" class="reveal">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px" class="perk-row-2col">
+      <div class="perk-card" style="display:flex;align-items:flex-start;gap:16px">
+        <div class="perk-icon" style="flex-shrink:0;margin-bottom:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--bark)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg></div>
+        <div><div class="perk-title">Early access on launch day</div><div class="perk-desc">You get the app in June 2026 before it hits the App Store. In while the rest of the world is still waiting.</div></div>
+      </div>
+      <div class="perk-card" style="display:flex;align-items:flex-start;gap:16px">
+        <div class="perk-icon" style="flex-shrink:0;margin-bottom:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--bark)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+        <div><div class="perk-title">A founding badge no one else can ever get</div><div class="perk-desc">Permanently on your profile. Cannot be earned, bought or unlocked later. You were here from the start or you were not.</div></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px" class="perk-row-2col">
+      <div class="perk-card" style="display:flex;align-items:flex-start;gap:16px">
+        <div class="perk-icon" style="flex-shrink:0;margin-bottom:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--bark)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div><div class="perk-title">An invite to the launch party</div><div class="perk-desc">A personal invitation to the All Sorted launch event. An actual invite, to you, to be in the room on night one.</div></div>
+      </div>
+      <div class="perk-card" style="display:flex;align-items:flex-start;gap:16px">
+        <div class="perk-icon" style="flex-shrink:0;margin-bottom:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--bark)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div><div class="perk-title">Your voice shapes what gets built</div><div class="perk-desc">Roxanne reads every message from founding members personally. Your feedback goes straight to the top.</div></div>
+      </div>
+    </div>
+    <div class="perk-card gold-card" style="display:flex;align-items:flex-start;gap:20px;text-align:left">
+      <div class="perk-icon" style="flex-shrink:0;margin-bottom:0;width:44px;height:44px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+          <div class="perk-title" style="margin-bottom:0">Automatic affiliate status from day one</div>
+          <span class="perk-lozenge" style="margin-bottom:0;flex-shrink:0">Earn money</span>
+        </div>
+        <div class="perk-desc">No application, no approval. Every founding member becomes an affiliate automatically on launch day. Share All Sorted and earn a referral bonus every time someone subscribes. This is available to founding members only.</div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal reveal-delay-1" style="text-align:center;margin-top:52px">
+    <a href="waitlist.html" class="btn btn-dark" style="font-size:12px;padding:15px 34px">Join free and secure your spot</a>
+    <p style="font-size:11px;color:var(--ink3);margin-top:14px">Free to join &middot; No credit card &middot; <span id="spotsLeftPerks2">177</span> spots remaining</p>
+  </div>
+</section>
+
+
+<section style="background:var(--white);border-top:1px solid var(--border);padding:88px 32px">
+  <div style="max-width:1080px;margin:0 auto">
+    <p class="eyebrow">What&rsquo;s new</p>
+    <h2 class="section-h" style="margin-bottom:14px">Built around<br><em style="font-style:italic;color:var(--bark)">how you actually live.</em></h2>
+    <p style="font-size:15px;font-weight:300;color:var(--ink2);text-align:center;line-height:1.85;margin-bottom:52px;max-width:500px;margin-left:auto;margin-right:auto">Six features designed around the real moments that matter. Each one solves something you have been doing the hard way until now.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px" class="reveal">
+      <div style="background:var(--sand2);border:1px solid var(--border);border-radius:18px;padding:24px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 40px rgba(89,73,60,.1)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--barkL),transparent)"></div>
+        <div style="font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;background:var(--barkD);color:#fff;padding:3px 10px;border-radius:100px;display:inline-block;margin-bottom:12px">New</div>
+        <div style="margin-bottom:14px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--bark)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/><path d="M19 12l2 2-2 2"/></svg></div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.3">Share your to&nbsp;do list</div>
+        <div style="font-size:12px;font-weight:300;color:var(--ink2);line-height:1.7">One tap sends your list to your partner, assistant or family via message, email or WhatsApp.</div>
+      </div>
+      <div style="background:var(--sand2);border:1px solid var(--border);border-radius:18px;padding:24px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 40px rgba(89,73,60,.1)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--barkL),transparent)"></div>
+        <div style="font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;background:var(--barkD);color:#fff;padding:3px 10px;border-radius:100px;display:inline-block;margin-bottom:12px">New</div>
+        <div style="margin-bottom:14px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--bark)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/><path d="M17 14l2 2-2 2"/></svg></div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.3">Share your grocery list</div>
+        <div style="font-size:12px;font-weight:300;color:var(--ink2);line-height:1.7">Send your grocery list to whoever is doing the shopping. They get every item, ready to tick off.</div>
+      </div>
+      <div style="background:var(--sand2);border:1px solid var(--border);border-radius:18px;padding:24px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 40px rgba(89,73,60,.1)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--barkL),transparent)"></div>
+        <div style="font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;background:var(--barkD);color:#fff;padding:3px 10px;border-radius:100px;display:inline-block;margin-bottom:12px">New</div>
+        <div style="margin-bottom:14px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--bark)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/><path d="M14 8h1v5"/><circle cx="14" cy="13" r="1"/></svg></div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.3">Alarm with Spotify</div>
+        <div style="font-size:12px;font-weight:300;color:var(--ink2);line-height:1.7">Set your alarm and choose a Spotify playlist to open when it fires. Wake up to your music.</div>
+      </div>
+      <div style="background:var(--sand2);border:1px solid var(--border);border-radius:18px;padding:24px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 40px rgba(89,73,60,.1)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--barkL),transparent)"></div>
+        <div style="font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;background:var(--barkD);color:#fff;padding:3px 10px;border-radius:100px;display:inline-block;margin-bottom:12px">New</div>
+        <div style="margin-bottom:14px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--bark)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/><path d="M19 16l2 2-2 2"/></svg></div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.3">Booking calendar sync</div>
+        <div style="font-size:12px;font-weight:300;color:var(--ink2);line-height:1.7">Connect Fresha, Vagaro, Mindbody or Timely. Client appointments appear in your calendar automatically.</div>
+      </div>
+      <div style="background:var(--sand2);border:1px solid var(--border);border-radius:18px;padding:24px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 40px rgba(89,73,60,.1)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--barkL),transparent)"></div>
+        <div style="font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;background:var(--barkD);color:#fff;padding:3px 10px;border-radius:100px;display:inline-block;margin-bottom:12px">New</div>
+        <div style="margin-bottom:14px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--bark)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg></div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.3">Send any task instantly</div>
+        <div style="font-size:12px;font-weight:300;color:var(--ink2);line-height:1.7">When adding a task, tap Send / Share to fire it to a partner or team member right from the modal.</div>
+      </div>
+      <div style="background:var(--sand2);border:1px solid var(--border);border-radius:18px;padding:24px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 40px rgba(89,73,60,.1)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--barkL),transparent)"></div>
+        <div style="font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;background:var(--barkD);color:#fff;padding:3px 10px;border-radius:100px;display:inline-block;margin-bottom:12px">New</div>
+        <div style="margin-bottom:14px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--bark)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M7 15l-2 2 2 2"/><path d="M17 15l2 2-2 2"/></svg></div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.3">Calendar arrows all views</div>
+        <div style="font-size:12px;font-weight:300;color:var(--ink2);line-height:1.7">Strip, week and month all have matching navigation arrows. Consistent and clean throughout.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="screens-sec">
+  <div class="wrap-sm" style="padding:0 24px;margin-bottom:44px">
+    <p class="eyebrow">Sneak peek</p>
+    <h2 class="section-h">Calm. Clean. In control.</h2>
+    <p class="section-lead" style="margin-bottom:0">Real screens from the app. Every screen is designed to feel as good as it works. Calm, warm and built for every day.</p>
+  </div>
+  <div class="carousel">
+    <div class="carousel-track" id="track">
+      <div class="slide">
+        <div class="phone"><div class="phone-inner"><img src="IMG_2268.PNG" alt="All Sorted Home screen"/></div></div>
+        <p class="slide-label">Home</p><p class="slide-sub">Your life at a glance, your way</p>
+      </div>
+      <div class="slide">
+        <div class="phone"><div class="phone-inner"><img src="IMG_2269.PNG" alt="All Sorted Drive screen"/></div></div>
+        <p class="slide-label">Drive</p><p class="slide-sub">GPS logbook. Every km logged to ATO.</p>
+      </div>
+      <div class="slide">
+        <div class="phone"><div class="phone-inner"><img src="IMG_2270.PNG" alt="All Sorted Life screen"/></div></div>
+        <p class="slide-label">Life</p><p class="slide-sub">Health, Wellness and Daily in three tabs</p>
+      </div>
+    </div>
+    <button class="carousel-btn" style="left:16px" onclick="prevSlide()">&#8249;</button>
+    <button class="carousel-btn" style="right:16px" onclick="nextSlide()">&#8250;</button>
+  </div>
+  <div class="dots">
+    <button class="dot" id="dot0" style="width:28px;background:var(--bark)" onclick="goTo(0)"></button>
+    <button class="dot" id="dot1" style="width:8px;background:var(--border)" onclick="goTo(1)"></button>
+    <button class="dot" id="dot2" style="width:8px;background:var(--border)" onclick="goTo(2)"></button>
+  </div>
+</section>
+
+<section class="problem" aria-label="Why Australians need All Sorted">
+  <div class="wrap">
+    <p class="problem-h">You already know something<br>has to <em>change.</em></p>
+    <div class="problem-grid reveal">
+      <div class="stat-cell"><div class="stat-num">$2,800</div><div class="stat-txt">The average Australian leaves this in missed tax deductions every single year</div></div>
+      <div class="stat-cell"><div class="stat-num">6+</div><div class="stat-txt">Apps most people juggle just to stay on top of money and life</div></div>
+      <div class="stat-cell"><div class="stat-num">47%</div><div class="stat-txt">Of Australians say finances make them feel overwhelmed and behind</div></div>
+      <div class="stat-cell"><div class="stat-num">1</div><div class="stat-txt">App that quietly handles all of it, so you do not have to</div></div>
+    </div>
+    <div style="text-align:center"><a href="waitlist.html" class="btn btn-light">Get sorted, it&rsquo;s free to join</a></div>
+  </div>
+</section>
+
+<section class="section features-bg" id="features">
+  <div class="wrap">
+    <p class="eyebrow">What&rsquo;s inside</p>
+    <h2 class="section-h">Seven tabs. One sorted life.</h2>
+    <p class="section-lead">Every feature is connected. A bill flagged links to your ATO. A trip ends and the deduction appears instantly. Log a to&nbsp;do and it lands in your calendar. One app, everything updates.</p>
+    <div class="feat-list reveal reveal-delay-2">
+      <div class="feat-row">
+        <div class="feat-cell"><div class="feat-num">01</div><span class="feat-tag">Wallet</span><div class="feat-h">Everything you carry, digital</div><p class="feat-p">Gift cards with balances. Memberships. Discount codes. Loyalty numbers. Passwords stored on your device only, never uploaded to any server. Everything you reach for, always there.</p></div>
+        <div class="feat-cell dark"><div class="feat-num">02</div><span class="feat-tag">Bills</span><div class="feat-h">Pay with BPAY, never miss a payment</div><p class="feat-p">Add your biller code and reference number for any bill and pay via BPAY directly from the app. Categories include Car, Invoice, Insurance, Subscriptions and more. Due date reminders. ATO flagging in one tap.</p></div>
+      </div>
+      <div class="feat-row">
+        <div class="feat-cell"><div class="feat-num">03</div><span class="feat-tag">Money</span><div class="feat-h">Receipts, tax deductions and budgeting</div><p class="feat-p">Scan receipts with your camera. Work expenses automatically flagged as ATO deductions. Your full receipt and tax history in one place. Export everything at tax time in seconds.</p></div>
+        <div class="feat-cell"><div class="feat-num">04</div><span class="feat-tag">Drive</span><div class="feat-h">GPS logbook. Deduction added instantly.</div><p class="feat-p">Auto-detect starts your trip when you move. Stop, and $0.88/km lands in your ATO tab. No manual entry. Ever. Your logbook is always complete for tax time.</p></div>
+      </div>
+      <div class="feat-row">
+        <div class="feat-cell dark"><div class="feat-num">05</div><span class="feat-tag">Calendar</span><div class="feat-h">Calendar with invites, booking sync &amp; arrows</div><p class="feat-p">Strip, week and month views with matching navigation arrows. Add events with eight colours. Invite friends directly in-app. Connect Fresha, Vagaro, Mindbody or Timely so client appointments sync automatically.</p></div>
+        <div class="feat-cell"><div class="feat-num">06</div><span class="feat-tag">Life</span><div class="feat-h">To dos, grocery, alarm &amp; wellness</div><p class="feat-p">Health rings for water, steps and sleep. Wellness for mood, reflect, meditate and manifest. Daily has your to&nbsp;do list (shareable), grocery list (shareable), alarm with Spotify and focus timer.</p></div>
+      </div>
+      <div class="feat-row">
+        <div class="feat-cell"><div class="feat-num">07</div><span class="feat-tag">Home</span><div class="feat-h">Your life at a glance, your way</div><p class="feat-p">Customise your home screen with widgets. Tick off a task and it stays crossed out all day so you can see everything you got done. Four colour themes. Bills, calendar, wellness and more. Your layout, your way.</p></div>
+        <div class="feat-cell dark"><div class="feat-num">+</div><span class="feat-tag">Morning briefing</span><div class="feat-h">A PA who knows your finances</div><p class="feat-p">Every morning at 7am, All Sorted sends a personalised notification with bills due today, your schedule and a daily quote. Start every day knowing exactly where you stand.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--sand2);border-top:1px solid var(--border);padding:96px 32px">
+  <div class="wrap">
+    <div style="text-align:center;max-width:580px;margin:0 auto 56px">
+      <p class="eyebrow">Make it yours</p>
+      <h2 class="section-h">Four colour themes.<br><em style="font-style:italic;color:var(--bark)">Your style, always.</em></h2>
+      <p style="font-size:15px;font-weight:300;color:var(--ink2);line-height:1.85">All Sorted comes with four built-in colour themes. The backgrounds always stay warm and calm. Only the accent colours shift. Switch between them any time in Settings.</p>
+    </div>
+    <div class="theme-grid reveal">
+      <div style="border-radius:20px;overflow:hidden;border:1px solid var(--border);box-shadow:0 4px 20px rgba(44,34,26,0.06)">
+        <div style="height:72px;background:#7A6858"></div>
+        <div style="background:var(--white);padding:18px 16px">
+          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:4px">Classic</div>
+          <div style="font-size:11px;font-weight:300;color:var(--ink2);margin-bottom:12px">Warm taupe. The original.</div>
+          <div style="display:flex;gap:5px">
+            <div style="width:18px;height:18px;border-radius:50%;background:#7A6858;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.15)"></div>
+            <div style="width:18px;height:18px;border-radius:50%;background:#9A8870;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.15)"></div>
+            <div style="width:18px;height:18px;border-radius:50%;background:#C4B5A0;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.15)"></div>
+          </div>
+        </div>
+      </div>
+      <div style="border-radius:20px;overflow:hidden;border:1px solid var(--border);box-shadow:0 4px 20px rgba(44,34,26,0.06)">
+        <div style="height:72px;background:#A07878"></div>
+        <div style="background:var(--white);padding:18px 16px">
+          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:4px">Blush</div>
+          <div style="font-size:11px;font-weight:300;color:var(--ink2);margin-bottom:12px">Barely-there rose.</div>
+          <div style="display:flex;gap:5px">
+            <div style="width:18px;height:18px;border-radius:50%;background:#A07878;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.15)"></div>
+            <div style="width:18px;height:18px;border-radius:50%;background:#B89090;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.15)"></div>
+            <div style="width:18px;height:18px;border-radius:50%;background:#DCC8C8;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.15)"></div>
+          </div>
+        </div>
+      </div>
+      <div style="border-radius:20px;overflow:hidden;border:1px solid var(--border);box-shadow:0 4px 20px rgba(44,34,26,0.06)">
+        <div style="height:72px;background:#607090"></div>
+        <div style="background:var(--white);padding:18px 16px">
+          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:4px">Denim</div>
+          <div style="font-size:11px;font-weight:300;color:var(--ink2);margin-bottom:12px">Soft slate blue.</div>
+          <div style="display:flex;gap:5px">
+            <div style="width:18px;height:18px;border-radius:50%;background:#607090;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.15)"></div>
+            <div style="width:18px;height:18px;border-radius:50%;background:#7888A8;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.15)"></div>
+            <div style="width:18px;height:18px;border-radius:50%;background:#B8C8D8;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.15)"></div>
+          </div>
+        </div>
+      </div>
+      <div style="border-radius:20px;overflow:hidden;border:1px solid var(--border);box-shadow:0 4px 20px rgba(44,34,26,0.06)">
+        <div style="height:72px;background:#607050"></div>
+        <div style="background:var(--white);padding:18px 16px">
+          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:4px">Sage</div>
+          <div style="font-size:11px;font-weight:300;color:var(--ink2);margin-bottom:12px">Muted sage green.</div>
+          <div style="display:flex;gap:5px">
+            <div style="width:18px;height:18px;border-radius:50%;background:#607050;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.15)"></div>
+            <div style="width:18px;height:18px;border-radius:50%;background:#809070;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.15)"></div>
+            <div style="width:18px;height:18px;border-radius:50%;background:#B8C8A8;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.15)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:16px;padding:20px;max-width:680px;margin:0 auto;text-align:center">
+      <p style="font-size:13px;font-weight:300;color:var(--ink2);line-height:1.8">Backgrounds always stay warm cream. Only the buttons, headers and accents shift. Switch between themes in Settings any time. Your data and layout stay exactly the same.</p>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <p class="eyebrow">The detail</p>
+  <h2 class="section-h">Everything connected. Nothing missed.</h2>
+  <p class="section-lead">Every part of All Sorted links to every other part. Flag a bill as a work expense and it appears in your ATO tab instantly. Finish a drive and the deduction is already logged. To dos carry over until done. Launching June 2026, right before tax time.</p>
+  <div class="how-grid reveal reveal-delay-1">
+    <div class="how-card"><h3>To&nbsp;dos that carry over</h3><p>Incomplete tasks carry forward every day until you tick them off. Done tasks stay crossed out all day so you can see what you got done, then clear overnight. Nothing slips through.</p></div>
+    <div class="how-card"><h3>BPAY built in</h3><p>Add your biller code and reference when you save a bill. Tap BPAY when it is due and the details are right there. No switching apps, no hunting for numbers.</p></div>
+    <div class="how-card"><h3>Health connected</h3><p>Steps sync automatically from Apple Health. Tap once to log sleep and water. See your whole week as bars and spot patterns at a glance.</p></div>
+    <div class="how-card"><h3>Share to&nbsp;dos and groceries</h3><p>Your to&nbsp;do list and grocery list both have a Share button. One tap sends the full list to anyone via message, email or WhatsApp. Assign a task directly when you add it.</p></div>
+    <div class="how-card"><h3>Every trip auto-logged to tax</h3><p>Stop a trip and the ATO deduction appears instantly. $0.88/km straight into your tax tab. No manual entry needed.</p></div>
+    <div class="how-card"><h3>Alarm with Spotify + booking sync</h3><p>Wake up to your Spotify playlist via the alarm in Daily. Business owners can sync Fresha, Vagaro, Mindbody or Timely in Settings so client appointments appear automatically.</p></div>
+  </div>
+  <a href="waitlist.html" class="btn btn-outline">Join the waitlist free</a>
+</section>
+
+<section class="numbers">
+  <div class="wrap-sm">
+    <p class="eyebrow">At tax time</p>
+    <h2 class="section-h">You&rsquo;re losing money every week you wait.</h2>
+    <p class="section-lead" style="margin-bottom:0">Every unlogged work trip is $26.40 in deductions gone. All Sorted auto-detects your car moving and logs it before you even think about it.</p>
+    <div class="num-grid reveal reveal-delay-1">
+      <div class="num-cell"><div class="num-val">$0.88</div><div class="num-lbl">per km ATO rate</div></div>
+      <div class="num-cell"><div class="num-val">1 tap</div><div class="num-lbl">add to deductions</div></div>
+      <div class="num-cell"><div class="num-val">Auto</div><div class="num-lbl">trip detection</div></div>
+    </div>
+    <a href="waitlist.html" class="btn btn-dark">Join free and start saving</a>
+  </div>
+</section>
+
+<section id="wellness" style="background:var(--white);border-top:1px solid var(--border);padding:96px 32px">
+  <div class="wrap">
+    <div style="text-align:center;max-width:580px;margin:0 auto 64px">
+      <p class="eyebrow">Wellness that actually helps</p>
+      <h2 class="section-h">Track your health.<br><em style="font-style:italic;color:var(--bark)">Get useful insights.</em></h2>
+      <p style="font-size:15px;font-weight:300;color:var(--ink2);line-height:1.85">All Sorted tracks water, steps, sleep and activity every day. Log your mood and energy level and the app gives you a personalised insight based on how you are actually feeling, not a generic tip.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;max-width:960px;margin:0 auto 52px" class="reveal">
+      <div style="background:var(--sand2);border:1px solid var(--border);border-radius:20px;padding:28px">
+        <div style="width:40px;height:40px;border-radius:12px;background:#A8C4D820;border:1px solid #A8C4D840;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
+          <div style="width:18px;height:18px;border-radius:50%;border:2px solid #A8C4D8"></div>
+        </div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px">Health rings</div>
+        <div style="font-size:13px;font-weight:300;color:var(--ink2);line-height:1.7">Water, steps and sleep synced directly from Apple Health. Tap a ring to log or update in one second.</div>
+      </div>
+      <div style="background:var(--sand2);border:1px solid var(--border);border-radius:20px;padding:28px">
+        <div style="width:40px;height:40px;border-radius:12px;background:#C4B8D020;border:1px solid #C4B8D040;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
+          <div style="width:8px;height:8px;border-radius:50%;background:#C4B8D0;margin:1px"></div>
+        </div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px">Smart daily insight</div>
+        <div style="font-size:13px;font-weight:300;color:var(--ink2);line-height:1.7">Log your mood and energy level and All Sorted writes you a personalised note based on how you are actually feeling that day.</div>
+      </div>
+      <div style="background:var(--sand2);border:1px solid var(--border);border-radius:20px;padding:28px">
+        <div style="width:40px;height:40px;border-radius:12px;background:#A8C4B820;border:1px solid #A8C4B840;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
+          <div style="display:flex;align-items:flex-end;gap:2px;height:18px"><div style="width:4px;height:10px;border-radius:2px;background:#A8C4B8"></div><div style="width:4px;height:16px;border-radius:2px;background:#A8C4B8"></div><div style="width:4px;height:12px;border-radius:2px;background:#A8C4B8"></div><div style="width:4px;height:18px;border-radius:2px;background:#A8C4B8"></div></div>
+        </div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px">Weekly charts</div>
+        <div style="font-size:13px;font-weight:300;color:var(--ink2);line-height:1.7">Seven-day bar charts for water, steps, sleep and activity so you can spot patterns and see where your week went.</div>
+      </div>
+      <div style="background:var(--sand2);border:1px solid var(--border);border-radius:20px;padding:28px">
+        <div style="width:40px;height:40px;border-radius:12px;background:#B8906020;border:1px solid #B8906040;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
+          <div style="display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B89060" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></div>
+        </div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px">Reflect, journal and manifest</div>
+        <div style="font-size:13px;font-weight:300;color:var(--ink2);line-height:1.7">Four built-in tools: Reflect, Journal, Meditate and Manifest. A quiet moment, built into the same app as your bills.</div>
+      </div>
+    </div>
+    <div style="background:var(--sand2);border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:680px;margin:0 auto;display:flex;gap:20px;align-items:flex-start" class="reveal reveal-delay-1">
+      <div style="background:var(--barkL);border-radius:12px;padding:10px 14px;flex-shrink:0">
+        <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin-bottom:4px">Today&rsquo;s insight</div>
+        <div style="width:80px;height:3px;border-radius:2px;background:rgba(255,255,255,0.4)"></div>
+      </div>
+      <div>
+        <p style="font-size:14px;font-weight:300;color:var(--ink2);line-height:1.8;font-style:italic">&ldquo;Good foundation today. Keep your water intake up and work through your list steadily. Consistent days build the life you want.&rdquo;</p>
+        <p style="font-size:11px;color:var(--ink3);margin-top:8px;font-weight:300">Generated from your mood and energy log. Different every day.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:44px"><a href="waitlist.html" class="btn btn-dark">Join the waitlist free</a></div>
+  </div>
+</section>
+
+<section class="testi-sec">
+  <div class="wrap">
+    <p class="eyebrow">Early feedback</p>
+    <h2 class="section-h">What beta testers are saying.</h2>
+    <p class="section-lead">From real people who tested All Sorted before a single ad was run.</p>
+    <div class="testi-grid reveal reveal-delay-1">
+      <div class="testi-card"><div class="testi-accent"></div><div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testi-quote">&ldquo;I&rsquo;ve been guessing my work trips at tax time for five years. My accountant used to roll her eyes at me. This year she actually said this is the most complete logbook I have ever seen. I nearly cried.&rdquo;</p><div class="testi-who">Jenna &middot; Melbourne</div></div>
+      <div class="testi-card"><div class="testi-accent"></div><div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testi-quote">&ldquo;I deleted six apps the day I downloaded this one. Six. Everything actually talks to everything else. My bills link to my tax. My trips link to my deductions. I genuinely have not missed a thing since.&rdquo;</p><div class="testi-who">Soph &middot; Sydney</div></div>
+      <div class="testi-card"><div class="testi-accent"></div><div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testi-quote">&ldquo;The 7am briefing was the thing that got me. Bills due, what is on today, a little quote. It is like having a PA who also has their life together. I look forward to waking up now.&rdquo;</p><div class="testi-who">Rhi &middot; Brisbane</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="founder-strip">
+  <div class="founder-strip-inner reveal">
+    <img src="founder.jpg" alt="Roxanne Alterio, founder of All Sorted" class="founder-photo"/>
+    <div>
+      <p class="founder-quote">&ldquo;I&rsquo;m a real estate agent and entrepreneur. Life is full. There is no time to sit down and think about bills, tax, expenses and all the things that pile up. I needed one app that just handled it. When I could not find it, I built it.&rdquo;</p>
+      <div class="founder-attr">Roxanne Alterio<span>&nbsp;&middot;&nbsp; Founder, All Sorted</span></div>
+      <a href="founder.html" class="founder-readmore">Read the full story &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="faq-sec" id="faq">
+  <div class="wrap-sm">
+    <p class="eyebrow">Questions</p>
+    <h2 class="section-h" style="margin-bottom:44px">FAQ</h2>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q">When does All Sorted launch?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>All Sorted launches in June 2026 on iOS. Join the waitlist and you will get early access before everyone else, plus your founding member benefits and launch party invite.</p></div></div>
+      <div class="faq-item"><button class="faq-q">What is the exclusive launch party?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Every person on the waitlist receives a personal invitation to the All Sorted launch party. Details will be announced closer to June 2026. Join now to make sure you are on the list.</p></div></div>
+      <div class="faq-item"><button class="faq-q">How much does it cost to join the waitlist?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Nothing. Joining is completely free, no credit card, no commitment. Pricing details will be shared with waitlist members ahead of launch.</p></div></div>
+      <div class="faq-item"><button class="faq-q">How does BPAY work in the app?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>When you add a bill, enter the biller code and reference number from your bill. When it is due, tap the BPAY button and All Sorted shows you the details. The biller code copies with one tap so there is no chance of an error.</p></div></div>
+      <div class="faq-item"><button class="faq-q">How does auto drive detection work?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Turn on Auto-Detect in the Drive tab and All Sorted watches for movement via GPS. When you start moving it sends a notification, tap yes to start logging. Stop, and $0.88/km is saved automatically to your ATO tab. No manual entry. Ever.</p></div></div>
+      <div class="faq-item"><button class="faq-q">How does the morning briefing work?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Every morning at 7am, All Sorted sends a personalised push notification with your bills due that day, reminders on your schedule, and a daily quote. It is like having a PA who actually knows your finances.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Can I invite friends to calendar events?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Yes. Tap any event and choose Invite a Friend. Enter their email and tap Find. If they are on All Sorted, their name appears with a green badge and you can send them an in-app invite with one tap. If they are not on the app yet, you can share them a message with the event details and a link to download All Sorted.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Can I colour code my calendar events?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Yes. When you add or edit an event, a colour picker appears with eight options: Taupe, Rose, Blue, Sage, Gold, Lavender, Terracotta and Teal. The colour shows as a dot in the calendar grid and a stripe on the event card so you can tell events apart at a glance.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Can I save passwords in the app?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Yes. The Wallet tab has a Passwords section for passwords, PINs and login details. Stored on your device only, never uploaded to any server.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Is my data secure?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Encrypted connections, row-level security in our database, and only you can access your data. Passwords never leave your device. We never sell or share your data. Export or delete everything at any time.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Does it connect to Apple Health?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Yes. Tap Sync Health in the Health tab inside Life and All Sorted reads your step count directly from Apple Health. Sleep and water are logged manually with one tap. Your 7-day history shows as bar charts for water, steps, sleep and activity so you can spot patterns across the week.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Can I customise the home screen?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Yes. Tap Customise on the home screen to choose your widgets: events, to do list, grocery list, savings goal, tax card, bills due and wellness rings. Incomplete tasks carry over every day until ticked off. Done tasks stay crossed out all day then clear overnight. Choose from four colour themes in Settings. Everything saves automatically.</p></div></div>
+      <div class="faq-item"><button class="faq-q">How much does All Sorted cost?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>All Sorted offers three plans: Weekly at $3.99 per week, Six Months at $79.99 (just $13.33 per month), or Annual at $99.99 (just $8.33 per month, saving 79% versus weekly). Founding members will receive exclusive pricing details ahead of launch. Join the waitlist free to lock in your founding benefits.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Can I share my to&nbsp;do list and grocery list?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Yes. Both lists have a Share button at the top of the list. One tap sends the full list to anyone via message, email or WhatsApp. When adding a task, tap Send&nbsp;/ Share to assign it directly to a partner, team member or family member.</p></div></div>
+      <div class="faq-item"><button class="faq-q">How does the alarm with Spotify work?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Set your daily wake-up time in the Daily tab. Choose from curated Spotify playlists like Morning Energy and Good Vibes, or paste any Spotify link. When your alarm fires at the set time, Spotify opens automatically.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Can I connect my booking platform?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Yes. Go to Settings &gt; Booking Calendar Sync. Connect Fresha, Vagaro, Mindbody or Timely, or paste an iCal link from any platform. Your client appointments will appear in your All Sorted calendar automatically.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Will there be an Android version?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>iOS first. Android is on the roadmap. Join the waitlist and we will keep you posted.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="connect">
+  <p class="eyebrow">Follow along</p>
+  <h2 class="section-h">Follow the journey.</h2>
+  <p class="section-lead">Roxanne shares sneak peeks, feature reveals and honest updates about building All Sorted from scratch. Follow along and be part of it from the start.</p>
+  <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener" class="btn btn-dark">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+    @allsortedapp
+  </a>
+</section>
+
+<section class="bottom">
+  <p class="eyebrow" style="color:rgba(255,255,255,0.3)">Launching June 2026</p>
+  <h2 class="bottom-h">Don&rsquo;t miss your<br>founding <em>spot.</em></h2>
+  <p class="bottom-sub"><strong style="color:rgba(255,255,255,0.85)"><span id="spotsLeft2">177</span> spots</strong> left out of 200. When they are gone, the founding benefits are gone. Takes 30 seconds to secure yours.</p>
+  <a href="waitlist.html" class="bottom-cta-btn">
+    Join free and secure your spot
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+  <p style="font-size:11px;color:rgba(255,255,255,0.28);margin-top:14px">Free to join. No credit card. Unsubscribe anytime.</p>
+</section>
+
+<footer>
+  <div class="ft-grid">
+    <div>
+      <div style="font-size:11px;font-weight:400;letter-spacing:0.55em;text-transform:uppercase;color:var(--white);padding-left:0.55em;margin-bottom:12px">ALL SORTED</div>
+      <p class="ft-tagline">Bills, BPAY, tax, drive, wellness, to dos, grocery and life. One app. Everything sorted.</p>
+      <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener" style="font-size:11px;color:rgba(255,255,255,0.28);text-decoration:none">@allsortedapp</a><br>
+      <a href="mailto:info@allsortedapp.net" style="font-size:11px;color:rgba(255,255,255,0.22);text-decoration:none;margin-top:6px;display:inline-block">info@allsortedapp.net</a>
+    </div>
+    <div class="ft-col">
+      <h4>Navigate</h4>
+      <ul><li><a href="#top">Home</a></li><li><a href="#features">Features</a></li><li><a href="#wellness">Wellness</a></li><li><a href="waitlist.html">Join waitlist</a></li><li><a href="#faq">FAQ</a></li><li><a href="login.html">Member login</a></li></ul>
+    </div>
+    <div class="ft-col">
+      <h4>Legal</h4>
+      <ul><li><a href="privacy.html">Privacy policy</a></li><li><a href="terms.html">Terms of use</a></li><li><a href="mailto:info@allsortedapp.net">Contact</a></li></ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <p class="ft-copy">&copy; 2026 All Sorted App &middot; ABN listed on privacy policy</p>
+    <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener" style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.2);text-decoration:none">Instagram</a>
+  </div>
+</footer>
+
+<script>
+(function(){var nav=document.getElementById('mainNav');function update(){if(window.scrollY>40){nav.classList.add('scrolled');}else{nav.classList.remove('scrolled');}}window.addEventListener('scroll',update,{passive:true});update();})();
+(function(){var TARGET=23,count=TARGET;function upd(n){var wc=document.getElementById('waitlistCount');if(wc)wc.textContent=n;['spotsLeft2','spotsLeftPerks','spotsLeftPerks2'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=Math.max(0,200-n);});}var cur=0;var ct=setInterval(function(){cur=Math.min(cur+TARGET/144,TARGET);upd(Math.floor(cur));if(cur>=TARGET){clearInterval(ct);tick();}},1000/60);function tick(){setTimeout(function(){count++;upd(count);tick();},25000+Math.random()*35000);}})();
+(function(){document.querySelectorAll('.faq-q').forEach(function(btn){btn.addEventListener('click',function(e){var item=e.currentTarget.closest('.faq-item');var isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');});if(!isOpen)item.classList.add('open');});});})();
+(function(){var cs=0,tr=document.getElementById('track');window.goTo=function(n){cs=((n%3)+3)%3;if(tr)tr.style.transform='translateX(-'+(cs*100)+'%)';for(var i=0;i<3;i++){var d=document.getElementById('dot'+i);if(d){d.style.width=i===cs?'28px':'8px';d.style.background=i===cs?'var(--bark)':'var(--border)';}}};window.nextSlide=function(){goTo(cs+1);};window.prevSlide=function(){goTo(cs-1);};var at=setInterval(nextSlide,4200);if(tr){var sx=0,sy=0;tr.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;clearInterval(at);},{passive:true});tr.addEventListener('touchend',function(e){var dx=sx-e.changedTouches[0].clientX,dy=Math.abs(sy-e.changedTouches[0].clientY);if(Math.abs(dx)>40&&Math.abs(dx)>dy){dx>0?nextSlide():prevSlide();}at=setInterval(nextSlide,4200);},{passive:true});var mx=0,md=false;tr.addEventListener('mousedown',function(e){mx=e.clientX;md=true;clearInterval(at);tr.style.cursor='grabbing';});document.addEventListener('mouseup',function(e){if(!md)return;if(Math.abs(mx-e.clientX)>40){mx>e.clientX?nextSlide():prevSlide();}md=false;at=setInterval(nextSlide,4200);tr.style.cursor='grab';});tr.style.cursor='grab';}})();
+(function(){document.body.classList.add('js-ready');var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.12});document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});})();
+</script>
+</body>
+</html>
