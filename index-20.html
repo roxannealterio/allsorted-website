@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>All Sorted &middot; ATO Drive Logbook &amp; Tax Deduction App for Australians</title>
+<meta name="description" content="All Sorted is the iOS app that auto-logs your work trips at $0.92/km, tracks ATO tax deductions live, manages bills with BPAY, scans receipts and organises your whole life. One app. Nothing slips."/>
+<link rel="canonical" href="https://allsortedapp.net/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://allsortedapp.net/"/>
+<meta property="og:title" content="All Sorted &middot; ATO Drive Logbook &amp; Tax Deductions App"/>
+<meta property="og:description" content="Auto-log work trips at $0.92/km. Track ATO deductions live. Manage bills, receipts and your whole life. One iOS app."/>
+<meta property="og:image" content="https://allsortedapp.net/hero.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="keywords" content="ATO drive logbook app, tax deductions app Australia, work trip mileage tracker, cents per kilometre app, BPAY bills app, receipt scanner ATO, Australian tax app iPhone, GPS logbook ATO"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sand:#F8F4EF;
+  --sand2:#F2EBE3;
+  --sand3:#EAE0D5;
+  --taupe:#9A8672;
+  --taupeM:#8B7663;
+  --taupeD:#716050;
+  --taupeDD:#5E4C3E;
+  --taupeL:#BCA890;
+  --taupeLL:#D4C4B0;
+  --ink:#2C1E14;
+  --ink2:#4A3828;
+  --ink3:#7A6858;
+  --white:#FDFAF7;
+  --border:#DDD0C0;
+  --green:#5A9080;
+  --dark:#5E4C3E;
+  --dark2:#4A3828;
+}
+html{scroll-behavior:smooth;background:var(--taupeDD)}
+body{font-family:'DM Sans','SF Pro Display','Helvetica Neue',Arial,sans-serif;background:var(--sand);color:var(--ink);font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;background:transparent;border-bottom:1px solid transparent;transition:background 0.35s,border-color 0.35s}
+.nav.scrolled{background:rgba(248,244,239,0.97);border-color:var(--border);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+.nav-logo{font-size:11px;font-weight:400;letter-spacing:0.65em;text-transform:uppercase;text-decoration:none;color:var(--ink);padding-left:0.65em;transition:opacity 0.2s}
+.nav-logo:hover{opacity:0.7}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-link{font-size:12px;font-weight:400;letter-spacing:0.02em;text-decoration:none;color:var(--ink2);transition:color 0.2s}
+.nav-link:hover{color:var(--ink)}
+.nav-pill{font-size:11px;font-weight:500;letter-spacing:0.06em;padding:9px 24px;border-radius:100px;text-decoration:none;transition:all 0.22s;color:var(--white);background:var(--taupeDD);border:1.5px solid var(--taupeDD)}
+.nav-pill:hover{background:var(--dark2);border-color:var(--dark2);transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:var(--sand);padding:100px 32px 80px}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:52px 52px;opacity:0.28;z-index:0;pointer-events:none}
+.hero-body{position:relative;z-index:1;width:100%;max-width:720px;margin:0 auto;padding:0 24px;text-align:center}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(46px,7vw,80px);font-weight:400;line-height:1.04;color:var(--ink);letter-spacing:-0.025em;margin-bottom:24px}
+.hero-h1 em{font-style:italic;color:var(--taupeD)}
+.hero-sub{font-size:17px;font-weight:300;color:var(--ink3);line-height:1.8;margin-bottom:44px;max-width:520px;margin-left:auto;margin-right:auto}
+.hero-cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--taupeDD);color:#fff;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:0.02em;padding:17px 36px;border-radius:100px;text-decoration:none;transition:all 0.22s;box-shadow:0 4px 20px rgba(94,76,62,0.25)}
+.hero-cta-btn:hover{background:var(--dark2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(94,76,62,0.32)}
+.hero-trust{display:flex;align-items:center;justify-content:center;gap:10px;font-size:12px;font-weight:300;color:var(--ink3);margin-top:20px;margin-bottom:68px}
+.trust-avatars{display:flex}
+.ta{width:28px;height:28px;border-radius:50%;background:var(--taupeL);border:2px solid var(--white);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:var(--white);margin-left:-8px}
+.ta:first-child{margin-left:0}
+
+/* ── HERO MOCK CARDS ── */
+.hero-mock{position:relative;z-index:1;width:100%;max-width:880px;margin:0 auto;padding:0 24px}
+.mock-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:18px 20px;box-shadow:0 2px 16px rgba(94,76,62,0.07),0 8px 40px rgba(94,76,62,0.05)}
+
+/* ── TICKER ── */
+.ticker{overflow:hidden;background:var(--taupeDD);padding:12px 0}
+.ticker-track{display:flex;white-space:nowrap;animation:scroll 40s linear infinite}
+.ticker-item{font-size:10px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.35);padding:0 44px}
+.ticker-item span{color:rgba(255,255,255,0.7)}
+
+/* ── PARTY BANNER ── */
+.party-banner{background:var(--dark2);padding:16px 32px;text-align:center}
+.party-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.party-text{font-size:13px;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.5}
+.party-text strong{font-weight:500;color:var(--white)}
+.party-tag{font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);padding:4px 12px;border-radius:100px}
+
+/* ── PROBLEM / DARK SECTIONS ── */
+.problem{background:var(--taupeDD);padding:96px 32px 0}
+.problem-h{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,50px);font-weight:400;font-style:italic;color:rgba(255,255,255,0.88);text-align:center;line-height:1.2;max-width:680px;margin:0 auto 48px}
+.problem-h em{font-style:normal;color:var(--taupeL)}
+.problem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.1);border-radius:20px;overflow:hidden;max-width:900px;margin:0 auto 56px}
+.stat-cell{background:rgba(255,255,255,0.06);padding:28px 20px}
+.stat-num{font-family:'Playfair Display',serif;font-size:42px;font-weight:400;color:var(--taupeL);line-height:1;margin-bottom:10px}
+.stat-txt{font-size:12px;font-weight:300;color:rgba(255,255,255,0.50);line-height:1.7}
+
+/* ── DRIVE DEEP DIVE ── */
+.drive-hero{background:var(--taupeDD);padding:0 32px 88px;overflow:hidden;position:relative}
+.drive-stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.1);border-radius:20px;overflow:hidden;margin-bottom:16px}
+.drive-stat{background:rgba(255,255,255,0.06);padding:30px 26px}
+.drive-stat-label{font-size:9px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.40);margin-bottom:18px}
+.drive-stat-val{font-family:'Playfair Display',serif;font-size:48px;font-weight:400;color:var(--white);line-height:1;margin-bottom:8px}
+.drive-stat-val.green{color:#7EC8A8}
+.drive-stat-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.75;margin-bottom:18px}
+.drive-stat-bullets{font-size:11px;color:rgba(255,255,255,0.40);line-height:2.1}
+.drive-tab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.drive-tab-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:28px 30px}
+.drive-tab-label{font-size:9px;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;color:var(--taupeL);margin-bottom:12px}
+.drive-tab-title{font-size:16px;font-weight:400;color:var(--white);margin-bottom:10px;line-height:1.3}
+.drive-tab-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.8}
+.drive-maths{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:28px 30px;display:flex;gap:40px;flex-wrap:wrap}
+.drive-maths-row{display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.07);width:100%;align-items:center}
+.drive-maths-row:last-child{border-bottom:none;padding-bottom:0}
+.drive-maths-label{font-size:13px;font-weight:300;color:rgba(255,255,255,0.50)}
+.drive-maths-val{font-size:14px;font-weight:700}
+.drive-maths-val.loss{color:#D4846A}
+.drive-maths-val.win{color:#7EC8A8}
+.drive-cats{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.drive-cat{font-size:10px;font-weight:300;color:rgba(255,255,255,0.40);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);border-radius:20px;padding:4px 12px}
+
+/* ── TAX ── */
+.tax-sec{background:var(--sand2);border-top:1px solid var(--border);padding:96px 32px}
+.tax-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:960px;margin:0 auto 48px}
+.tax-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:32px;position:relative;overflow:hidden}
+.tax-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--taupeLL)}
+.tax-card-label{font-size:9px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:var(--taupe);margin-bottom:14px}
+.tax-card-title{font-family:'Playfair Display',serif;font-size:19px;font-weight:400;color:var(--ink);margin-bottom:10px;line-height:1.3}
+.tax-card-desc{font-size:13px;font-weight:300;color:var(--ink3);line-height:1.8}
+.tax-card.dark{background:var(--taupeDD);border-color:var(--taupeDD)}
+.tax-card.dark::before{background:rgba(255,255,255,0.15)}
+.tax-card.dark .tax-card-label{color:rgba(255,255,255,0.48)}
+.tax-card.dark .tax-card-title{color:var(--white)}
+.tax-card.dark .tax-card-desc{color:rgba(255,255,255,0.58)}
+
+/* ── SECTIONS ── */
+.section{padding:96px 32px}
+.wrap{max-width:1080px;margin:0 auto}
+.wrap-sm{max-width:680px;margin:0 auto}
+.eyebrow{font-size:9px;font-weight:500;letter-spacing:0.44em;text-transform:uppercase;color:var(--taupe);text-align:center;margin-bottom:16px}
+.section-h{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,46px);font-weight:400;color:var(--ink);text-align:center;line-height:1.14;margin-bottom:14px;letter-spacing:-0.01em;overflow-wrap:break-word}
+.section-lead{font-size:15px;font-weight:300;color:var(--ink3);text-align:center;line-height:1.9;max-width:500px;margin:0 auto 56px}
+
+/* ── FEATURES ── */
+.features-bg{background:var(--sand2);border-top:1px solid var(--border);padding:72px 32px 88px}
+.feat-list{border:1px solid var(--border);border-radius:20px;overflow:hidden;background:var(--white)}
+.feat-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
+.feat-row:last-child{border-bottom:none}
+.feat-cell{background:var(--white);padding:36px 30px;transition:background 0.2s}
+.feat-cell:hover{background:var(--sand)}
+.feat-cell.dark{background:var(--taupeDD)}
+.feat-cell.dark:hover{background:var(--dark2)}
+.feat-num{font-family:'Playfair Display',serif;font-size:13px;font-weight:400;color:var(--ink3);margin-bottom:18px}
+.feat-cell.dark .feat-num{color:rgba(255,255,255,0.30)}
+.feat-tag{font-size:9px;font-weight:500;letter-spacing:0.3em;text-transform:uppercase;color:var(--taupe);display:block;margin-bottom:10px}
+.feat-cell.dark .feat-tag{color:rgba(255,255,255,0.55)}
+.feat-h{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--ink);line-height:1.3;margin-bottom:12px}
+.feat-cell.dark .feat-h{color:var(--white)}
+.feat-p{font-size:13px;font-weight:300;color:var(--ink3);line-height:1.85}
+.feat-cell.dark .feat-p{color:rgba(255,255,255,0.58)}
+
+/* ── NUMBERS ── */
+.numbers{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:72px 32px;text-align:center}
+.num-grid{display:grid;grid-template-columns:repeat(3,1fr);max-width:600px;width:100%;margin:44px auto;border:1px solid var(--border);border-radius:20px;overflow:hidden}
+.num-cell{padding:28px 16px;text-align:center;border-right:1px solid var(--border)}
+.num-cell:last-child{border-right:none}
+.num-val{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,50px);font-weight:400;color:var(--taupeD);line-height:1;margin-bottom:8px}
+.num-lbl{font-size:9px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink3)}
+
+/* ── HOW IT WORKS ── */
+.how{background:var(--taupeDD);padding:96px 32px;text-align:center}
+.how .eyebrow{color:rgba(255,255,255,0.48)}
+.how .section-h{color:var(--white)}
+.how .section-lead{color:rgba(255,255,255,0.58)}
+.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;max-width:960px;margin:0 auto 52px;text-align:left}
+.how-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.13);border-radius:16px;padding:28px;transition:background 0.2s}
+.how-card:hover{background:rgba(255,255,255,0.10)}
+.how-card h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:400;color:var(--white);margin-bottom:10px;line-height:1.3}
+.how-card p{font-size:13px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.85}
+
+/* ── WHAT'S NEW ── */
+.whats-new{background:var(--sand2);border-top:1px solid var(--border);padding:88px 32px}
+.new-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;max-width:1080px;margin:0 auto}
+.new-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:26px;transition:transform 0.2s,box-shadow 0.2s;position:relative;overflow:hidden}
+.new-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--taupeLL)}
+.new-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(94,76,62,0.10)}
+.new-badge{font-size:8px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;background:var(--taupeDD);color:var(--white);padding:3px 10px;border-radius:100px;display:inline-block;margin-bottom:14px}
+.new-icon{margin-bottom:14px;color:var(--taupeD)}
+.new-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.3}
+.new-desc{font-size:12px;font-weight:300;color:var(--ink3);line-height:1.75}
+
+/* ── PERKS ── */
+.perks-hero{background:var(--sand);border-top:1px solid var(--border);padding:96px 32px;text-align:center}
+.perk-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:32px 26px;text-align:left;transition:transform 0.2s,box-shadow 0.2s;position:relative;overflow:hidden}
+.perk-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--taupeLL)}
+.perk-card:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(94,76,62,0.09)}
+.perk-card.gold-card{background:var(--taupeDD);border-color:var(--taupeDD)}
+.perk-card.gold-card::before{background:var(--taupeL)}
+.perk-icon{width:38px;height:38px;border-radius:11px;background:var(--sand2);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.perk-card.gold-card .perk-icon{background:rgba(255,255,255,0.09)}
+.perk-title{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:8px;line-height:1.3}
+.perk-card.gold-card .perk-title{color:var(--white)}
+.perk-desc{font-size:12.5px;font-weight:300;color:var(--ink3);line-height:1.8}
+.perk-card.gold-card .perk-desc{color:rgba(255,255,255,0.55)}
+.perk-lozenge{display:inline-block;font-size:8px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;background:var(--taupeL);color:var(--ink);padding:3px 10px;border-radius:100px;margin-bottom:12px}
+
+/* ── SCREENS ── */
+.screens-sec{padding:88px 0 72px;background:var(--white);text-align:center;border-top:1px solid var(--border)}
+.carousel{position:relative;overflow:hidden}
+.carousel-track{display:flex;transition:transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);will-change:transform;touch-action:pan-y}
+.slide{min-width:100%;display:flex;flex-direction:column;align-items:center;padding:0 24px}
+.phone{background:var(--taupeDD);border-radius:48px;padding:12px;box-shadow:0 28px 72px rgba(94,76,62,0.28);width:256px}
+.phone-inner{border-radius:38px;overflow:hidden;background:var(--sand)}
+.phone-inner img{width:100%;display:block}
+.slide-label{font-family:'Playfair Display',serif;font-size:15px;font-weight:400;font-style:italic;color:var(--taupeD);margin-top:22px}
+.slide-sub{font-size:12px;font-weight:300;color:var(--ink3);margin-top:4px}
+.carousel-btn{position:absolute;top:42%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--white);cursor:pointer;font-size:20px;color:var(--taupe);display:flex;align-items:center;justify-content:center;z-index:5;line-height:1;transition:all 0.2s}
+.carousel-btn:hover{background:var(--taupeD);color:#fff;border-color:var(--taupeD)}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:24px}
+.dot{height:3px;border-radius:2px;border:none;cursor:pointer;padding:0;transition:all 0.3s}
+
+/* ── TESTIMONIALS ── */
+.testi-sec{background:var(--sand2);border-top:1px solid var(--border);padding:96px 32px}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;max-width:940px;margin:0 auto 52px}
+.testi-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:28px;position:relative}
+.testi-accent{position:absolute;top:0;left:28px;right:28px;height:2px;background:var(--taupeLL)}
+.testi-stars{color:var(--taupeD);font-size:12px;letter-spacing:3px;margin-bottom:16px}
+.testi-quote{font-family:'Playfair Display',serif;font-size:17px;font-weight:400;font-style:italic;color:var(--ink);line-height:1.65;margin-bottom:18px}
+.testi-who{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--taupe)}
+
+/* ── FOUNDER ── */
+.founder-strip{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:72px 32px}
+.founder-strip-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:90px 1fr;gap:40px;align-items:center}
+.founder-photo{width:90px;height:90px;border-radius:50%;object-fit:cover;object-position:center top;border:2px solid var(--border);flex-shrink:0}
+.founder-quote{font-family:'Playfair Display',serif;font-size:clamp(17px,2.5vw,23px);font-weight:400;font-style:italic;color:var(--ink);line-height:1.55;margin-bottom:14px}
+.founder-attr{font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--taupe)}
+.founder-attr span{font-weight:300;text-transform:none;letter-spacing:0;color:var(--ink3);margin-left:4px}
+.founder-readmore{display:inline-block;margin-top:10px;font-size:12px;color:var(--taupe);text-decoration:none;transition:color 0.2s}
+.founder-readmore:hover{color:var(--ink)}
+
+/* ── FAQ ── */
+.faq-sec{background:var(--sand2);padding:96px 32px;border-top:1px solid var(--border)}
+.faq-list{max-width:640px;width:100%;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;padding:22px 0;background:none;border:none;cursor:pointer;font-family:inherit;font-size:14px;font-weight:400;color:var(--ink);text-align:left;gap:16px;line-height:1.45;transition:color 0.2s}
+.faq-q:hover{color:var(--taupeD)}
+.faq-icon{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.25s}
+.faq-icon span{font-size:16px;color:var(--taupe);line-height:1;transition:transform 0.25s;display:block;pointer-events:none}
+.faq-item.open .faq-icon{background:var(--taupeD);border-color:var(--taupeD)}
+.faq-item.open .faq-icon span{transform:rotate(45deg);color:#fff}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.38s ease}
+.faq-a p{padding:0 0 22px;font-size:14px;font-weight:300;color:var(--ink3);line-height:1.9}
+.faq-item.open .faq-a{max-height:500px}
+
+/* ── CONNECT ── */
+.connect{background:var(--taupeDD);padding:76px 32px;text-align:center;border-top:none}
+
+/* ── BOTTOM CTA ── */
+.bottom{background:var(--taupeDD);padding:88px 32px;text-align:center}
+.bottom-h{font-family:'Playfair Display',serif;font-size:clamp(32px,6vw,58px);font-weight:400;font-style:italic;color:var(--white);line-height:1.12;margin-bottom:16px}
+.bottom-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,0.58);margin-bottom:44px;line-height:1.75;max-width:440px;margin-left:auto;margin-right:auto}
+.bottom-cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--taupeDD);font-family:inherit;font-size:13px;font-weight:500;padding:17px 36px;border-radius:100px;text-decoration:none;transition:all 0.22s;box-shadow:0 4px 20px rgba(0,0,0,0.12)}
+.bottom-cta-btn:hover{background:var(--sand);transform:translateY(-2px)}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;border-radius:100px;transition:all 0.22s}
+.btn-dark{background:var(--taupeDD);color:var(--white);word-break:keep-all}
+.btn-dark:hover{background:var(--dark2);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.22)}
+.btn-outline:hover{background:rgba(255,255,255,0.09);color:#fff}
+
+/* ── FOOTER ── */
+footer{background:var(--dark2);padding:60px 48px 32px;border-top:1px solid rgba(255,255,255,0.07)}
+.ft-grid{display:grid;grid-template-columns:1fr auto auto;gap:64px;max-width:960px;margin:0 auto 44px}
+.ft-tagline{font-size:12px;font-weight:300;color:rgba(255,255,255,0.30);line-height:1.75;margin-bottom:12px;max-width:220px}
+.ft-col h4{font-size:9px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:16px}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.ft-col ul li a{font-size:12px;font-weight:300;color:rgba(255,255,255,0.38);text-decoration:none;transition:color 0.2s}
+.ft-col ul li a:hover{color:var(--white)}
+.ft-bottom{border-top:1px solid rgba(255,255,255,0.07);padding-top:24px;max-width:960px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.ft-copy{font-size:11px;color:rgba(255,255,255,0.22)}
+
+/* ── UTILS ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.65s ease,transform 0.65s ease}
+.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.12s}
+.reveal-delay-2{transition-delay:0.24s}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hero-body>*{animation:fadeUp .7s ease both}
+.hero-body>*:nth-child(1){animation-delay:.1s}
+.hero-body>*:nth-child(2){animation-delay:.22s}
+.hero-body>*:nth-child(3){animation-delay:.34s}
+.hero-body>*:nth-child(4){animation-delay:.46s}
+.hero>div:last-child{animation:fadeUp .8s ease .6s both}
+
+@media(max-width:768px){
+  .nav{padding:0 20px}
+  .nav-links .nav-link{display:none}
+  .hero{padding:80px 20px 52px}
+  .hero-body{padding:0 4px}
+  .hero-h1{font-size:clamp(36px,9vw,52px);margin-bottom:18px}
+  .hero-sub{font-size:15px;margin-bottom:32px}
+  .hero-cta-btn{padding:15px 28px;font-size:12px}
+  .hero-trust{margin-bottom:36px}
+  .hero-mock{padding:0 16px}
+  .section{padding:52px 20px}
+  .problem{padding:52px 20px}
+  .how{padding:52px 20px}
+  .numbers{padding:52px 20px}
+  .testi-sec{padding:52px 20px}
+  .perks-hero{padding:52px 20px}
+  .faq-sec{padding:52px 20px}
+  .connect{padding:44px 20px}
+  .bottom{padding:64px 20px}
+  .whats-new{padding:52px 20px}
+  .screens-sec{padding:52px 0 44px;background:var(--white)}
+  .founder-strip{padding:44px 20px}
+  .tax-sec{padding:52px 20px}
+  .features-bg{padding-top:0;padding-bottom:0}
+  .features-bg .section{padding:52px 20px}
+  .drive-hero{padding:0 20px 52px}
+  .section-lead{max-width:100%}
+  .section-h{font-size:clamp(26px,7vw,38px)}
+  .problem-grid{grid-template-columns:1fr 1fr}
+  .stat-cell{padding:24px 16px}
+  .stat-num{font-size:32px}
+  .drive-stat-grid{grid-template-columns:1fr}
+  .drive-stat{padding:24px 20px}
+  .drive-stat-val{font-size:38px}
+  .drive-tab-grid{grid-template-columns:1fr}
+  .drive-tab-card{padding:22px 20px}
+  .drive-maths{flex-direction:column;gap:0;padding:22px 20px}
+  .drive-maths>div:last-child{border-left:none;padding-left:0;border-top:1px solid rgba(255,255,255,0.10);padding-top:20px;margin-top:20px}
+  .tax-grid{grid-template-columns:1fr}
+  .tax-card{padding:24px 20px}
+  .feat-row{grid-template-columns:1fr}
+  .feat-cell{padding:28px 22px}
+  .feat-h{font-size:18px}
+  .how-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .how-card{padding:20px}
+  .how-card h3{font-size:15px}
+  .num-grid{max-width:100%}
+  .num-cell{padding:24px 12px}
+  .num-val{font-size:clamp(28px,7vw,40px)}
+  .new-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .new-card{padding:20px}
+  .perk-row-2col{grid-template-columns:1fr !important}
+  .perk-card{padding:20px 16px}
+  .testi-grid{grid-template-columns:1fr}
+  .testi-card{padding:24px}
+  .founder-strip-inner{grid-template-columns:64px 1fr;gap:20px}
+  .founder-photo{width:64px;height:64px}
+  .founder-quote{font-size:16px}
+  .ft-grid{grid-template-columns:1fr;gap:32px}
+  footer{padding:44px 20px 28px}
+  .ft-bottom{flex-direction:column;gap:12px;text-align:center}
+  .party-banner{padding:12px 20px}
+  .drive-hero>div:first-child{padding:52px 0 40px !important}
+}
+
+@media(max-width:420px){
+  .how-grid{grid-template-columns:1fr}
+  .new-grid{grid-template-columns:1fr}
+  .problem-grid{grid-template-columns:1fr}
+  .stat-cell{padding:20px 14px}
+  .mock-grid{grid-template-columns:1fr !important;max-width:300px !important}
+  .mock-card:nth-child(2),.mock-card:nth-child(3){display:none}
+}
+@media(max-width:540px){
+  .mock-grid{gap:8px}
+  .mock-card{padding:14px 16px !important}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <a href="index.html" class="nav-logo">All Sorted</a>
+  <div class="nav-links">
+    <a href="#drive" class="nav-link">Drive</a>
+    <a href="#tax" class="nav-link">Tax</a>
+    <a href="#features" class="nav-link">Features</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+    <a href="founder.html" class="nav-link">Story</a>
+    <a href="waitlist.html" class="nav-pill">Join free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-body">
+    <h1 class="hero-h1">Your tax return<br>deserves <em>every dollar.</em></h1>
+    <p class="hero-sub">Every work trip auto-logged. Every bill tracked. Every receipt one tap from your ATO refund. All Sorted runs quietly in the background and makes sure nothing slips through at tax time.</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:24px">
+      <a href="waitlist.html" class="hero-cta-btn">
+        Join the waitlist free
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#drive" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--ink2);font-family:inherit;font-size:13px;font-weight:400;padding:17px 26px;border-radius:100px;text-decoration:none;border:1.5px solid var(--border);transition:all .22s" onmouseover="this.style.borderColor='var(--taupeD)';this.style.color='var(--taupeDD)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--ink2)'">See how it works</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-avatars"><div class="ta">R</div><div class="ta">J</div><div class="ta">S</div><div class="ta">M</div><div class="ta">+</div></div>
+      <span><span id="waitlistCount" style="font-weight:600;color:var(--ink)">23</span> people already have their spot</span>
+    </div>
+  </div>
+
+  <div class="hero-mock">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;max-width:720px;margin:0 auto" class="mock-grid">
+      <div class="mock-card">
+        <div style="font-size:9px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink3);margin-bottom:16px">Drive &middot; This FY</div>
+        <div style="font-size:34px;font-weight:200;color:var(--ink);line-height:1;margin-bottom:4px">847<span style="font-size:16px;color:var(--ink3)"> km</span></div>
+        <div style="font-size:13px;font-weight:600;color:var(--green)">$779.24 deduction</div>
+        <div style="margin-top:14px;background:var(--sand3);border-radius:4px;height:4px;overflow:hidden"><div style="width:62%;height:4px;background:var(--green);border-radius:4px"></div></div>
+      </div>
+      <div class="mock-card">
+        <div style="font-size:9px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink3);margin-bottom:16px">Tax Refund</div>
+        <div style="font-size:34px;font-weight:200;color:var(--ink);line-height:1;margin-bottom:4px">$2,841</div>
+        <div style="font-size:11px;color:var(--ink3);font-weight:300">estimated this FY</div>
+        <div style="margin-top:14px;background:var(--sand3);border-radius:4px;height:4px;overflow:hidden"><div style="width:78%;height:4px;background:var(--taupeD);border-radius:4px"></div></div>
+      </div>
+      <div class="mock-card">
+        <div style="font-size:9px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink3);margin-bottom:16px">Bills Due</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--ink)">Electricity</div>
+            <div style="font-size:11px;color:var(--ink3);font-weight:300;margin-top:2px">Due in 3 days &middot; $186</div>
+          </div>
+          <div style="border-top:1px solid var(--border);padding-top:10px">
+            <div style="font-size:13px;font-weight:600;color:var(--ink)">Phone Plan</div>
+            <div style="font-size:11px;color:var(--ink3);font-weight:300;margin-top:2px">Due in 8 days &middot; $55</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTY BANNER -->
+<div class="party-banner">
+  <div class="party-inner">
+    <p class="party-text"><strong>Every waitlist member gets a personal invite to our exclusive launch party.</strong> Join the list to secure yours.</p>
+    <div class="party-tag">Members only</div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">Drive <span>$0.92/km Auto-Logged</span></span>
+    <span class="ticker-item">Tax Refund <span>Home Screen Widget</span></span>
+    <span class="ticker-item">Bills <span>BPAY + Email Import</span></span>
+    <span class="ticker-item">Receipts <span>Scan + ATO Flagging</span></span>
+    <span class="ticker-item">Calendar <span>Friend Invites</span></span>
+    <span class="ticker-item">Apple Health <span>Steps Sync</span></span>
+    <span class="ticker-item">Drive Reports <span>Logbook Compliance</span></span>
+    <span class="ticker-item">Team Sharing <span>Bills, Receipts and Drive</span></span>
+    <span class="ticker-item">Passwords <span>Device Only</span></span>
+    <span class="ticker-item">7am Briefing <span>Every Day</span></span>
+    <span class="ticker-item">AI Scan <span>Receipts and Bills Auto-Fill</span></span>
+    <span class="ticker-item">Cloud Backup <span>Automatic Every 30 Minutes</span></span>
+    <span class="ticker-item">Drive <span>$0.92/km Auto-Logged</span></span>
+    <span class="ticker-item">Tax Refund <span>Home Screen Widget</span></span>
+    <span class="ticker-item">Bills <span>BPAY + Email Import</span></span>
+    <span class="ticker-item">Receipts <span>AI Scan + ATO Flagging</span></span>
+    <span class="ticker-item">Calendar <span>Friend Invites</span></span>
+    <span class="ticker-item">Apple Health <span>Steps Sync</span></span>
+    <span class="ticker-item">Drive Reports <span>Logbook Compliance</span></span>
+    <span class="ticker-item">Team Sharing <span>Bills, Receipts and Drive</span></span>
+    <span class="ticker-item">Passwords <span>Device Only</span></span>
+    <span class="ticker-item">7am Briefing <span>Every Day</span></span>
+    <span class="ticker-item">AI Scan <span>Receipts and Bills Auto-Fill</span></span>
+    <span class="ticker-item">Cloud Backup <span>Automatic Every 30 Minutes</span></span>
+  </div>
+</div>
+
+<!-- PROBLEM STATS -->
+<section class="problem" aria-label="Why Australians need All Sorted">
+  <div class="wrap">
+    <p class="problem-h">You already know something<br>has to <em>change.</em></p>
+    <div class="problem-grid reveal">
+      <div class="stat-cell"><div class="stat-num">$2,800</div><div class="stat-txt">The average Australian leaves this in missed tax deductions every single year</div></div>
+      <div class="stat-cell"><div class="stat-num">6 apps</div><div class="stat-txt">The average number of apps people juggle before giving up and guessing at tax time</div></div>
+      <div class="stat-cell"><div class="stat-num">$27.60</div><div class="stat-txt">Lost in deductions every time you forget to log a single 30&nbsp;km work trip</div></div>
+      <div class="stat-cell"><div class="stat-num">0 min</div><div class="stat-txt">Manual entry needed with Auto-Detect on. All Sorted logs the trip while you drive</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DRIVE DEEP DIVE -->
+<section class="drive-hero" id="drive" aria-label="GPS drive logbook for ATO deductions">
+  <div style="text-align:center;padding:clamp(56px,6vw,80px) 0 clamp(40px,5vw,64px);max-width:1080px;margin:0 auto">
+    <p class="eyebrow" style="color:rgba(255,255,255,0.42)">The ATO-ready logbook</p>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,56px);font-weight:400;color:var(--white);line-height:1.08;margin-bottom:16px;letter-spacing:-0.015em">Drive. <em style="font-style:italic;color:var(--taupeL)">Every km,<br>every deduction.</em></h2>
+    <p style="font-size:15px;font-weight:300;color:rgba(255,255,255,0.52);max-width:460px;margin:0 auto;line-height:1.9">Turn on Auto-Detect once. All Sorted does the rest. You just drive.</p>
+  </div>
+  <div style="max-width:1080px;margin:0 auto">
+    <div class="drive-stat-grid">
+      <div class="drive-stat">
+        <div class="drive-stat-label">Auto-Detect</div>
+        <div class="drive-stat-val">On</div>
+        <div class="drive-stat-desc">Watches for movement via GPS. When you start driving it starts recording. Stop for 90 seconds and the trip is saved automatically with a push notification.</div>
+        <div class="drive-stat-bullets">
+          &bull; Push notification when trip starts and saves<br>
+          &bull; Background location runs while app is closed<br>
+          &bull; One tap to confirm purpose in Drive Settings
+        </div>
+      </div>
+      <div class="drive-stat">
+        <div class="drive-stat-label">ATO Rate</div>
+        <div class="drive-stat-val green">$0.92</div>
+        <div class="drive-stat-desc">Per km. Cents Per Kilometre method. FY&nbsp;2025&ndash;26 rate built in. Switch between financial years in Drive Settings.</div>
+        <div class="drive-stat-bullets">
+          &bull; FY 2026&ndash;27: $0.92/km (upcoming)<br>
+          &bull; FY 2025&ndash;26: $0.92/km (current)<br>
+          &bull; FY 2024&ndash;25: $0.88/km
+        </div>
+      </div>
+      <div class="drive-stat">
+        <div class="drive-stat-label">Compliance</div>
+        <div class="drive-stat-val">ATO ✓</div>
+        <div class="drive-stat-desc">Built-in Logbook Compliance check in the Reports tab. Green means ready. Amber tells you exactly what to fix before lodging.</div>
+        <div class="drive-stat-bullets">
+          &bull; Vehicle recorded<br>
+          &bull; Business purpose on every trip<br>
+          &bull; Correct ATO rate applied
+        </div>
+      </div>
+    </div>
+
+    <div class="drive-tab-grid">
+      <div class="drive-tab-card">
+        <div class="drive-tab-label">Logbook tab</div>
+        <div class="drive-tab-title">Every trip with route map</div>
+        <p class="drive-tab-desc">From and to addresses, date, purpose, kilometres and ATO deduction per trip. Tap to edit. Add manual trips too.</p>
+        <div class="drive-cats">
+          <span class="drive-cat">Client Visit</span><span class="drive-cat">Site Visit</span><span class="drive-cat">Supply Run</span><span class="drive-cat">Conference</span><span class="drive-cat">Training</span><span class="drive-cat">Other</span>
+        </div>
+      </div>
+      <div class="drive-tab-card">
+        <div class="drive-tab-label">Reports tab</div>
+        <div class="drive-tab-title">Your financial year in one view</div>
+        <p class="drive-tab-desc">Total km, trips, ATO deduction, monthly breakdown charts and a built-in ATO Logbook Compliance check. Export full CSV for your accountant in one tap.</p>
+        <div style="background:rgba(126,200,168,0.10);border:1px solid rgba(126,200,168,0.20);border-radius:10px;padding:12px;margin-top:14px">
+          <div style="font-size:11px;font-weight:300;color:rgba(126,200,168,0.85);line-height:1.75">Export: date &middot; from &middot; to &middot; purpose &middot; km &middot; deduction &middot; GPS or manual &middot; vehicle &middot; ATO rate</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="drive-maths">
+      <div style="flex:1;min-width:200px">
+        <div class="drive-tab-label">Team tab</div>
+        <div class="drive-tab-title" style="color:var(--white);font-family:'Playfair Display',serif;font-size:16px;font-weight:400">Your whole team. One logbook.</div>
+        <p class="drive-tab-desc" style="margin-top:10px">Invite a team member by email. They download All Sorted, sign in, and their trips start flowing to you automatically. See weekly, monthly and full FY totals for every driver. Approve logbooks, share expenses and export a combined team report for your accountant. No spreadsheets, no chasing anyone for a CSV.</p>
+      </div>
+      <div style="flex:1;min-width:200px;border-left:1px solid rgba(255,255,255,0.10);padding-left:40px">
+        <div class="drive-tab-label">The maths</div>
+        <div class="drive-maths-row"><span class="drive-maths-label">1 forgotten 30&nbsp;km trip</span><span class="drive-maths-val loss">$27.60 lost</span></div>
+        <div class="drive-maths-row"><span class="drive-maths-label">2 trips/week &times; 48 weeks</span><span class="drive-maths-val loss">$2,654 lost</span></div>
+        <div class="drive-maths-row"><span class="drive-maths-label">Team of 3 drivers, same pattern</span><span class="drive-maths-val loss">$7,962 lost</span></div>
+        <div class="drive-maths-row"><span class="drive-maths-label">With All Sorted team tracking</span><span class="drive-maths-val win">$0 lost</span></div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:48px">
+      <a href="waitlist.html" style="display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--taupeDD);font-family:inherit;font-size:13px;font-weight:500;padding:17px 38px;border-radius:100px;text-decoration:none;transition:all .22s;box-shadow:0 4px 20px rgba(0,0,0,0.12)" onmouseover="this.style.background='var(--sand)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--white)';this.style.transform=''">
+        Start logging every km free
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TAX SECTION -->
+<section class="tax-sec" id="tax" aria-label="ATO tax deductions and refund tracking">
+  <div class="wrap">
+    <p class="eyebrow">Your running tax total</p>
+    <h2 class="section-h">Know your refund<br><em style="font-style:italic;color:var(--taupeD)">before you even lodge.</em></h2>
+    <p class="section-lead">Every receipt, bill and kilometre feeds into one running total. Your estimated refund lives on the home screen and updates live as you log things throughout the day.</p>
+    <div class="tax-grid">
+      <div class="tax-card dark">
+        <div class="tax-card-label">Home screen widget</div>
+        <div class="tax-card-title">Your refund, always visible</div>
+        <p class="tax-card-desc">A clean card on your home screen shows your estimated refund, a progress bar and total deductions logged. Tap for the full breakdown. No digging.</p>
+      </div>
+      <div class="tax-card">
+        <div class="tax-card-label">Receipts</div>
+        <div class="tax-card-title">Scan. Yes or No. Done.</div>
+        <p class="tax-card-desc">Scan a receipt and the app reads the store, date and amount. One tap marks it as a work expense and it lands in your ATO total instantly. Share your full receipts summary with your accountant in one tap.</p>
+      </div>
+      <div class="tax-card">
+        <div class="tax-card-label">Bills</div>
+        <div class="tax-card-title">AI fills in the bill. You just save it.</div>
+        <p class="tax-card-desc">Scan a bill and AI reads the biller name, amount, due date and BPAY code automatically. Import from email or enter manually. Tick ATO Deduction on any work bill and it flows instantly into your tax total.</p>
+      </div>
+      <div class="tax-card dark">
+        <div class="tax-card-label">At tax time</div>
+        <div class="tax-card-title">Export everything in one tap</div>
+        <p class="tax-card-desc">All receipts, deductions, work bills and drive trips in one export. Send it to your accountant directly from the app. Every figure is already there.</p>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <a href="waitlist.html" class="btn btn-dark">Start tracking deductions free</a>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="numbers">
+  <div class="wrap-sm">
+    <p class="eyebrow">At tax time</p>
+    <h2 class="section-h">You&rsquo;re losing money every week you wait.</h2>
+    <p class="section-lead" style="margin-bottom:0">Every unlogged work trip is $27.60 in deductions gone. All Sorted auto-detects your car moving and logs it before you even think about it.</p>
+    <div class="num-grid reveal reveal-delay-1">
+      <div class="num-cell"><div class="num-val">$0.92</div><div class="num-lbl">per km ATO rate</div></div>
+      <div class="num-cell"><div class="num-val">1 tap</div><div class="num-lbl">add to deductions</div></div>
+      <div class="num-cell"><div class="num-val">0 min</div><div class="num-lbl">manual entry needed</div></div>
+    </div>
+    <div style="text-align:center;margin-top:8px">
+      <a href="waitlist.html" class="btn btn-dark">Join the waitlist</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES GRID -->
+<section class="features-bg" id="features">
+  <div class="wrap">
+    <p class="eyebrow">What&rsquo;s inside</p>
+    <h2 class="section-h">Everything connected.<br><em style="font-style:italic;color:var(--taupeD)">One sorted life.</em></h2>
+    <p class="section-lead">Every feature talks to every other. Mark a receipt as a work expense and it lands in your tax total instantly. Stop a drive and $0.92/km is logged. Flag a bill as ATO deductible and it flows through.</p>
+    <div class="feat-list reveal reveal-delay-2">
+      <div class="feat-row">
+        <div class="feat-cell dark"><div class="feat-num">01</div><span class="feat-tag">Life &amp; Calendar</span><div class="feat-h">Your full calendar lives inside Life</div><p class="feat-p">Strip, week and month views. Add events with colour, location and video call. Invite friends in-app. Sync to iPhone Calendar. To&nbsp;do list and grocery list sit right below. Share either list with one tap.</p></div>
+        <div class="feat-cell"><div class="feat-num">02</div><span class="feat-tag">Bills</span><div class="feat-h">BPAY, scan or import from email</div><p class="feat-p">Add a biller code and pay via BPAY in one tap. Scan a bill or paste your bill email and All Sorted extracts the details on-device. Tick ATO Deduction and it flows instantly. Share your full bills summary with your accountant or team in one tap.</p></div>
+      </div>
+      <div class="feat-row">
+        <div class="feat-cell"><div class="feat-num">03</div><span class="feat-tag">Receipts</span><div class="feat-h">AI scans it. You tap Yes.</div><p class="feat-p">Point your camera at a receipt and AI reads the store, amount, date and category automatically, and pre-ticks Yes if it looks like a work expense. Tap Save and it is in your ATO deductions. Share your summary with your accountant or request receipts from your team in one tap.</p></div>
+        <div class="feat-cell dark"><div class="feat-num">04</div><span class="feat-tag">Drive</span><div class="feat-h">GPS logbook for you and your team</div><p class="feat-p">Auto-Detect logs every trip at $0.92/km with background location. Notification when a trip starts and when it saves. Team tab: invite members by email and their kilometres flow to you. ATO compliance check and one-tap export.</p></div>
+      </div>
+      <div class="feat-row">
+        <div class="feat-cell"><div class="feat-num">05</div><span class="feat-tag">Health</span><div class="feat-h">Rings, streaks and Apple Health sync</div><p class="feat-p">Health lives inside Life. Three rings for water, steps and sleep. Steps sync automatically from Apple Health on iPhone. Activity logging with one tap. 7-day bar charts for each metric.</p></div>
+        <div class="feat-cell dark"><div class="feat-num">06</div><span class="feat-tag">Tax</span><div class="feat-h">Your refund estimate, always on screen</div><p class="feat-p">Your estimated refund lives on the home screen as a widget. Every receipt, bill and kilometre updates it live. Tap to see the full breakdown. Export everything for your accountant in one tap.</p></div>
+      </div>
+      <div class="feat-row">
+        <div class="feat-cell dark"><div class="feat-num">07</div><span class="feat-tag">Home</span><div class="feat-h">Your life at a glance, your way</div><p class="feat-p">Customise with widgets: tax refund, bills due, health rings, grocery list, events, to&nbsp;dos and more. Ticked tasks stay crossed out all day then clear overnight. Four colour themes: Default, Blush, Denim and Sage. 7am morning briefing every day.</p></div>
+        <div class="feat-cell"><div class="feat-num">08</div><span class="feat-tag">Wallet</span><div class="feat-h">Everything you carry, digital</div><p class="feat-p">Gift cards, memberships, discount codes and passwords. Passwords stored on your device only, never uploaded to any server. Everything you reach for, always there.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <p class="eyebrow">The detail</p>
+  <h2 class="section-h">Everything connected. Nothing missed.</h2>
+  <p class="section-lead">Flag a receipt as a work expense and it appears in your tax total instantly. Stop a drive and $0.92/km is logged. Paste a bill email and it fills itself in. To&nbsp;dos carry over until done.</p>
+  <div class="how-grid reveal reveal-delay-1">
+    <div class="how-card"><h3>Auto-detect logs trips for you</h3><p>Turn on Auto-Detect in Drive Settings. All Sorted detects movement, starts recording and sends a notification. Stop for 90 seconds and the trip saves automatically with another notification.</p></div>
+    <div class="how-card"><h3>AI scans receipts and bills</h3><p>Tap Scan on Receipts or Bills. AI reads the store, amount, date, category and BPAY code automatically, and pre-ticks Yes if it looks like a work expense. Or paste your bill email and it extracts details on-device.</p></div>
+    <div class="how-card"><h3>Share bills and receipts instantly</h3><p>Both Bills and Receipts have a Share button in the header. Tap it to send a formatted summary via Messages, WhatsApp or email. One tap. No formatting. No manual export.</p></div>
+    <div class="how-card"><h3>Invite friends to events</h3><p>Tap any event and choose Invite. All Sorted finds the person if they are on the app. Send in-app or share a link. The invite lands on their calendar automatically.</p></div>
+    <div class="how-card"><h3>Tax refund live on your home screen</h3><p>Your estimated refund is on the home screen as a widget. Every receipt, bill and kilometre updates it live. Export to your accountant in one tap. Everything backs up to the cloud automatically every 30 minutes so nothing is ever lost.</p></div>
+    <div class="how-card"><h3>Health syncs from Apple Health</h3><p>Steps sync automatically on iPhone. Log water and sleep in one tap. Bar charts show your last 7&nbsp;days so you can spot patterns across the week.</p></div>
+    <div class="how-card"><h3>Team expenses in one place</h3><p>Your team logs their own trips. You see everything in one view. Share bills, receipts or a full drive logbook with your accountant in one tap from any screen.</p></div>
+    <div class="how-card"><h3>Passwords stay on your device</h3><p>Store wifi passwords, PINs and account logins in Wallet. Encrypted and saved on-device only. Never uploaded, never shared. Everything you reach for, always there.</p></div>
+  </div>
+  <a href="waitlist.html" class="btn btn-outline">Join the waitlist free</a>
+</section>
+
+<!-- WHAT'S NEW -->
+<section class="whats-new">
+  <div class="wrap">
+    <p class="eyebrow">What&rsquo;s new</p>
+    <h2 class="section-h" style="margin-bottom:14px">Built around<br><em style="font-style:italic;color:var(--taupeD)">how you actually live.</em></h2>
+    <p style="font-size:15px;font-weight:300;color:var(--ink3);text-align:center;line-height:1.9;margin-bottom:52px;max-width:480px;margin-left:auto;margin-right:auto">Ten features designed around the real moments that matter.</p>
+    <div class="new-grid reveal">
+      <div class="new-card">
+        <div class="new-badge">New</div>
+        <div class="new-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/><path d="M19 12l2 2-2 2"/></svg></div>
+        <div class="new-title">Share your to&nbsp;do and grocery list</div>
+        <div class="new-desc">One tap sends your list to your partner, assistant or family via message, email or WhatsApp. Both lists have a dedicated Share button.</div>
+      </div>
+      <div class="new-card">
+        <div class="new-badge">New</div>
+        <div class="new-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="new-title">Import bills from email</div>
+        <div class="new-desc">Paste your bill email and All Sorted extracts the amount, due date and reference on-device. Nothing sent to any server.</div>
+      </div>
+      <div class="new-card">
+        <div class="new-badge">New</div>
+        <div class="new-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
+        <div class="new-title">Share bills and receipts instantly</div>
+        <div class="new-desc">Both Bills and Receipts have a Share button. Tap Send to share a formatted summary, or tap Request to ask a team member to send you theirs.</div>
+      </div>
+      <div class="new-card">
+        <div class="new-badge">New</div>
+        <div class="new-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="new-title">Background auto-detect</div>
+        <div class="new-desc">Auto-Detect now runs in the background with iOS background location. Trip starts and saves send push notifications even when the app is closed.</div>
+      </div>
+      <div class="new-card">
+        <div class="new-badge">New</div>
+        <div class="new-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="new-title">Passwords on-device only</div>
+        <div class="new-desc">Store wifi passwords, PINs and logins in Wallet. Saved on your device only using iOS secure storage. Never uploaded, never shared.</div>
+      </div>
+      <div class="new-card">
+        <div class="new-badge">New</div>
+        <div class="new-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></div>
+        <div class="new-title">Four colour themes</div>
+        <div style="display:flex;gap:8px;margin:10px 0 8px">
+          <div style="text-align:center;flex:1">
+            <div style="width:100%;height:28px;border-radius:8px;background:linear-gradient(135deg,#A89880,#C4B5A0);margin-bottom:4px;border:1px solid rgba(0,0,0,0.06)"></div>
+            <span style="font-size:10px;color:#7A6858;font-weight:500">Default</span>
+          </div>
+          <div style="text-align:center;flex:1">
+            <div style="width:100%;height:28px;border-radius:8px;background:linear-gradient(135deg,#C8B4B4,#E0CECE);margin-bottom:4px;border:1px solid rgba(0,0,0,0.06)"></div>
+            <span style="font-size:10px;color:#B09090;font-weight:500">Blush</span>
+          </div>
+          <div style="text-align:center;flex:1">
+            <div style="width:100%;height:28px;border-radius:8px;background:linear-gradient(135deg,#8898AC,#C0CEDC);margin-bottom:4px;border:1px solid rgba(0,0,0,0.06)"></div>
+            <span style="font-size:10px;color:#708090;font-weight:500">Denim</span>
+          </div>
+          <div style="text-align:center;flex:1">
+            <div style="width:100%;height:28px;border-radius:8px;background:linear-gradient(135deg,#A4B09A,#C2CEB8);margin-bottom:4px;border:1px solid rgba(0,0,0,0.06)"></div>
+            <span style="font-size:10px;color:#708060;font-weight:500">Sage</span>
+          </div>
+        </div>
+        <div class="new-desc">Choose your look in Settings. All four share the same warm cream background. Only the accent colour changes. Your theme is remembered across sign-ins with no colour flash.</div>
+      </div>
+      <div class="new-card">
+        <div class="new-badge">New</div>
+        <div class="new-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/><path d="M19 16l2 2-2 2"/></svg></div>
+        <div class="new-title">Booking calendar sync</div>
+        <div class="new-desc">Connect Fresha, Vagaro, Mindbody or Timely. Client appointments appear in your calendar automatically.</div>
+      </div>
+      <div class="new-card">
+        <div class="new-badge">New</div>
+        <div class="new-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+        <div class="new-title">7am morning briefing</div>
+        <div class="new-desc">A push notification every morning at 7am with bills due, what is on today and a motivational quote. Starts automatically after sign-in.</div>
+      </div>
+      <div class="new-card">
+        <div class="new-badge">New</div>
+        <div class="new-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10H6a4 4 0 0 0 0 8h12a4 4 0 0 0 0-8z"/><path d="M6 10V8a6 6 0 0 1 12 0v2"/><line x1="12" y1="14" x2="12" y2="18"/></svg></div>
+        <div class="new-title">AI receipt and bill scanning</div>
+        <div class="new-desc">Point your camera at a receipt or bill and AI fills in every field automatically. Store, amount, date, category, BPAY code and whether it looks like a work expense.</div>
+      </div>
+      <div class="new-card">
+        <div class="new-badge">New</div>
+        <div class="new-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10H6a4 4 0 0 0 0 8h12a4 4 0 0 0 0-8z"/><path d="M12 14v4m-2-2h4"/></svg></div>
+        <div class="new-title">Automatic cloud backup</div>
+        <div class="new-desc">Everything backs up to the cloud automatically every 30 minutes. Todos, documents, receipts, calendar, settings. Tap Back Up Now in Settings any time for an instant save.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENS CAROUSEL -->
+<section class="screens-sec">
+  <div class="wrap-sm" style="padding:0 24px;margin-bottom:44px">
+    <p class="eyebrow">Sneak peek</p>
+    <h2 class="section-h">Calm. Clean. In control.</h2>
+    <p class="section-lead" style="margin-bottom:0">Real screens from the app. Every screen is designed to feel as good as it works.</p>
+  </div>
+  <div class="carousel">
+    <div class="carousel-track" id="track">
+      <div class="slide">
+        <div class="phone"><div class="phone-inner"><img src="IMG_2268.PNG" alt="All Sorted Home screen with tax widget and bills due"/></div></div>
+        <p class="slide-label">Home</p><p class="slide-sub">Tax refund, bills due and your day at a glance</p>
+      </div>
+      <div class="slide">
+        <div class="phone"><div class="phone-inner"><img src="IMG_2269.PNG" alt="All Sorted Drive screen GPS logbook ATO deductions"/></div></div>
+        <p class="slide-label">Drive</p><p class="slide-sub">GPS logbook. Every km logged to ATO.</p>
+      </div>
+      <div class="slide">
+        <div class="phone"><div class="phone-inner"><img src="IMG_2270.PNG" alt="All Sorted Life screen calendar to do list grocery"/></div></div>
+        <p class="slide-label">Life</p><p class="slide-sub">Your calendar, to do list and grocery in one scroll</p>
+      </div>
+    </div>
+    <button class="carousel-btn" style="left:16px" onclick="prevSlide()">&#8249;</button>
+    <button class="carousel-btn" style="right:16px" onclick="nextSlide()">&#8250;</button>
+  </div>
+  <div class="dots">
+    <button class="dot" id="dot0" style="width:28px;background:var(--taupeD)" onclick="goTo(0)"></button>
+    <button class="dot" id="dot1" style="width:8px;background:var(--border)" onclick="goTo(1)"></button>
+    <button class="dot" id="dot2" style="width:8px;background:var(--border)" onclick="goTo(2)"></button>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-sec">
+  <div class="wrap">
+    <p class="eyebrow">Early feedback</p>
+    <h2 class="section-h">What beta testers are saying.</h2>
+    <p class="section-lead">From real people who tested All Sorted before a single ad was run.</p>
+    <div class="testi-grid reveal reveal-delay-1">
+      <div class="testi-card"><div class="testi-accent"></div><div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testi-quote">&ldquo;I&rsquo;ve been guessing my work trips at tax time for five years. My accountant used to roll her eyes at me. This year she actually said this is the most complete logbook I have ever seen. I nearly cried.&rdquo;</p><div class="testi-who">Jenna &middot; Melbourne</div></div>
+      <div class="testi-card"><div class="testi-accent"></div><div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testi-quote">&ldquo;I deleted six apps the day I downloaded this one. Six. Everything actually talks to everything else. My bills link to my tax. My trips link to my deductions. I genuinely have not missed a thing since.&rdquo;</p><div class="testi-who">Soph &middot; Sydney</div></div>
+      <div class="testi-card"><div class="testi-accent"></div><div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testi-quote">&ldquo;The 7am briefing was the thing that got me. Bills due, what is on today, a little quote. It is like having a PA who also has their life together. I look forward to waking up now.&rdquo;</p><div class="testi-who">Rhi &middot; Brisbane</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER STRIP -->
+<section class="founder-strip">
+  <div class="founder-strip-inner reveal">
+    <img src="founder.jpg" alt="Roxanne Alterio, founder of All Sorted" class="founder-photo"/>
+    <div>
+      <p class="founder-quote">&ldquo;I&rsquo;m a real estate agent and entrepreneur. Life is full. There is no time to sit down and think about bills, tax, expenses and all the things that pile up. I needed one app that just handled it. When I could not find it, I built it.&rdquo;</p>
+      <div class="founder-attr">Roxanne Alterio<span>&nbsp;&middot;&nbsp;Founder, All Sorted</span></div>
+      <a href="founder.html" class="founder-readmore">Read the full story &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- PERKS -->
+<section class="perks-hero">
+  <div style="max-width:620px;width:100%;margin:0 auto 52px">
+    <p class="eyebrow">Why join now</p>
+    <h2 class="section-h" style="margin-bottom:16px">200 founding spots.<br><em style="font-style:italic;color:var(--taupeD)">Locked in forever.</em></h2>
+    <p style="font-size:15px;font-weight:300;color:var(--ink3);line-height:1.9;text-align:center">The first 200 people to join All Sorted become founding members. The benefits are permanent, exclusive and cannot be earned any other way.</p>
+  </div>
+  <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(94,76,62,0.07);border:1.5px solid var(--border);border-radius:100px;padding:10px 18px;margin-bottom:32px;max-width:100%;flex-wrap:wrap;justify-content:center">
+    <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--taupe);animation:pulse 2s ease-in-out infinite;flex-shrink:0"></span>
+    <span style="font-size:13px;font-weight:300;color:var(--ink3)"><b style="font-weight:600;color:var(--ink)"><span id="spotsLeftPerks">177</span> of 200</b> founding spots still available</span>
+  </div>
+  <div style="max-width:860px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:12px" class="reveal">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px" class="perk-row-2col">
+      <div class="perk-card" style="display:flex;align-items:flex-start;gap:16px">
+        <div class="perk-icon" style="flex-shrink:0;margin-bottom:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--taupe)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg></div>
+        <div><div class="perk-title">Early access on launch day</div><div class="perk-desc">You get the app in June 2026 before it hits the App Store. In while the rest of the world is still waiting.</div></div>
+      </div>
+      <div class="perk-card" style="display:flex;align-items:flex-start;gap:16px">
+        <div class="perk-icon" style="flex-shrink:0;margin-bottom:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--taupe)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+        <div><div class="perk-title">A founding badge no one else can ever get</div><div class="perk-desc">Permanently on your profile. Cannot be earned, bought or unlocked later.</div></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px" class="perk-row-2col">
+      <div class="perk-card" style="display:flex;align-items:flex-start;gap:16px">
+        <div class="perk-icon" style="flex-shrink:0;margin-bottom:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--taupe)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div><div class="perk-title">An invite to the launch party</div><div class="perk-desc">A personal invitation to the All Sorted launch event. An actual invite, to you, on night one.</div></div>
+      </div>
+      <div class="perk-card" style="display:flex;align-items:flex-start;gap:16px">
+        <div class="perk-icon" style="flex-shrink:0;margin-bottom:0"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="var(--taupe)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div><div class="perk-title">Your voice shapes what gets built</div><div class="perk-desc">Roxanne reads every message from founding members personally. Your feedback goes straight to the top.</div></div>
+      </div>
+    </div>
+    <div class="perk-card gold-card" style="display:flex;align-items:flex-start;gap:16px;text-align:left">
+      <div class="perk-icon" style="flex-shrink:0;margin-bottom:0;width:44px;height:44px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--taupeL)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+          <div class="perk-title" style="margin-bottom:0">Automatic affiliate status from day one</div>
+          <span class="perk-lozenge" style="margin-bottom:0;flex-shrink:0">Earn money</span>
+        </div>
+        <div class="perk-desc">No application, no approval. Every founding member becomes an affiliate automatically on launch day. Share All Sorted and earn a referral bonus every time someone subscribes.</div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal reveal-delay-1" style="text-align:center;margin-top:52px">
+    <a href="waitlist.html" class="btn btn-dark" style="font-size:12px;padding:15px 34px">Join free and secure your spot</a>
+    <p style="font-size:11px;color:var(--ink3);margin-top:14px">Free to join &middot; No credit card &middot; <span id="spotsLeftPerks2">177</span> spots remaining</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-sec" id="faq">
+  <div class="wrap-sm">
+    <p class="eyebrow">Questions</p>
+    <h2 class="section-h" style="margin-bottom:44px">FAQ</h2>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q">When does All Sorted launch?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>All Sorted launches in June 2026 on iOS. Join the waitlist and you will get early access before everyone else, plus your founding member benefits and launch party invite.</p></div></div>
+      <div class="faq-item"><button class="faq-q">What is the exclusive launch party?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Every person on the waitlist receives a personal invitation to the All Sorted launch party. Details will be announced closer to June 2026. Join now to make sure you are on the list.</p></div></div>
+      <div class="faq-item"><button class="faq-q">How much does it cost to join the waitlist?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Nothing. Joining is completely free, no credit card, no commitment. Pricing details will be shared with waitlist members ahead of launch.</p></div></div>
+      <div class="faq-item"><button class="faq-q">How does auto drive detection work?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Turn on Auto-Detect in Drive Settings and All Sorted watches for movement via GPS with background location. When you start moving you get a push notification. Stop for 90 seconds and the trip is saved automatically with another notification showing the kilometres and ATO deduction. No manual entry. Ever.</p></div></div>
+      <div class="faq-item"><button class="faq-q">What do the Reports and Team tabs in Drive do?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Reports shows your trip totals by purpose, total kilometres, total ATO deduction and a monthly breakdown. It also includes a built-in ATO Logbook Compliance check. Team lets you invite team members by email. They download All Sorted, log their own trips, and their kilometres flow back to you automatically. Export a combined report for your accountant in one tap.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Can my team share bills and receipts?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Yes. Both the Bills and Receipts screens have a Share button in the header. Tap Send to share a formatted summary with your accountant via Messages, WhatsApp or email. Tap Request to send a message asking a team member to submit their receipts to you. One tap. No manual formatting.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Can I import a bill from email?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Yes. Tap Import from Email in the Bills screen, copy all the text from your bill email and paste it in. All Sorted reads the amount, due date and reference number on your device and pre-fills the bill form. Nothing is sent to any server.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Where do I find my tax refund estimate?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Your estimated refund lives on the home screen as a widget showing the number, a progress bar and how many deductions you have logged this year. Tap it for the full breakdown of receipts, drive trips and work bills. Tap Export to send everything to your accountant in one tap.</p></div></div>
+      <div class="faq-item"><button class="faq-q">How does AI receipt and bill scanning work?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Tap Scan on the Receipts or Bills screen and point your camera at the document. All Sorted sends the image to Claude AI which reads the store or biller name, amount, date, category, BPAY biller code and reference number. It pre-fills every field in the form and pre-ticks Yes if the expense looks work-related. You just check the details and tap Save. If the AI cannot read something clearly, the field stays blank for you to fill in manually.</p></div></div>
+      <div class="faq-item"><button class="faq-q">How does BPAY work in the app?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>When you add a bill, enter the biller code and reference number from your bill. When it is due, tap the BPAY button and All Sorted shows you the details. The biller code copies with one tap so there is no chance of an error.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Can I invite friends to calendar events?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Yes. Tap any event and choose Invite a Friend. Enter their email and tap Find. If they are on All Sorted, their name appears and you can send them an in-app invite. If they are not on the app yet, you can share them a message with the event details and a link to download All Sorted.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Can I colour code my calendar events?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Yes. When you add or edit an event, a colour picker appears with eight options: Taupe, Rose, Blue, Sage, Gold, Lavender, Terracotta and Teal. The colour shows as a dot in the calendar grid and a stripe on the event card so you can tell events apart at a glance.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Can I share my to do list and grocery list?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Yes. Both the To Do List and Grocery List have a Share button in their section header. Tap it and your list is sent via Messages, WhatsApp, email or any share sheet in one tap. Perfect for sharing a grocery run with your partner or sending tasks to your team.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Can I save passwords in the app?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Yes. The Wallet tab has a Passwords section for passwords, PINs and login details. Stored on your device only using iOS secure storage, never uploaded to any server. Tap to view, long press to copy.</p></div></div>
+      <div class="faq-item"><button class="faq-q">What colour themes are available?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>All Sorted has four colour themes: Default (warm taupe), Sage (soft green), Blush (dusty rose), Denim (soft blue) and Sage (muted green). Switch between them in Settings. Your chosen theme is remembered across sign-ins with no colour flash on startup.</p></div></div>
+      <div class="faq-item"><button class="faq-q">How does cloud backup work?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>All Sorted automatically backs up your data to the cloud every 30 minutes while you are signed in. This covers todos, documents, receipts, bills, calendar events, wellness logs, grocery list and all your settings. You can also tap Back Up Now in Settings at any time for an instant save. If you change phones or reinstall the app, everything restores automatically when you sign back in. Passwords are the only exception, they stay on your device only and are never uploaded.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Is my data secure?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Encrypted connections, row-level security in our database, and only you can access your data. Passwords never leave your device. We never sell or share your data. Export or delete everything at any time.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Does it connect to Apple Health?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Yes. Tap Health in the Life tab and then Sync Health at the top of the screen. All Sorted reads your step count directly from Apple Health. Sleep and water are logged with a single tap. Your 7-day history shows as bar charts so you can spot patterns across the week.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Can I customise the home screen?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>Yes. Tap Customise on the home screen to choose your widgets: tax refund, events, to do list, grocery list, savings goal, bills due and health rings. Incomplete tasks carry over every day until ticked off. Done tasks stay crossed out all day then clear overnight. Choose from four colour themes in Settings.</p></div></div>
+      <div class="faq-item"><button class="faq-q">How much does All Sorted cost?<span class="faq-icon"><span>+</span></span></button><div class="faq-a"><p>All Sorted offers three plans: Weekly at $3.99 per week, Six Months at $79.99 (just $13.33 per month), or Annual at $99.99 (just $8.33 per month, saving 79% versus weekly). Founding members will receive exclusive pricing details ahead of launch. Join the waitlist free to lock in your founding benefits.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section class="connect">
+  <p class="eyebrow" style="color:rgba(255,255,255,0.45)">Follow along</p>
+  <h2 class="section-h" style="color:var(--white)">Follow the journey.</h2>
+  <p class="section-lead" style="color:rgba(255,255,255,0.55)">Roxanne shares sneak peeks, feature reveals and honest updates about building All Sorted from scratch. Follow along and be part of it from the start.</p>
+  <a href="https://www.instagram.com/allsortedapp?igsh=eDJ4eGRmdGNjeXhy" target="_blank" rel="noopener" class="btn" style="background:rgba(255,255,255,0.12);color:var(--white);border:1.5px solid rgba(255,255,255,0.20)">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+    @allsortedapp
+  </a>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom" style="border-top:1px solid rgba(255,255,255,0.10)">
+  <p class="eyebrow" style="color:rgba(255,255,255,0.38)">Get sorted</p>
+  <h2 class="bottom-h">Don&rsquo;t miss your<br>founding <em>spot.</em></h2>
+  <p class="bottom-sub"><strong style="color:rgba(255,255,255,0.82)"><span id="spotsLeft2">177</span> spots</strong> left out of 200. When they are gone, the founding benefits are gone forever. Takes 30 seconds.</p>
+  <a href="waitlist.html" class="bottom-cta-btn">
+    Join free &mdash; 30 seconds
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-grid">
+    <div>
+      <div style="font-size:11px;font-weight:400;letter-spacing:0.6em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:12px">All Sorted</div>
+      <div class="ft-tagline">One app for your drive logbook, ATO deductions, bills, receipts, calendar and life. Launching soon on iOS.</div>
+    </div>
+    <div class="ft-col">
+      <h4>App</h4>
+      <ul>
+        <li><a href="#drive">Drive &amp; Logbook</a></li>
+        <li><a href="#tax">Tax Deductions</a></li>
+        <li><a href="#features">All Features</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="founder.html">Our Story</a></li>
+        <li><a href="waitlist.html">Join Waitlist</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+        <li><a href="mailto:info@allsortedapp.net">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-copy">&copy; 2026 All Sorted App &middot; Made in Australia</div>
+    <div style="display:flex;gap:20px">
+      <a href="privacy.html" style="font-size:11px;color:rgba(255,255,255,0.28);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.28)'">Privacy</a>
+      <a href="terms.html" style="font-size:11px;color:rgba(255,255,255,0.28);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.28)'">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var nav=document.getElementById('mainNav');function update(){if(window.scrollY>40){nav.classList.add('scrolled');}else{nav.classList.remove('scrolled');}}window.addEventListener('scroll',update,{passive:true});update();})();
+(function(){var TARGET=23,count=TARGET;function upd(n){var wc=document.getElementById('waitlistCount');if(wc)wc.textContent=n;['spotsLeft2','spotsLeftPerks','spotsLeftPerks2'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=Math.max(0,200-n);});}var cur=0;var ct=setInterval(function(){cur=Math.min(cur+TARGET/144,TARGET);upd(Math.floor(cur));if(cur>=TARGET){clearInterval(ct);tick();}},1000/60);function tick(){setTimeout(function(){count++;upd(count);tick();},25000+Math.random()*35000);}})();
+(function(){document.querySelectorAll('.faq-q').forEach(function(btn){btn.addEventListener('click',function(e){var item=e.currentTarget.closest('.faq-item');var isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');});if(!isOpen)item.classList.add('open');});});})();
+(function(){var cs=0,tr=document.getElementById('track');window.goTo=function(n){cs=((n%3)+3)%3;if(tr)tr.style.transform='translateX(-'+(cs*100)+'%)';for(var i=0;i<3;i++){var d=document.getElementById('dot'+i);if(d){d.style.width=i===cs?'28px':'8px';d.style.background=i===cs?'var(--taupeD)':'var(--border)';}}};window.nextSlide=function(){goTo(cs+1);};window.prevSlide=function(){goTo(cs-1);};var at=setInterval(nextSlide,4200);if(tr){var sx=0,sy=0;tr.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;clearInterval(at);},{passive:true});tr.addEventListener('touchend',function(e){var dx=sx-e.changedTouches[0].clientX,dy=Math.abs(sy-e.changedTouches[0].clientY);if(Math.abs(dx)>40&&Math.abs(dx)>dy){dx>0?nextSlide():prevSlide();}at=setInterval(nextSlide,4200);},{passive:true});var mx=0,md=false;tr.addEventListener('mousedown',function(e){mx=e.clientX;md=true;clearInterval(at);tr.style.cursor='grabbing';});document.addEventListener('mouseup',function(e){if(!md)return;if(Math.abs(mx-e.clientX)>40){mx>e.clientX?nextSlide():prevSlide();}md=false;at=setInterval(nextSlide,4200);tr.style.cursor='grab';});tr.style.cursor='grab';}})();
+(function(){document.body.classList.add('js-ready');var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.12});document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});})();
+</script>
+</body>
+</html>
